@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>بوابة المدرسة</title>
+  <style>
+    body {
+      font-family: "Tahoma", sans-serif;
+      background: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      text-align: center;
+      padding: 20px;
+      color: #333;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .card {
+      padding: 30px 20px;
+      border-radius: 12px;
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    /* ألوان خاصة لكل خانة */
+    .c1 { background: #007bff; } /* أزرق */
+    .c2 { background: #28a745; } /* أخضر */
+    .c3 { background: #ffc107; color:#333; } /* أصفر */
+    .c4 { background: #fd7e14; } /* برتقالي */
+    .c5 { background: #dc3545; } /* أحمر */
+    .c6 { background: #6f42c1; } /* بنفسجي */
+    .c7 { background: #20c997; } /* فيروزي */
+  </style>
+</head>
+<body>
+  <h1>بوابة المدرسة</h1>
+
+  <div class="grid">
+    <div class="card c1">تسجيلاتي</div>
+    <div class="card c2">كشوف النقاط</div>
+    <div class="card c3">نقاط الرقابة المستمرة، الفروض والاختبارات</div>
+    <div class="card c4">مواضيع الفروض والاختبارات</div>
+    <div class="card c5">الامتحانات الرسمية</div>
+    <div class="card c6">توقيت الفروض والاختبارات</div>
+    <div class="card c7">طلبات التحويل</div>
+  </div>
+</body>
+</html>
