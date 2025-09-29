@@ -1,219 +1,330 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>فضاء التلميذ</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: "Tigwal", sans-serif;
-      background: #f0f0f0;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      height: 100vh;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الديوان الوطني للتعليم والتكوين عن بعد</title>
+    <!-- إضافة خط Cairo من Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- إضافة Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
 
-    /* البطاقة الرئيسية */
-    .card {
-      background: white;
-      width: 400px;
-      margin-top: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      padding: 20px;
-      animation: slideUp 0.8s ease;
-    }
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
 
-    @keyframes slideUp {
-      from { transform: translateY(50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
+        /* الشريط الأخضر مع النص المتحرك */
+        .header-bar {
+            background: #2ecc71;
+            padding: 10px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            overflow: hidden;
+        }
 
-    /* الرأس */
-    .header {
-      text-align: right;
-      font-size: 14px;
-      margin-bottom: 10px;
-    }
-    .header img {
-      width: 40px;
-      vertical-align: middle;
-      margin-left: 10px;
-    }
+        .moving-text {
+            color: #8e44ad;
+            font-weight: bold;
+            font-size: 18px;
+            white-space: nowrap;
+            animation: moveText 20s linear infinite;
+        }
 
-    /* الشريط المتحرك */
-    .marquee {
-      background: #2e7d32;
-      color: purple;
-      padding: 5px;
-      overflow: hidden;
-      position: relative;
-      margin-bottom: 20px;
-    }
-    .marquee span {
-      position: absolute;
-      white-space: nowrap;
-      animation: marquee 15s linear infinite;
-    }
-    @keyframes marquee {
-      0% { right: -100%; }
-      100% { right: 100%; }
-    }
+        @keyframes moveText {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
 
-    /* الخانات */
-    .input-box {
-      width: 100%;
-      margin-bottom: 15px;
-    }
-    .input-box input {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #aaa;
-      border-radius: 8px;
-      font-size: 14px;
-    }
+        /* البطاقة الرئيسية */
+        .login-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            padding: 40px 30px;
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+            transform: translateY(100px);
+            opacity: 0;
+            animation: slideUp 0.8s ease-out forwards;
+            margin-top: 100px;
+        }
 
-    /* الأزرار */
-    .buttons {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-    }
-    .btn {
-      flex: 1;
-      padding: 10px;
-      border: none;
-      border-radius: 8px;
-      font-size: 14px;
-      cursor: pointer;
-      color: white;
-    }
-    .btn-login {
-      background: #1565c0;
-    }
-    .btn-register {
-      background: #e91e63;
-    }
+        @keyframes slideUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
 
-    /* المودال */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0; top: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.6);
-    }
-    .modal-content {
-      background: #fff;
-      margin: 5% auto;
-      border-radius: 12px;
-      width: 70%;
-      max-width: 800px;
-      font-size: 14px;
-      animation: slideDown 0.5s ease;
-    }
-    @keyframes slideDown {
-      from { transform: translateY(-50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-    .modal-header {
-      background: #c62828;
-      color: white;
-      padding: 10px;
-      text-align: center;
-      border-top-left-radius: 12px;
-      border-top-right-radius: 12px;
-    }
-    .modal-body { padding: 20px; line-height: 1.6; }
-    .modal-footer { text-align: center; padding: 15px; }
-    .modal-footer button {
-      padding: 10px 25px;
-      border: none;
-      border-radius: 8px;
-      background: #9e9e9e;
-      color: white;
-      cursor: not-allowed;
-      transition: background 0.3s;
-    }
-    .modal-footer button.active {
-      background: #388e3c;
-      cursor: pointer;
-    }
-  </style>
+        /* الشعار والعناوين */
+        .logo-section {
+            margin-bottom: 30px;
+        }
+
+        .national-title {
+            color: #2c3e50;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .ministry-title {
+            color: #34495e;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .office-title {
+            color: #8e44ad;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .welcome-title {
+            color: #2c3e50;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        /* حقول الإدخال */
+        .form-group {
+            margin-bottom: 25px;
+            text-align: right;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #bdc3c7;
+            border-radius: 8px;
+            font-size: 16px;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            border-color: #3498db;
+            background: white;
+            outline: none;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+        }
+
+        /* زر تسجيل الدخول */
+        .login-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .login-btn:hover {
+            background: linear-gradient(135deg, #2980b9, #1f618d);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        /* الروابط */
+        .links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .link {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .link:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+
+        /* رسائل الخطأ */
+        .error-message {
+            color: #e74c3c;
+            background: #fadbd8;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            display: none;
+            font-weight: 500;
+        }
+
+        /* الـ CAPTCHA */
+        .captcha-section {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #bdc3c7;
+        }
+
+        .captcha-title {
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .captcha-display {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            letter-spacing: 5px;
+        }
+    </style>
 </head>
 <body>
-
-  <!-- البطاقة -->
-  <div class="card">
-    <div class="header">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/7/77/Ministry_of_Education_Algeria_logo.png" alt="شعار">
-      الجمهورية الجزائرية الديمقراطية الشعبية <br>
-      وزارة التربية الوطنية <br>
-      الديوان الوطني للتعليم والتكوين عن بعد
+    <!-- الشريط الأخضر العلوي -->
+    <div class="header-bar">
+        <div class="moving-text">
+            مرحباً بكم في فضاء التلميذ - الديوان الوطني للتعليم والتكوين عن بعد
+        </div>
     </div>
 
-    <div class="marquee">
-      <span>فضاء التلميذ - مرحباً بكم في الأرضية الرقمية للديوان الوطني للتعليم والتكوين عن بعد</span>
+    <!-- البطاقة الرئيسية -->
+    <div class="login-card">
+        <!-- العناوين -->
+        <div class="logo-section">
+            <div class="national-title">الجمهورية الجزائرية الديمقراطية الشعبية</div>
+            <div class="ministry-title">وزارة التربية الوطنية</div>
+            <div class="office-title">الديوان الوطني للتعليم والتكوين عن بعد</div>
+            <div class="welcome-title">مرحبا بكم في الأرضية الرقمية</div>
+        </div>
+
+        <!-- رسالة الخطأ -->
+        <div class="error-message" id="errorMessage">
+            إسم المستخدم وكلمة المرور غير صحيحة
+        </div>
+
+        <!-- نموذج التسجيل -->
+        <form id="loginForm">
+            <div class="form-group">
+                <input type="email" class="input-field" id="email" placeholder="البريد الإلكتروني" required>
+            </div>
+
+            <div class="form-group">
+                <input type="password" class="input-field" id="password" placeholder="كلمة المرور" required>
+            </div>
+
+            <!-- قسم CAPTCHA -->
+            <div class="captcha-section">
+                <div class="captcha-title">nCAPTCHA</div>
+                <div class="captcha-display" id="captchaDisplay">A1B2C3</div>
+            </div>
+
+            <button type="submit" class="login-btn">تسجيل الدخول</button>
+        </form>
+
+        <!-- الروابط -->
+        <div class="links">
+            <a href="#" class="link">تسجيل جديد</a>
+            <a href="#" class="link">استعادة كلمة المرور</a>
+        </div>
     </div>
 
-    <div class="input-box">
-      <input type="text" placeholder="رقم التسجيل">
-    </div>
-    <div class="input-box">
-      <input type="password" placeholder="الرقم السري">
-    </div>
+    <script>
+        // تهيئة Firebase
+        const firebaseConfig = {
+            // هنا ضع إعدادات Firebase الخاصة بك
+            apiKey: "your-api-key",
+            authDomain: "your-project.firebaseapp.com",
+            projectId: "your-project-id",
+            storageBucket: "your-project.appspot.com",
+            messagingSenderId: "your-sender-id",
+            appId: "your-app-id"
+        };
 
-    <div class="buttons">
-      <button class="btn btn-login">تسجيل الدخول</button>
-      <button class="btn btn-register" id="registerBtn">تسجيل جديد</button>
-    </div>
-  </div>
+        // تهيئة Firebase
+        firebase.initializeApp(firebaseConfig);
 
-  <!-- المودال -->
-  <div id="privacyModal" class="modal">
-    <div class="modal-content">
-      <div class="modal-header">سياسة حماية المعطيات ذات الطابع الشخصي</div>
-      <div class="modal-body">
-        <p>تعتبر وزارة التربية الوطنية مسؤولة عن معالجة المعطيات ذات الطابع الشخصي التي يتم جمعها من عملية التسجيل هذه.</p>
-        <p>المعطيات ذات الطابع الشخصي التي تصلنا عبر هذه المنصة تعتبر سرية للغاية وتخصص لتسيير عملية تمدرس ابنك/تك.</p>
-        <p>في حال اجتياز ابنك/تك إحدى الامتحانات المدرسية الرسمية، تنقل هذه البيانات إلى الديوان الوطني للمسابقات والامتحانات.</p>
-        <p>وفقا لأحكام القانون رقم 18-2007 ... يبقى تداول هذه البيانات داخل الوطن. يمكنك ممارسة حقوقك المكفولة بموجب القانون، كما هو مبين في المواد 32-36.</p>
-        <label>
-          <input type="checkbox" id="acceptPrivacy"> أوافق على شروط الخصوصية
-        </label>
-      </div>
-      <div class="modal-footer">
-        <button id="confirmPrivacy" disabled>تم</button>
-      </div>
-    </div>
-  </div>
+        // إدارة نموذج التسجيل
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
 
-  <script>
-    const registerBtn = document.getElementById("registerBtn");
-    const modal = document.getElementById("privacyModal");
-    const checkbox = document.getElementById("acceptPrivacy");
-    const confirmBtn = document.getElementById("confirmPrivacy");
+            // تسجيل الدخول باستخدام Firebase
+            firebase.auth().signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // تم تسجيل الدخول بنجاح
+                    const user = userCredential.user;
+                    console.log("تم تسجيل الدخول بنجاح:", user);
+                    // توجيه المستخدم إلى الصفحة الرئيسية
+                    window.location.href = "dashboard.html";
+                })
+                .catch((error) => {
+                    // حدث خطأ في تسجيل الدخول
+                    const errorCode = error.code;
+                    const errorMessageText = error.message;
+                    
+                    // عرض رسالة الخطأ
+                    errorMessage.style.display = 'block';
+                    errorMessage.textContent = 'إسم المستخدم وكلمة المرور غير صحيحة';
+                    
+                    console.error("خطأ في تسجيل الدخول:", error);
+                });
+        });
 
-    registerBtn.onclick = () => { modal.style.display = "block"; };
-    checkbox.onchange = () => {
-      if (checkbox.checked) {
-        confirmBtn.disabled = false;
-        confirmBtn.classList.add("active");
-      } else {
-        confirmBtn.disabled = true;
-        confirmBtn.classList.remove("active");
-      }
-    };
-    confirmBtn.onclick = () => {
-      if (!confirmBtn.disabled) {
-        modal.style.display = "none";
-        alert("تم التوجه إلى واجهة التسجيل الجديدة ✅");
-      }
-    };
-    window.onclick = (e) => { if (e.target == modal) modal.style.display = "none"; };
-  </script>
+        // إخفاء رسالة الخطأ عند البدء في الكتابة
+        document.getElementById('email').addEventListener('input', function() {
+            document.getElementById('errorMessage').style.display = 'none';
+        });
 
+        document.getElementById('password').addEventListener('input', function() {
+            document.getElementById('errorMessage').style.display = 'none';
+        });
+
+        // إنشاء CAPTCHA عشوائي
+        function generateCaptcha() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let captcha = '';
+            for (let i = 0; i < 6; i++) {
+                captcha += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            document.getElementById('captchaDisplay').textContent = captcha;
+        }
+
+        // توليد CAPTCHA عند تحميل الصفحة
+        generateCaptcha();
+    </script>
 </body>
 </html>
