@@ -1,73 +1,309 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>فضاء التلميذ</title>
-  <!-- استدعاء خط مشابه لموقع الوزارة -->
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>فضاء التلميذ - الديوان الوطني</title>
+
+  <!-- خط مشابه لموقع الوزارة -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+
   <style>
-    body {
-      margin: 0;
-      font-family: 'Cairo', sans-serif;
-      background: url("https://i.ibb.co/DLczm2p/bg-education.jpg") no-repeat center center fixed;
-      background-size: cover;
+    :root{
+      --accent:#0056b3;
+      --card-radius:12px;
+      --shadow: 0 10px 30px rgba(9,30,66,.12);
     }
-    .overlay {
-      background: rgba(255, 255, 255, 0.9);
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Cairo", Tahoma, Arial, sans-serif;
+      background: linear-gradient(180deg,#e9f1fb 0%, #f7fbff 100%);
+      min-height:100vh;
+      color:#222;
     }
+
+    /* خلفية مركبة: صورة كتب + خريطة الجزائر */
+    .hero {
+      display:flex;
+      gap:30px;
+      align-items:center;
+      justify-content:center;
+      padding:40px 20px;
+      max-width:1200px;
+      margin:40px auto;
+    }
+
+    .hero-left{
+      flex:0 0 460px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.85));
+      border-radius: var(--card-radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .cover-img{
+      width:100%;
+      height:220px;
+      background-image: url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1200&q=70'); /* كتب */
+      background-size:cover;
+      background-position:center;
+    }
+    .left-body{
+      padding:18px;
+    }
+    .title{
+      font-weight:700;
+      font-size:18px;
+      color:var(--accent);
+      margin-bottom:8px;
+      line-height:1.2;
+    }
+    .subtitle{
+      font-size:13px;
+      color:#555;
+      margin-bottom:14px;
+    }
+    .flag-map{
+      position:absolute;
+      right:12px;
+      top:12px;
+      width:84px;
+      height:84px;
+      border-radius:10px;
+      overflow:hidden;
+      box-shadow:0 6px 18px rgba(0,0,0,0.12);
+      border:4px solid rgba(255,255,255,0.7);
+      background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Flag_of_Algeria.svg/512px-Flag_of_Algeria.svg.png');
+      background-size:cover;
+      background-position:center;
+    }
+
+    /* صندوق تسجيل الدخول */
     .login-box {
-      width: 380px;
-      padding: 25px;
+      width:380px;
       background: #fff;
-      box-shadow: 0px 6px 20px rgba(0,0,0,0.25);
-      border-radius: 10px;
-      text-align: center;
+      border-radius: var(--card-radius);
+      box-shadow: var(--shadow);
+      padding:22px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      align-items:stretch;
     }
-    .login-box h2 {
-      font-size: 18px;
-      margin-bottom: 20px;
-      color: #222;
-      line-height: 1.6;
+    .login-box h2{
+      margin:0;
+      font-size:16px;
+      color:#0b3d91;
+      font-weight:700;
+      text-align:center;
+      line-height:1.3;
     }
-    .login-box input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-family: inherit;
+    .login-row{ display:flex; gap:10px; align-items:center; justify-content:center; margin-top:6px; }
+    .input{
+      width:100%;
+      padding:11px 12px;
+      border-radius:8px;
+      border:1px solid #d6dce6;
+      font-size:14px;
+      outline:none;
     }
-    .login-box button {
-      width: 100%;
-      padding: 12px;
-      background: #007bff;
-      border: none;
-      border-radius: 6px;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
+    .btn{
+      background: linear-gradient(90deg,var(--accent), #0078ff);
+      color:#fff;
+      padding:11px;
+      border-radius:8px;
+      border:none;
+      cursor:pointer;
+      font-weight:700;
+      font-size:15px;
+      box-shadow: 0 6px 16px rgba(3,78,162,0.15);
     }
-    .login-box button:hover {
-      background: #0056b3;
+    .note{ font-size:13px; color:#666; text-align:center; margin-top:8px; }
+
+    /* المحتوى بعد الدخول: شبكة بطاقات ملونة */
+    #main-content{
+      display:none;
+      max-width:1100px;
+      margin:20px auto 80px;
+      padding:0 18px;
+    }
+    .cards-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      gap:18px;
+      align-items:stretch;
+    }
+    .card{
+      border-radius:12px;
+      padding:22px;
+      color:#fff;
+      font-weight:700;
+      font-size:16px;
+      box-shadow: 0 8px 26px rgba(13,38,72,0.08);
+      cursor:pointer;
+      transition: transform .15s ease, box-shadow .15s;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      min-height:110px;
+    }
+    .card:hover{ transform: translateY(-6px); box-shadow: 0 14px 36px rgba(13,38,72,0.12); }
+
+    .c1{ background: linear-gradient(135deg,#007bff,#0056b3); } /* تسجيلاتي */
+    .c2{ background: linear-gradient(135deg,#28a745,#1d8a3a); } /* كشوف النقاط */
+    .c3{ background: linear-gradient(135deg,#ffc107,#e1a800); color:#222; } /* نقاط الرقابة */
+    .c4{ background: linear-gradient(135deg,#ff7043,#f4511e); } /* مواضيع الفروض */
+    .c5{ background: linear-gradient(135deg,#e53935,#c62828); } /* الامتحانات الرسمية */
+    .c6{ background: linear-gradient(135deg,#6a1b9a,#512da8); } /* توقيت الفروض */
+    .c7{ background: linear-gradient(135deg,#20c997,#17a589); } /* طلبات التحويل */
+
+    /* رأس الصفحة بعد الدخول */
+    header.appbar{
+      max-width:1100px;
+      margin:18px auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:10px 18px;
+    }
+    .app-title{ font-weight:700; color:#0b3d91; }
+    .logout{
+      background:#fff;
+      border-radius:10px;
+      padding:8px 12px;
+      box-shadow:0 6px 18px rgba(0,0,0,0.08);
+      cursor:pointer;
+      font-weight:700;
+    }
+
+    /* responsive */
+    @media (max-width:860px){
+      .hero{ flex-direction:column; gap:18px; padding:18px; margin:18px; }
+      .hero-left{ width:100% }
+      .login-box{ width:100% }
     }
   </style>
 </head>
 <body>
-  <div class="overlay">
-    <div class="login-box">
+
+  <!-- hero: اليمين = معلومات قصيرة + علم الجزائر, اليسار = صندوق تسجيل الدخول -->
+  <div class="hero" aria-hidden="false">
+    <div class="hero-left">
+      <div class="flag-map" title="علم الجزائر"></div>
+      <div class="cover-img" role="img" aria-label="كتب مدرسية"></div>
+      <div class="left-body">
+        <div class="title">فضاء التلميذ - الديوان الوطني للتعليم والتكوين عن بعد</div>
+        <div class="subtitle">منصة لمتابعة نتائج التلاميذ، الغيابات، المواعيد وطلبات التحويل.</div>
+        <div style="font-size:13px;color:#444">أدخل بياناتك المؤمنة للدخول إلى الخدمات الرقمية للمدرسة.</div>
+      </div>
+    </div>
+
+    <div class="login-box" id="login-box" aria-label="صندوق تسجيل الدخول">
       <h2>مرحباً بكم في فضاء التلميذ - الديوان الوطني للتعليم والتكوين عن بعد</h2>
-      <form>
-        <input type="text" placeholder="البريد الإلكتروني" required>
-        <input type="password" placeholder="كلمة المرور" required>
-        <button type="submit">دخول</button>
-      </form>
+
+      <input id="email" class="input" placeholder="البريد الإلكتروني (مثال: 21202505167@school.com)" autocomplete="username" />
+      <input id="password" class="input" type="password" placeholder="كلمة المرور" autocomplete="current-password" />
+
+      <button class="btn" id="loginBtn">دخول</button>
+      <div class="note">إن واجهتك مشكلة بالدخول تواصل مع إدارة المؤسسة.</div>
     </div>
   </div>
+
+  <!-- المحتوى بعد تسجيل الدخول -->
+  <header class="appbar" style="display:none" id="appbar">
+    <div class="app-title">بوابة المدرسة - فضاء التلميذ</div>
+    <div class="logout" id="logoutBtn">تسجيل خروج</div>
+  </header>
+
+  <main id="main-content">
+    <section class="cards-grid" id="cardsGrid">
+      <div class="card c1" onclick="openPage('registration.html')">📘 تسجيلاتي</div>
+      <div class="card c2" onclick="openPage('grades.html')">📊 كشوف النقاط</div>
+      <div class="card c3" onclick="openPage('continuous.html')">📝 نقاط الرقابة المستمرة، الفروض والاختبارات</div>
+      <div class="card c4" onclick="openPage('topics.html')">📂 مواضيع الفروض والاختبارات</div>
+      <div class="card c5" onclick="openPage('official.html')">🎓 الامتحانات الرسمية</div>
+      <div class="card c6" onclick="openPage('schedule.html')">⏰ توقيت الفروض والاختبارات</div>
+      <div class="card c7" onclick="openPage('transfer.html')">📑 طلبات التحويل</div>
+    </section>
+  </main>
+
+  <!-- Firebase + login logic -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js";
+
+    // ← ضع هنا إعدادات مشروعك (التي حصلت عليها في Firebase Console)
+    const firebaseConfig = {
+      apiKey: "AIzaSyB5C8Z8rsRb-wsLv1-Pv5Whqqc3z7NkzrA",
+      authDomain: "diwan-8bec0.firebaseapp.com",
+      projectId: "diwan-8bec0",
+      storageBucket: "diwan-8bec0.firebasestorage.app",
+      messagingSenderId: "144048154405",
+      appId: "1:144048154405:web:3ba53185d382040b135ccc",
+      measurementId: "G-LPC1TFTWFT"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const loginBox = document.getElementById('login-box');
+    const mainContent = document.getElementById('main-content');
+    const appbar = document.getElementById('appbar');
+    const loginBtn = document.getElementById('loginBtn');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    // وظيفة فتح صفحات (لو أنشأت الملفات لاحقاً)
+    window.openPage = function(name){
+      // إذا الملف موجود، يفتح؛ وإلا يعرض رسالة بسيطة
+      if (location.origin + location.pathname.replace(/\/[^/]*$/, '/') + name) {
+        window.location.href = name;
+      } else {
+        alert('الصفحة غير متوفرة الآن — سيتم إنشاؤها لاحقاً.');
+      }
+    };
+
+    loginBtn.addEventListener('click', () => {
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      if (!email || !password) { alert('املأ الحقول'); return; }
+
+      signInWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          // إظهار المحتوى
+          loginBox.style.display='none';
+          appbar.style.display='flex';
+          mainContent.style.display='block';
+          // تمرير إلى أعلى
+          window.scrollTo({top:0, behavior:'smooth'});
+        })
+        .catch(err => {
+          alert('فشل في تسجيل الدخول: ' + err.message);
+        });
+    });
+
+    logoutBtn.addEventListener('click', async () => {
+      await signOut(auth);
+      // إعادة الحالة
+      loginBox.style.display='flex';
+      appbar.style.display='none';
+      mainContent.style.display='none';
+      document.getElementById('password').value = '';
+    });
+
+    // لو المستخدم مسجل من قبل (جلسة Firebase) نظهر المحتوى مباشرة
+    onAuthStateChanged(auth, user => {
+      if (user) {
+        loginBox.style.display='none';
+        appbar.style.display='flex';
+        mainContent.style.display='block';
+      } else {
+        loginBox.style.display='flex';
+        appbar.style.display='none';
+        mainContent.style.display='none';
+      }
+    });
+  </script>
 </body>
 </html>
