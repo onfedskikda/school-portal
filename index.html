@@ -2,129 +2,111 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>بوابة الطالب</title>
+  <title>فضاء التلميذ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0; padding: 0; box-sizing: border-box;
-      font-family: "Cairo", sans-serif;
-    }
+    * { box-sizing: border-box; }
     body {
-      background: linear-gradient(135deg, #1a73e8, #00c6ff);
+      font-family: 'Tajawal', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #e0f7fa, #ffffff);
       min-height: 100vh;
-      display: flex; justify-content: center; align-items: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
     }
-    .container, .dashboard {
-      background: rgba(255,255,255,0.15);
-      padding: 40px;
-      border-radius: 20px;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 0 30px rgba(0,0,0,0.2);
-      width: 350px; text-align: center;
-      animation: fadeIn 1.5s ease;
-    }
-    h2 {
-      color: #fff;
-      margin-bottom: 20px;
-      font-size: 1.5rem;
-      animation: slideDown 1.2s ease;
-    }
-    .input-box { margin: 20px 0; animation: slideUp 1s ease; }
-    .input-box input {
-      width: 100%; padding: 12px;
-      border: none; border-radius: 10px;
-      background: rgba(255,255,255,0.2);
-      color: #fff; font-size: 1rem; outline: none;
-    }
-    .btn {
-      width: 100%; padding: 12px;
-      background: #00c6ff; border: none; border-radius: 10px;
-      font-size: 1rem; font-weight: bold; color: #fff;
-      cursor: pointer; margin-top: 15px; transition: 0.3s;
-      animation: bounceIn 1.3s ease;
-    }
-    .btn:hover { background: #0099cc; }
-    .hidden { display: none; }
-    /* الخانات بعد الدخول */
-    .options {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 15px;
-    }
-    .option {
-      background: rgba(255,255,255,0.25);
-      padding: 15px;
+    .card {
+      background: #fff;
+      width: 400px;
       border-radius: 12px;
-      color: #fff;
-      font-size: 1.1rem;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      animation: slideUp 1.2s ease forwards;
       opacity: 0;
-      transform: translateY(30px);
-      animation: popUp 0.8s forwards;
-    }
-    .option:hover { background: rgba(0,0,0,0.2); }
-    /* حركات */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.9); }
-      to { opacity: 1; transform: scale(1); }
+      transform: translateY(50px);
     }
     @keyframes slideUp {
-      from { transform: translateY(50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
-    @keyframes slideDown {
-      from { transform: translateY(-50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+    .card header {
+      text-align: center;
+      padding: 20px;
+      border-bottom: 2px solid #eee;
     }
-    @keyframes bounceIn {
-      0% { transform: scale(0.5); opacity: 0; }
-      60% { transform: scale(1.1); opacity: 1; }
-      100% { transform: scale(1); }
+    .card header img {
+      height: 60px;
+      vertical-align: middle;
+      margin-left: 10px;
     }
-    @keyframes popUp {
-      to { opacity: 1; transform: translateY(0); }
+    .card header h2, .card header h3 {
+      margin: 5px 0;
+      font-size: 16px;
     }
-    .option:nth-child(1) { animation-delay: 0.2s; }
-    .option:nth-child(2) { animation-delay: 0.4s; }
-    .option:nth-child(3) { animation-delay: 0.6s; }
-    .option:nth-child(4) { animation-delay: 0.8s; }
-    .option:nth-child(5) { animation-delay: 1s; }
-    .option:nth-child(6) { animation-delay: 1.2s; }
+    .banner {
+      background: #80cbc4;
+      color: #004d40;
+      padding: 10px;
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+    }
+    .banner span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: marquee 10s linear infinite;
+      font-weight: bold;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-100%); }
+    }
+    .form {
+      padding: 20px;
+      text-align: center;
+    }
+    .form input {
+      width: 90%;
+      margin: 10px 0;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    .form button {
+      width: 95%;
+      padding: 12px;
+      background: #00796b;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 18px;
+      transition: background 0.3s;
+    }
+    .form button:hover {
+      background: #004d40;
+    }
   </style>
 </head>
 <body>
-  <!-- واجهة الدخول -->
-  <div class="container" id="login">
-    <h2>ادخل بياناتك للمتابعة</h2>
-    <div class="input-box">
-      <input type="text" id="username" placeholder="اسم المستخدم">
+  <div class="card">
+    <header>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Coat_of_arms_of_Algeria.svg/1024px-Coat_of_arms_of_Algeria.svg.png" alt="شعار">
+      <h2>الجمهورية الجزائرية الديمقراطية الشعبية</h2>
+      <h3>وزارة التربية الوطنية</h3>
+    </header>
+    <div class="banner">
+      <span>مرحباً بكم في فضاء التلميذ - الديوان الوطني للتعليم والتكوين عن بعد</span>
     </div>
-    <div class="input-box">
-      <input type="password" id="password" placeholder="كلمة المرور">
-    </div>
-    <button class="btn" onclick="login()">دخول</button>
-  </div>
-
-  <!-- لوحة الطالب -->
-  <div class="dashboard hidden" id="dashboard">
-    <h2>مرحبا بك</h2>
-    <div class="options">
-      <div class="option">📘 تسجيلاتي</div>
-      <div class="option">📄 كشوف النقاط</div>
-      <div class="option">📝 نماذج الفروض والاختبارات</div>
-      <div class="option">📊 نتائج المراقبة المستمرة والفروض والاختبارات</div>
-      <div class="option">🔄 طلبات التحويل</div>
-      <div class="option">❓ طرح إشكاليات</div>
+    <div class="form">
+      <input type="text" placeholder="اسم المستخدم" required>
+      <input type="password" placeholder="كلمة المرور" required>
+      <button type="submit">تسجيل الدخول</button>
     </div>
   </div>
-
-  <script>
-    function login() {
-      document.getElementById("login").classList.add("hidden");
-      document.getElementById("dashboard").classList.remove("hidden");
-    }
-  </script>
 </body>
 </html>
