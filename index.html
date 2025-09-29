@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>الديوان الوطني للتعليم والتكوين عن بعد</title>
-    <!-- إضافة خط Cairo من Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- إضافة Firebase -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <style>
@@ -24,245 +23,402 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
+            position: relative;
+            overflow: hidden;
         }
 
-        /* الشريط الأخضر مع النص المتحرك */
-        .header-bar {
-            background: #2ecc71;
-            padding: 10px 0;
+        /* تأثيرات الخلفية الفاخرة */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(1deg); }
+        }
+
+        /* الشريط العلوي الفاخر */
+        .premium-header {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            padding: 15px 0;
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
-            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            border-bottom: 3px solid #8e44ad;
         }
 
-        .moving-text {
+        .premium-moving-text {
             color: #8e44ad;
-            font-weight: bold;
-            font-size: 18px;
+            font-weight: 700;
+            font-size: 20px;
             white-space: nowrap;
-            animation: moveText 20s linear infinite;
+            animation: premiumMove 15s linear infinite;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
         }
 
-        @keyframes moveText {
+        @keyframes premiumMove {
             0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
         }
 
-        /* البطاقة الرئيسية */
-        .login-card {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-            padding: 40px 30px;
+        /* البطاقة الفاخرة */
+        .premium-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            box-shadow: 
+                0 25px 50px rgba(0,0,0,0.3),
+                0 0 100px rgba(142, 68, 173, 0.2),
+                inset 0 1px 0 rgba(255,255,255,0.4);
+            padding: 50px 40px;
             width: 100%;
-            max-width: 450px;
+            max-width: 500px;
             text-align: center;
-            transform: translateY(100px);
+            transform: translateY(100px) scale(0.9);
             opacity: 0;
-            animation: slideUp 0.8s ease-out forwards;
-            margin-top: 100px;
+            animation: premiumSlideUp 1s ease-out 0.3s forwards;
+            border: 1px solid rgba(255,255,255,0.3);
+            position: relative;
+            overflow: hidden;
         }
 
-        @keyframes slideUp {
+        .premium-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        @keyframes premiumSlideUp {
             to {
-                transform: translateY(0);
+                transform: translateY(0) scale(1);
                 opacity: 1;
             }
         }
 
-        /* الشعار والعناوين */
-        .logo-section {
-            margin-bottom: 30px;
+        /* الشعار والعناوين الفاخرة */
+        .premium-logo-section {
+            margin-bottom: 40px;
+            position: relative;
         }
 
-        .national-title {
+        .premium-national {
             color: #2c3e50;
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-
-        .ministry-title {
-            color: #34495e;
             font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 10px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
 
-        .office-title {
+        .premium-ministry {
+            color: #34495e;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .premium-office {
             color: #8e44ad;
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-
-        .welcome-title {
-            color: #2c3e50;
             font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 30px;
-        }
-
-        /* حقول الإدخال */
-        .form-group {
+            font-weight: 800;
             margin-bottom: 25px;
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .premium-welcome {
+            color: #2c3e50;
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .premium-welcome::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 25%;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(135deg, #3498db, #8e44ad);
+            border-radius: 10px;
+        }
+
+        /* حقول الإدخال الفاخرة */
+        .premium-form-group {
+            margin-bottom: 30px;
             text-align: right;
+            position: relative;
         }
 
-        .input-field {
+        .premium-input {
             width: 100%;
-            padding: 15px;
-            border: 2px solid #bdc3c7;
-            border-radius: 8px;
+            padding: 18px 20px;
+            border: 2px solid transparent;
+            border-radius: 12px;
             font-size: 16px;
-            background: #f8f9fa;
-            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
         }
 
-        .input-field:focus {
+        .premium-input:focus {
             border-color: #3498db;
             background: white;
             outline: none;
-            box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+            box-shadow: 
+                0 5px 20px rgba(52, 152, 219, 0.3),
+                0 0 30px rgba(52, 152, 219, 0.1);
+            transform: translateY(-2px);
         }
 
-        /* زر تسجيل الدخول */
-        .login-btn {
-            background: linear-gradient(135deg, #3498db, #2980b9);
+        .premium-input::placeholder {
+            color: #7f8c8d;
+            transition: all 0.3s ease;
+        }
+
+        .premium-input:focus::placeholder {
+            transform: translateY(-20px);
+            opacity: 0;
+        }
+
+        /* زر الدخول الفاخر */
+        .premium-login-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9, #8e44ad);
             color: white;
             border: none;
-            padding: 15px;
-            border-radius: 8px;
-            font-size: 18px;
-            font-weight: 600;
+            padding: 18px;
+            border-radius: 12px;
+            font-size: 20px;
+            font-weight: 700;
             cursor: pointer;
             width: 100%;
+            transition: all 0.4s ease;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 25px rgba(52, 152, 219, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .premium-login-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .premium-login-btn:hover::before {
+            left: 100%;
+        }
+
+        .premium-login-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 
+                0 15px 35px rgba(52, 152, 219, 0.6),
+                0 0 50px rgba(142, 68, 173, 0.3);
+        }
+
+        .premium-login-btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* قسم CAPTCHA الفاخر */
+        .premium-captcha {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            border: 2px solid transparent;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
-            margin-bottom: 20px;
         }
 
-        .login-btn:hover {
-            background: linear-gradient(135deg, #2980b9, #1f618d);
+        .premium-captcha:hover {
+            border-color: #3498db;
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
-        .login-btn:active {
-            transform: translateY(0);
-        }
-
-        /* الروابط */
-        .links {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-
-        .link {
-            color: #3498db;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .link:hover {
-            color: #2980b9;
-            text-decoration: underline;
-        }
-
-        /* رسائل الخطأ */
-        .error-message {
-            color: #e74c3c;
-            background: #fadbd8;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            display: none;
-            font-weight: 500;
-        }
-
-        /* الـ CAPTCHA */
-        .captcha-section {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            border: 1px solid #bdc3c7;
-        }
-
-        .captcha-title {
+        .premium-captcha-title {
             color: #2c3e50;
-            font-weight: 600;
-            margin-bottom: 10px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-size: 18px;
         }
 
-        .captcha-display {
-            font-size: 24px;
-            font-weight: bold;
+        .premium-captcha-display {
+            font-size: 28px;
+            font-weight: 800;
             color: #2c3e50;
             background: white;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            letter-spacing: 5px;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            letter-spacing: 8px;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.1);
+            border: 2px solid #bdc3c7;
+        }
+
+        /* الروابط الفاخرة */
+        .premium-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .premium-link {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .premium-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #3498db, #8e44ad);
+            transition: width 0.3s ease;
+        }
+
+        .premium-link:hover::before {
+            width: 100%;
+        }
+
+        .premium-link:hover {
+            color: #2980b9;
+            background: rgba(52, 152, 219, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* رسائل الخطأ الفاخرة */
+        .premium-error {
+            color: #e74c3c;
+            background: linear-gradient(135deg, #fadbd8, #f5b7b1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+            border: 1px solid #e74c3c;
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        /* الأيقونات */
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #7f8c8d;
+            font-size: 18px;
         }
     </style>
 </head>
 <body>
-    <!-- الشريط الأخضر العلوي -->
-    <div class="header-bar">
-        <div class="moving-text">
-            مرحباً بكم في فضاء التلميذ - الديوان الوطني للتعليم والتكوين عن بعد
+    <!-- الشريط العلوي الفاخر -->
+    <div class="premium-header">
+        <div class="premium-moving-text">
+            <i class="fas fa-star"></i> مرحباً بكم في فضاء التلميذ - الديوان الوطني للتعليم والتكوين عن بعد <i class="fas fa-star"></i>
         </div>
     </div>
 
-    <!-- البطاقة الرئيسية -->
-    <div class="login-card">
-        <!-- العناوين -->
-        <div class="logo-section">
-            <div class="national-title">الجمهورية الجزائرية الديمقراطية الشعبية</div>
-            <div class="ministry-title">وزارة التربية الوطنية</div>
-            <div class="office-title">الديوان الوطني للتعليم والتكوين عن بعد</div>
-            <div class="welcome-title">مرحبا بكم في الأرضية الرقمية</div>
+    <!-- البطاقة الفاخرة -->
+    <div class="premium-card">
+        <!-- العناوين الفاخرة -->
+        <div class="premium-logo-section">
+            <div class="premium-national">الجمهورية الجزائرية الديمقراطية الشعبية</div>
+            <div class="premium-ministry">وزارة التربية الوطنية</div>
+            <div class="premium-office">الديوان الوطني للتعليم والتكوين عن بعد</div>
+            <div class="premium-welcome">مرحبا بكم في الأرضية الرقمية</div>
         </div>
 
-        <!-- رسالة الخطأ -->
-        <div class="error-message" id="errorMessage">
-            إسم المستخدم وكلمة المرور غير صحيحة
+        <!-- رسالة الخطأ الفاخرة -->
+        <div class="premium-error" id="errorMessage">
+            <i class="fas fa-exclamation-triangle"></i> إسم المستخدم وكلمة المرور غير صحيحة
         </div>
 
-        <!-- نموذج التسجيل -->
+        <!-- نموذج التسجيل الفاخر -->
         <form id="loginForm">
-            <div class="form-group">
-                <input type="email" class="input-field" id="email" placeholder="البريد الإلكتروني" required>
+            <div class="premium-form-group">
+                <i class="fas fa-envelope input-icon"></i>
+                <input type="email" class="premium-input" id="email" placeholder="البريد الإلكتروني" required>
             </div>
 
-            <div class="form-group">
-                <input type="password" class="input-field" id="password" placeholder="كلمة المرور" required>
+            <div class="premium-form-group">
+                <i class="fas fa-lock input-icon"></i>
+                <input type="password" class="premium-input" id="password" placeholder="كلمة المرور" required>
             </div>
 
-            <!-- قسم CAPTCHA -->
-            <div class="captcha-section">
-                <div class="captcha-title">nCAPTCHA</div>
-                <div class="captcha-display" id="captchaDisplay">A1B2C3</div>
+            <!-- قسم CAPTCHA الفاخر -->
+            <div class="premium-captcha">
+                <div class="premium-captcha-title">nCAPTCHA</div>
+                <div class="premium-captcha-display" id="captchaDisplay">A1B2C3</div>
             </div>
 
-            <button type="submit" class="login-btn">تسجيل الدخول</button>
+            <button type="submit" class="premium-login-btn">
+                <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
+            </button>
         </form>
 
-        <!-- الروابط -->
-        <div class="links">
-            <a href="#" class="link">تسجيل جديد</a>
-            <a href="#" class="link">استعادة كلمة المرور</a>
+        <!-- الروابط الفاخرة -->
+        <div class="premium-links">
+            <a href="#" class="premium-link">
+                <i class="fas fa-user-plus"></i> تسجيل جديد
+            </a>
+            <a href="#" class="premium-link">
+                <i class="fas fa-key"></i> استعادة كلمة المرور
+            </a>
         </div>
     </div>
 
     <script>
         // تهيئة Firebase
         const firebaseConfig = {
-            // هنا ضع إعدادات Firebase الخاصة بك
             apiKey: "your-api-key",
             authDomain: "your-project.firebaseapp.com",
             projectId: "your-project-id",
@@ -271,7 +427,6 @@
             appId: "your-app-id"
         };
 
-        // تهيئة Firebase
         firebase.initializeApp(firebaseConfig);
 
         // إدارة نموذج التسجيل
@@ -282,29 +437,20 @@
             const password = document.getElementById('password').value;
             const errorMessage = document.getElementById('errorMessage');
 
-            // تسجيل الدخول باستخدام Firebase
             firebase.auth().signInWithEmailAndPassword(email, password)
                 .then((userCredential) => {
-                    // تم تسجيل الدخول بنجاح
                     const user = userCredential.user;
                     console.log("تم تسجيل الدخول بنجاح:", user);
-                    // توجيه المستخدم إلى الصفحة الرئيسية
                     window.location.href = "dashboard.html";
                 })
                 .catch((error) => {
-                    // حدث خطأ في تسجيل الدخول
-                    const errorCode = error.code;
-                    const errorMessageText = error.message;
-                    
-                    // عرض رسالة الخطأ
                     errorMessage.style.display = 'block';
                     errorMessage.textContent = 'إسم المستخدم وكلمة المرور غير صحيحة';
-                    
                     console.error("خطأ في تسجيل الدخول:", error);
                 });
         });
 
-        // إخفاء رسالة الخطأ عند البدء في الكتابة
+        // إخفاء رسالة الخطأ عند الكتابة
         document.getElementById('email').addEventListener('input', function() {
             document.getElementById('errorMessage').style.display = 'none';
         });
@@ -323,7 +469,6 @@
             document.getElementById('captchaDisplay').textContent = captcha;
         }
 
-        // توليد CAPTCHA عند تحميل الصفحة
         generateCaptcha();
     </script>
 </body>
