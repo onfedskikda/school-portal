@@ -1,296 +1,95 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8">
   <title>فضاء التلميذ</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --accent-1:#2575fc;
-      --accent-2:#6a11cb;
-      --card-radius:14px;
-      --glass: rgba(255,255,255,0.9);
+    body {
+      font-family: 'Tajawal', sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/7/77/Algeria_relief_location_map.jpg') no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
     }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:"Cairo",sans-serif;
-      min-height:100vh;
-      background: linear-gradient(135deg,var(--accent-2),var(--accent-1));
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:#222;
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(255, 255, 255, 0.8);
+      z-index: 0;
     }
-
-    /* wrapper */
-    .wrap{
-      width:95%;
-      max-width:1100px;
-      margin:30px;
+    .content {
+      position: relative;
+      z-index: 1;
+      padding: 30px;
     }
-
-    /* --- Login Card --- */
-    .login-card{
-      background: var(--glass);
-      border-radius: var(--card-radius);
-      padding:26px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
-      max-width:420px;
-      margin: 0 auto 26px;
-      text-align:center;
-      backdrop-filter: blur(6px);
-      animation: floatIn .6s ease;
+    header img {
+      height: 80px;
+      margin: 10px;
     }
-    .brand{
-      display:flex;
-      gap:14px;
-      align-items:center;
-      justify-content:center;
-      margin-bottom:12px;
+    h1 {
+      color: #00796b;
+      margin: 15px 0;
     }
-    .brand img{ width:72px; height:72px; object-fit:contain; border-radius:10px; }
-    h1{ margin:8px 0 6px; color:#0b3d91; font-size:20px; }
-    p.lead{ margin:0 0 14px; color:#444; }
-
-    .login-card input{
-      width:88%;
-      padding:12px;
-      margin:8px 0;
-      border-radius:8px;
-      border:1px solid #ddd;
-      font-size:15px;
-      display:block;
-      margin-left:auto; margin-right:auto;
+    p {
+      color: #333;
+      font-size: 18px;
+      margin-bottom: 25px;
     }
-    .btn{
-      display:inline-block;
-      background: linear-gradient(90deg,#ff9800,#ff6b00);
-      color:white;
-      padding:12px 18px;
-      border:none;
-      border-radius:10px;
-      font-weight:700;
-      cursor:pointer;
-      margin-top:8px;
-      width:88%;
-      font-size:15px;
+    .login-box {
+      background: #ffffffcc;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      max-width: 350px;
+      margin: auto;
     }
-    .btn:active{ transform:translateY(1px) }
-    .error{
-      color:#c92a2a;
-      margin-top:10px;
-      font-weight:700;
-      display:none;
+    .login-box h2 {
+      margin-bottom: 20px;
+      color: #00796b;
     }
-
-    /* --- Dashboard --- */
-    .dash{
-      display:none;
-      color:#fff;
-      margin-top:10px;
-      animation: fadeIn .5s ease;
+    .login-box input {
+      display: block;
+      width: 90%;
+      margin: 10px auto;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
     }
-    header.dhead{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-      margin-bottom:18px;
+    .login-box button {
+      background: #00796b;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
     }
-    .dtitle{ font-size:20px; font-weight:700; color:#fff; }
-    .logout{
-      background:rgba(255,255,255,0.12);
-      border:1px solid rgba(255,255,255,0.15);
-      color:#fff;
-      padding:8px 12px;
-      border-radius:10px;
-      cursor:pointer;
-      font-weight:700;
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-      gap:18px;
-    }
-    .card{
-      background: linear-gradient(180deg, #ffffff, #fafafa);
-      border-radius:14px;
-      padding:22px;
-      text-align:center;
-      color:#1f2d3d;
-      box-shadow: 0 12px 28px rgba(8,20,50,0.08);
-      cursor:pointer;
-      position:relative;
-      overflow:hidden;
-      transition: transform .28s ease, box-shadow .28s ease;
-    }
-    .card:hover{ transform: translateY(-10px); box-shadow: 0 18px 36px rgba(8,20,50,0.12); }
-    .card .ico{ font-size:42px; margin-bottom:12px; display:block; }
-    .card .ttl{ font-size:16px; font-weight:800; }
-
-    /* colored top accent for each card */
-    .card.c1{ border-top:6px solid #007bff; }
-    .card.c2{ border-top:6px solid #28a745; }
-    .card.c3{ border-top:6px solid #ffc107; }
-    .card.c4{ border-top:6px solid #17a2b8; }
-    .card.c5{ border-top:6px solid #6f42c1; }
-    .card.c6{ border-top:6px solid #dc3545; }
-
-    /* small user info */
-    .userline{ font-size:13px; color:rgba(0,0,0,0.55); margin-top:8px; }
-
-    @keyframes fadeIn{ from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
-    @keyframes floatIn{ from{opacity:0; transform:translateY(-18px)} to{opacity:1; transform:none} }
-
-    /* responsive tweaks */
-    @media (max-width:520px){
-      .login-card{ width:92%; padding:18px; }
+    .login-box button:hover {
+      background: #004d40;
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
+  <div class="content">
+    <header>
+      <img src="https://cdn-icons-png.flaticon.com/512/29/29302.png" alt="كتب">
+      <h1>فضاء التلميذ - الديوان الوطني للتعليم والتكوين عن بعد</h1>
+      <p>منصة لمتابعة النتائج، التسجيلات، وكشوف النقاط.</p>
+    </header>
 
-    <!-- login card -->
-    <div class="login-card" id="loginCard">
-      <div class="brand">
-        <img src="https://cdn-icons-png.flaticon.com/512/29/29302.png" alt="كتب">
-        <img src="https://i.ibb.co/qmCSmTG/onefd-logo.png" alt="ONEFD" style="width:72px;height:72px;">
-      </div>
-
-      <h1>فضاء التلميذ</h1>
-      <p class="lead">الديوان الوطني للتعليم والتكوين عن بعد</p>
-
-      <form id="loginForm" autocomplete="off">
-        <input id="u_input" type="text" placeholder="رقم التسجيل أو البريد (مثال: 21202505167)" required />
-        <input id="p_input" type="password" placeholder="كلمة المرور" required />
-        <button class="btn" type="submit">دخول</button>
+    <div class="login-box">
+      <h2>أدخل بياناتك للمتابعة</h2>
+      <form action="dashboard.html" method="get">
+        <input type="text" required>
+        <input type="password" required>
+        <button type="submit">دخول</button>
       </form>
-
-      <div id="loginError" class="error">بيانات الدخول غير صحيحة — تحقق من الرقم/البريد وكلمة المرور.</div>
-
-      <div style="margin-top:12px;font-size:13px;color:#555">أدخل بياناتك للمتابعة. (تلميح: جرب <b>21202505167</b> / <b>21Ut17174L#U</b>)</div>
     </div>
-
-    <!-- Dashboard -->
-    <div class="dash" id="dash">
-      <header class="dhead">
-        <div class="dtitle">📚 لوحة التلميذ</div>
-        <div>
-          <span id="who" class="userline"></span>
-          <button class="logout" id="logoutBtn">تسجيل خروج</button>
-        </div>
-      </header>
-
-      <div class="grid">
-        <div class="card c1" onclick="openCard('registration')">
-          <span class="ico">📘</span>
-          <div class="ttl">تسجيلاتي</div>
-        </div>
-
-        <div class="card c2" onclick="openCard('grades')">
-          <span class="ico">📑</span>
-          <div class="ttl">كشوف النقاط</div>
-        </div>
-
-        <div class="card c3" onclick="openCard('samples')">
-          <span class="ico">✏️</span>
-          <div class="ttl">نماذج الفروض والاختبارات</div>
-        </div>
-
-        <div class="card c4" onclick="openCard('results')">
-          <span class="ico">📊</span>
-          <div class="ttl">نتائج المراقبة المستمرة، الفروض، والاختبارات</div>
-        </div>
-
-        <div class="card c5" onclick="openCard('transfers')">
-          <span class="ico">🔄</span>
-          <div class="ttl">طلبات التحويل</div>
-        </div>
-
-        <div class="card c6" onclick="openCard('issues')">
-          <span class="ico">❓</span>
-          <div class="ttl">طرح إشكاليات</div>
-        </div>
-      </div>
-    </div>
-
   </div>
-
-<script>
-  // الصِحّة المطلوبة: اسم المستخدم (رقم أو بريد) وكلمة المرور
-  const VALID = {
-    username: "21202505167",
-    email: "21202505167@test.com",
-    password: "21Ut17174L#U"
-  };
-
-  const loginForm = document.getElementById('loginForm');
-  const loginCard = document.getElementById('loginCard');
-  const dash = document.getElementById('dash');
-  const loginError = document.getElementById('loginError');
-  const who = document.getElementById('who');
-  const logoutBtn = document.getElementById('logoutBtn');
-
-  // عند تحميل الصفحة: إذا الجلسة موجودة، أظهر الـ dashboard
-  document.addEventListener('DOMContentLoaded', () => {
-    if (localStorage.getItem('onefd_logged') === '1') {
-      showDashboard(localStorage.getItem('onefd_user') || VALID.username);
-    } else {
-      // إبقاء شاشة الدخول ظاهرة
-      loginCard.style.display = 'block';
-    }
-  });
-
-  loginForm.addEventListener('submit', function(e){
-    e.preventDefault();
-    loginError.style.display = 'none';
-
-    const u = document.getElementById('u_input').value.trim();
-    const p = document.getElementById('p_input').value;
-
-    // قبول إما الرقم أو الإيميل، ومطابقة كلمة المرور بالضبط
-    const okUser = (u === VALID.username || u === VALID.email);
-    const okPass = (p === VALID.password);
-
-    if (okUser && okPass) {
-      // حفظ جلسة بسيطة (انتباه: هذا غير آمن للتطبيق الحقيقي)
-      localStorage.setItem('onefd_logged','1');
-      localStorage.setItem('onefd_user', (u===VALID.email?VALID.username:u));
-      showDashboard(u);
-    } else {
-      loginError.style.display = 'block';
-      // مسح خانة الباسوورد لتجربة ثانية
-      document.getElementById('p_input').value = '';
-      document.getElementById('p_input').focus();
-    }
-  });
-
-  function showDashboard(userInput) {
-    loginCard.style.display = 'none';
-    dash.style.display = 'block';
-    // عرض من يكون مسجل الدخول
-    who.textContent = "المستخدم: " + (userInput || VALID.username);
-  }
-
-  logoutBtn.addEventListener('click', () => {
-    localStorage.removeItem('onefd_logged');
-    localStorage.removeItem('onefd_user');
-    dash.style.display = 'none';
-    loginCard.style.display = 'block';
-    // تفريغ الحقول
-    document.getElementById('u_input').value = '';
-    document.getElementById('p_input').value = '';
-    loginError.style.display = 'none';
-  });
-
-  // فتح صفحة فرعية (حالياً عرض تنبيه — لاحقاً تضع صفحات حقيقية)
-  function openCard(name) {
-    alert('ستفتح الصفحة: ' + name + ' (يمكنك إنشاء صفحة منفصلة لاحقًا).');
-  }
-</script>
 </body>
 </html>
