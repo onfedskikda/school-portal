@@ -2,94 +2,129 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>فضاء التلميذ</title>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>بوابة الطالب</title>
   <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: "Cairo", sans-serif;
+    }
     body {
-      font-family: 'Tajawal', sans-serif;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-      background: url('https://upload.wikimedia.org/wikipedia/commons/7/77/Algeria_relief_location_map.jpg') no-repeat center center fixed;
-      background-size: cover;
-      position: relative;
+      background: linear-gradient(135deg, #1a73e8, #00c6ff);
+      min-height: 100vh;
+      display: flex; justify-content: center; align-items: center;
     }
-    body::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(255, 255, 255, 0.8);
-      z-index: 0;
+    .container, .dashboard {
+      background: rgba(255,255,255,0.15);
+      padding: 40px;
+      border-radius: 20px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 0 30px rgba(0,0,0,0.2);
+      width: 350px; text-align: center;
+      animation: fadeIn 1.5s ease;
     }
-    .content {
-      position: relative;
-      z-index: 1;
-      padding: 30px;
-    }
-    header img {
-      height: 80px;
-      margin: 10px;
-    }
-    h1 {
-      color: #00796b;
-      margin: 15px 0;
-    }
-    p {
-      color: #333;
-      font-size: 18px;
-      margin-bottom: 25px;
-    }
-    .login-box {
-      background: #ffffffcc;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      max-width: 350px;
-      margin: auto;
-    }
-    .login-box h2 {
+    h2 {
+      color: #fff;
       margin-bottom: 20px;
-      color: #00796b;
+      font-size: 1.5rem;
+      animation: slideDown 1.2s ease;
     }
-    .login-box input {
-      display: block;
-      width: 90%;
-      margin: 10px auto;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 16px;
+    .input-box { margin: 20px 0; animation: slideUp 1s ease; }
+    .input-box input {
+      width: 100%; padding: 12px;
+      border: none; border-radius: 10px;
+      background: rgba(255,255,255,0.2);
+      color: #fff; font-size: 1rem; outline: none;
     }
-    .login-box button {
-      background: #00796b;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 6px;
+    .btn {
+      width: 100%; padding: 12px;
+      background: #00c6ff; border: none; border-radius: 10px;
+      font-size: 1rem; font-weight: bold; color: #fff;
+      cursor: pointer; margin-top: 15px; transition: 0.3s;
+      animation: bounceIn 1.3s ease;
+    }
+    .btn:hover { background: #0099cc; }
+    .hidden { display: none; }
+    /* الخانات بعد الدخول */
+    .options {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+    .option {
+      background: rgba(255,255,255,0.25);
+      padding: 15px;
+      border-radius: 12px;
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: bold;
       cursor: pointer;
-      font-size: 16px;
+      transition: 0.3s;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: popUp 0.8s forwards;
     }
-    .login-box button:hover {
-      background: #004d40;
+    .option:hover { background: rgba(0,0,0,0.2); }
+    /* حركات */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
     }
+    @keyframes slideUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes slideDown {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes bounceIn {
+      0% { transform: scale(0.5); opacity: 0; }
+      60% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+    @keyframes popUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .option:nth-child(1) { animation-delay: 0.2s; }
+    .option:nth-child(2) { animation-delay: 0.4s; }
+    .option:nth-child(3) { animation-delay: 0.6s; }
+    .option:nth-child(4) { animation-delay: 0.8s; }
+    .option:nth-child(5) { animation-delay: 1s; }
+    .option:nth-child(6) { animation-delay: 1.2s; }
   </style>
 </head>
 <body>
-  <div class="content">
-    <header>
-      <img src="https://cdn-icons-png.flaticon.com/512/29/29302.png" alt="كتب">
-      <h1>فضاء التلميذ - الديوان الوطني للتعليم والتكوين عن بعد</h1>
-      <p>منصة لمتابعة النتائج، التسجيلات، وكشوف النقاط.</p>
-    </header>
+  <!-- واجهة الدخول -->
+  <div class="container" id="login">
+    <h2>ادخل بياناتك للمتابعة</h2>
+    <div class="input-box">
+      <input type="text" id="username" placeholder="اسم المستخدم">
+    </div>
+    <div class="input-box">
+      <input type="password" id="password" placeholder="كلمة المرور">
+    </div>
+    <button class="btn" onclick="login()">دخول</button>
+  </div>
 
-    <div class="login-box">
-      <h2>أدخل بياناتك للمتابعة</h2>
-      <form action="dashboard.html" method="get">
-        <input type="text" required>
-        <input type="password" required>
-        <button type="submit">دخول</button>
-      </form>
+  <!-- لوحة الطالب -->
+  <div class="dashboard hidden" id="dashboard">
+    <h2>مرحبا بك</h2>
+    <div class="options">
+      <div class="option">📘 تسجيلاتي</div>
+      <div class="option">📄 كشوف النقاط</div>
+      <div class="option">📝 نماذج الفروض والاختبارات</div>
+      <div class="option">📊 نتائج المراقبة المستمرة والفروض والاختبارات</div>
+      <div class="option">🔄 طلبات التحويل</div>
+      <div class="option">❓ طرح إشكاليات</div>
     </div>
   </div>
+
+  <script>
+    function login() {
+      document.getElementById("login").classList.add("hidden");
+      document.getElementById("dashboard").classList.remove("hidden");
+    }
+  </script>
 </body>
 </html>
