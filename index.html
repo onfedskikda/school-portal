@@ -34,7 +34,7 @@
             border: 1px solid rgba(255,255,255,0.3);
         }
 
-        /* الشريط المتحرك داخل البطاقة */
+        /* الشريط المتحرك داخل البطاقة - بدون ظل */
         .moving-text-container {
             background: linear-gradient(135deg, #2ecc71, #27ae60);
             margin: -30px -40px 30px -40px;
@@ -50,7 +50,7 @@
             font-size: 18px;
             white-space: nowrap;
             animation: premiumMove 15s linear infinite;
-            text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
+            /* تم إزالة text-shadow */
         }
 
         @keyframes premiumMove {
@@ -58,7 +58,7 @@
             100% { transform: translateX(-100%); }
         }
 
-        /* العناوين */
+        /* العناوين بخط مشابه للرسمي */
         .premium-logo-section {
             margin-bottom: 30px;
         }
@@ -68,6 +68,7 @@
             font-size: 16px;
             font-weight: 700;
             margin-bottom: 5px;
+            font-family: 'Cairo', sans-serif;
         }
 
         .premium-ministry {
@@ -75,13 +76,15 @@
             font-size: 18px;
             font-weight: 700;
             margin-bottom: 8px;
+            font-family: 'Cairo', sans-serif;
         }
 
         .premium-office {
             color: #8e44ad;
             font-size: 20px;
             font-weight: 800;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            font-family: 'Cairo', sans-serif;
         }
 
         .premium-welcome {
@@ -91,6 +94,7 @@
             margin-bottom: 30px;
             position: relative;
             display: inline-block;
+            font-family: 'Cairo', sans-serif;
         }
 
         .premium-welcome::after {
@@ -119,6 +123,7 @@
             font-size: 16px;
             background: #f8f9fa;
             transition: all 0.3s ease;
+            font-family: 'Cairo', sans-serif;
         }
 
         .premium-input:focus {
@@ -148,6 +153,7 @@
             flex: 1;
             transition: all 0.3s ease;
             box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+            font-family: 'Cairo', sans-serif;
         }
 
         .login-btn:hover {
@@ -171,6 +177,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            font-family: 'Cairo', sans-serif;
         }
 
         .register-btn:hover {
@@ -193,6 +200,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            font-family: 'Cairo', sans-serif;
         }
 
         .forgot-btn:hover {
@@ -211,6 +219,42 @@
             font-weight: 600;
             border: 1px solid #e74c3c;
             text-align: center;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        /* رسالة النجاح */
+        .success-message {
+            color: #27ae60;
+            background: #d5f4e6;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px auto;
+            display: none;
+            font-weight: 700;
+            border: 2px solid #27ae60;
+            text-align: center;
+            max-width: 400px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 18px;
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-icon {
+            color: #27ae60;
+            font-size: 24px;
+            margin-left: 10px;
         }
 
         /* الأيقونات */
@@ -227,7 +271,7 @@
 <body>
     <!-- البطاقة في أعلى الصفحة -->
     <div class="premium-card">
-        <!-- الشريط المتحرك داخل البطاقة -->
+        <!-- الشريط المتحرك داخل البطاقة - بدون ظل -->
         <div class="moving-text-container">
             <div class="premium-moving-text">
                 <i class="fas fa-star"></i> مرحباً بكم في فضاء التلميذ - الديوان الوطني للتعليم والتكوين عن بعد <i class="fas fa-star"></i>
@@ -251,12 +295,12 @@
         <form id="loginForm">
             <div class="premium-form-group">
                 <i class="fas fa-user input-icon"></i>
-                <input type="text" class="premium-input" id="username" placeholder="اسم المستخدم" required>
+                <input type="text" class="premium-input" id="username" placeholder="اسم المستخدم" required value="21202505167">
             </div>
 
             <div class="premium-form-group">
                 <i class="fas fa-lock input-icon"></i>
-                <input type="password" class="premium-input" id="password" placeholder="كلمة المرور" required>
+                <input type="password" class="premium-input" id="password" placeholder="كلمة المرور" required value="21Ut17174L#U">
             </div>
 
             <!-- الخانات الثلاث جنب بعض -->
@@ -276,6 +320,12 @@
         </form>
     </div>
 
+    <!-- رسالة النجاح -->
+    <div class="success-message" id="successMessage">
+        <i class="fas fa-check-circle success-icon"></i>
+        تم تسجيل الدخول بنجاح
+    </div>
+
     <script>
         // بيانات المستخدم الصحيحة
         const correctUsername = "21202505167";
@@ -288,26 +338,37 @@
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             const errorMessage = document.getElementById('errorMessage');
+            const successMessage = document.getElementById('successMessage');
 
             // التحقق من بيانات المستخدم
             if (username === correctUsername && password === correctPassword) {
-                // تم تسجيل الدخول بنجاح - توجيه إلى الصفحة التالية
-                alert('تم تسجيل الدخول بنجاح! سيتم توجيهك إلى الصفحة الرئيسية.');
-                window.location.href = "dashboard.html"; // غير هذا الرابط إلى الصفحة التالية
+                // إخفاء رسالة الخطأ إذا كانت ظاهرة
+                errorMessage.style.display = 'none';
+                
+                // عرض رسالة النجاح
+                successMessage.style.display = 'block';
+                
+                // التوجيه إلى الصفحة التالية بعد 2 ثانية
+                setTimeout(function() {
+                    window.location.href = "dashboard.html"; // غير هذا الرابط إلى الصفحة التالية
+                }, 2000);
+                
             } else {
-                // عرض رسالة الخطأ
+                // عرض رسالة الخطأ وإخفاء رسالة النجاح
                 errorMessage.style.display = 'block';
-                errorMessage.textContent = 'إسم المستخدم أو كلمة المرور خاطئة';
+                successMessage.style.display = 'none';
             }
         });
 
         // إخفاء رسالة الخطأ عند الكتابة
         document.getElementById('username').addEventListener('input', function() {
             document.getElementById('errorMessage').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'none';
         });
 
         document.getElementById('password').addEventListener('input', function() {
             document.getElementById('errorMessage').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'none';
         });
     </script>
 </body>
