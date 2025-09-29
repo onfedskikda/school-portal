@@ -23,7 +23,7 @@
 
         body {
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                        url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+                        url('https://images.unsplash.com/photo-1497636577773-f1231844b336?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -53,38 +53,6 @@
                 transform: translateY(0);
                 opacity: 1;
             }
-        }
-
-        /* الشريط المتحرك داخل البطاقة - لون أخضر بارد جداً */
-        .moving-text-container {
-            background: linear-gradient(135deg, #00b894, #00a085);
-            margin: -30px -40px 30px -40px;
-            padding: 15px;
-            border-radius: 0 0 20px 20px;
-            border-bottom: 3px solid #007b6b;
-            overflow: hidden;
-            transform: translateY(-100%);
-            animation: slideDownHeader 0.8s ease-out 0.5s forwards;
-        }
-
-        @keyframes slideDownHeader {
-            to {
-                transform: translateY(0);
-            }
-        }
-
-        .premium-moving-text {
-            color: #000000;
-            font-weight: 700;
-            font-size: 18px;
-            white-space: nowrap;
-            animation: premiumMove 15s linear infinite;
-            font-family: 'TheSans', 'Cairo', sans-serif;
-        }
-
-        @keyframes premiumMove {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
         }
 
         /* العناوين بخط TheSans */
@@ -202,7 +170,7 @@
             border: none;
         }
 
-        /* الخانات الثلاث جنب بعض - معكوسة */
+        /* الخانات الثلاث جنب بعض */
         .buttons-container {
             display: flex;
             gap: 15px;
@@ -332,13 +300,6 @@
 <body>
     <!-- البطاقة في أعلى الصفحة -->
     <div class="premium-card">
-        <!-- الشريط المتحرك داخل البطاقة - أخضر بارد ونص أسود -->
-        <div class="moving-text-container">
-            <div class="premium-moving-text">
-                <i class="fas fa-star"></i> مرحباً بكم في فضاء التلميذ - الديوان الوطني للتعليم والتكوين عن بعد <i class="fas fa-star"></i>
-            </div>
-        </div>
-
         <!-- العناوين -->
         <div class="premium-logo-section">
             <div class="premium-national">الجمهورية الجزائرية الديمقراطية الشعبية</div>
@@ -372,19 +333,16 @@
             <!-- الخط الفاصل -->
             <hr class="separator">
 
-            <!-- الخانات الثلاث جنب بعض - معكوسة -->
+            <!-- الخانات الثلاث جنب بعض -->
             <div class="buttons-container">
-                <!-- خانة تسجيل الدخول أصبحت أولاً -->
                 <button type="submit" class="login-btn">
                     <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
                 </button>
                 
-                <!-- خانة تسجيل جديد في المنتصف -->
                 <a href="#" class="register-btn">
                     <i class="fas fa-user-plus"></i> تسجيل جديد
                 </a>
                 
-                <!-- خانة استعادة كلمة المرور أصبحت أخيراً -->
                 <a href="#" class="forgot-btn">
                     <i class="fas fa-key"></i> استعادة كلمة المرور
                 </a>
