@@ -9,23 +9,15 @@
       font-family: 'Tajawal', sans-serif;
       margin: 0;
       padding: 0;
+      background: #f0f2f5;
+    }
+    /* شاشة الدخول */
+    .login-screen, .dashboard {
+      display: none;
       text-align: center;
-      background: url('https://upload.wikimedia.org/wikipedia/commons/7/77/Algeria_relief_location_map.jpg') no-repeat center center fixed;
-      background-size: cover;
-      position: relative;
-    }
-    body::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(255, 255, 255, 0.8);
-      z-index: 0;
-    }
-    .content {
-      position: relative;
-      z-index: 1;
       padding: 30px;
     }
+    .active { display: block; }
     header img {
       height: 80px;
       margin: 10px;
@@ -68,10 +60,37 @@
     .login-box button:hover {
       background: #004d40;
     }
+    /* لوحة التلميذ */
+    .dashboard h2 {
+      margin-bottom: 20px;
+      color: #00796b;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+      max-width: 800px;
+      margin: auto;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform 0.2s;
+      font-size: 18px;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      background: #e0f7fa;
+    }
   </style>
 </head>
 <body>
-  <div class="content">
+
+  <!-- شاشة الدخول -->
+  <div class="login-screen active">
     <header>
       <img src="https://cdn-icons-png.flaticon.com/512/29/29302.png" alt="كتب">
       <h1>فضاء التلميذ - الديوان الوطني للتعليم والتكوين عن بعد</h1>
@@ -80,12 +99,35 @@
 
     <div class="login-box">
       <h2>تسجيل الدخول</h2>
-      <form action="dashboard.html" method="get">
+      <form id="loginForm">
         <input type="text" placeholder="البريد الإلكتروني أو رقم التسجيل" required>
         <input type="password" placeholder="كلمة المرور" required>
         <button type="submit">دخول</button>
       </form>
     </div>
   </div>
+
+  <!-- لوحة التلميذ -->
+  <div class="dashboard">
+    <h2>📚 لوحة التلميذ</h2>
+    <div class="grid">
+      <div class="card">📘 تسجيلاتي</div>
+      <div class="card">📑 كشوف النقاط</div>
+      <div class="card">📝 نماذج الفروض والاختبارات</div>
+      <div class="card">📊 نتائج المراقبة المستمرة، الفروض، والاختبارات</div>
+      <div class="card">🔄 طلبات التحويل</div>
+      <div class="card">❓ طرح إشكاليات</div>
+    </div>
+  </div>
+
+  <script>
+    // عند الضغط على دخول
+    document.getElementById("loginForm").addEventListener("submit", function(e){
+      e.preventDefault();
+      document.querySelector(".login-screen").classList.remove("active");
+      document.querySelector(".dashboard").classList.add("active");
+    });
+  </script>
+
 </body>
 </html>
