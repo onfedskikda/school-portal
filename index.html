@@ -2,137 +2,124 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>فضاء التلميذ</title>
   <!-- خط Cairo -->
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    * {
-      font-family: 'Cairo', sans-serif;
-      box-sizing: border-box;
-    }
-
     body {
+      font-family: 'Cairo', sans-serif;
       margin: 0;
-      background: url('https://i.ibb.co/wWfKYg5/school-tools.jpg') no-repeat center center/cover;
+      padding: 0;
+      text-align: center;
+      background: url('https://img.freepik.com/free-photo/back-school-concept-with-colorful-supplies_23-2148639129.jpg') no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
     }
-
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(255, 255, 255, 0.85);
+      z-index: 0;
+    }
     .card {
-      width: 90%;
+      position: relative;
+      z-index: 1;
+      width: 95%;
       max-width: 600px;
-      margin: 20px auto;
+      margin: 30px auto;
       background: #fff;
-      border-radius: 12px;
       padding: 20px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-      animation: slideUp 0.8s ease;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      animation: slideDown 1s ease;
     }
-
-    @keyframes slideUp {
-      from { transform: translateY(50px); opacity: 0; }
+    @keyframes slideDown {
+      from { transform: translateY(-50px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
-
     .header {
       display: flex;
       align-items: center;
-      gap: 15px;
-      margin-bottom: 15px;
+      justify-content: flex-start;
+      gap: 10px;
     }
-
     .header img {
-      width: 60px;
       height: 60px;
-      object-fit: contain;
     }
-
     .header-text {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .header-text strong {
+      text-align: right;
       font-size: 14px;
+      line-height: 1.5;
     }
-
     .marquee {
-      background: #00897B; /* أخضر بارد جداً */
-      color: #0000ff;
-      padding: 5px;
-      margin: 10px 0;
-      overflow: hidden;
-      white-space: nowrap;
-      position: relative;
+      background: #a8d5ba; /* أخضر بارد */
+      color: #004d40;
+      padding: 10px;
+      margin: 15px 0;
       border-radius: 6px;
+      overflow: hidden;
+      position: relative;
     }
-
     .marquee span {
       display: inline-block;
-      padding-right: 100%;
-      animation: marquee 10s linear infinite;
+      white-space: nowrap;
+      animation: scrollText 12s linear infinite;
     }
-
-    @keyframes marquee {
+    @keyframes scrollText {
       0% { transform: translateX(100%); }
       100% { transform: translateX(-100%); }
     }
-
-    .input-box {
-      margin: 10px 0;
-      width: 100%;
+    input {
+      display: block;
+      width: 90%;
+      margin: 10px auto;
       padding: 10px;
       border: 1px solid #ccc;
       border-radius: 6px;
+      font-size: 16px;
     }
-
     .buttons {
       display: flex;
-      justify-content: space-between;
-      margin-top: 15px;
-      gap: 10px;
+      justify-content: space-around;
+      margin-top: 20px;
     }
-
-    .btn {
+    .buttons button {
       flex: 1;
-      padding: 10px;
+      margin: 0 5px;
+      padding: 12px;
       border: none;
       border-radius: 6px;
+      font-size: 16px;
       color: #fff;
-      font-weight: bold;
       cursor: pointer;
-      transition: transform 0.2s;
+      transition: 0.3s;
     }
-
-    .btn:hover {
-      transform: scale(1.05);
-    }
-
-    .btn.blue { background: #007BFF; }
-    .btn.pink { background: #FF69B4; }
-    .btn.yellow { background: #FFD700; color: #000; }
-
+    .blue { background: #1976d2; }
+    .blue:hover { background: #0d47a1; }
+    .pink { background: #e91e63; }
+    .pink:hover { background: #ad1457; }
+    .yellow { background: #fbc02d; }
+    .yellow:hover { background: #f57f17; }
     .message {
-      margin-top: 10px;
-      text-align: center;
-      font-weight: bold;
+      margin-top: 15px;
       padding: 10px;
       border-radius: 6px;
       display: none;
     }
-
-    .success { background: #c8e6c9; color: #2e7d32; }
+    .success { background: #c8e6c9; color: #256029; }
     .error { background: #ffcdd2; color: #c62828; }
   </style>
 </head>
 <body>
   <div class="card">
-    <!-- الشعار + النصوص -->
+    <!-- الشعار + النص -->
     <div class="header">
-      <img src="https://i.ibb.co/2ZVZfQd/logo.png" alt="شعار">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Armoiries_de_l%27Alg%C3%A9rie.svg/120px-Armoiries_de_l%27Alg%C3%A9rie.svg.png" alt="شعار الجزائر">
       <div class="header-text">
-        <strong>الجمهورية الجزائرية الديمقراطية الشعبية</strong>
-        <span>وزارة التربية الوطنية</span>
-        <span>الديوان الوطني للتعليم والتكوين عن بعد</span>
+        <div>الجمهورية الجزائرية الديمقراطية الشعبية</div>
+        <div>وزارة التربية الوطنية</div>
+        <div>الديوان الوطني للتعليم والتكوين عن بعد</div>
       </div>
     </div>
 
@@ -141,34 +128,34 @@
       <span>مرحباً بكم في فضاء التلميذ - الديوان الوطني للتعليم والتكوين عن بعد</span>
     </div>
 
-    <!-- خانات التسجيل -->
-    <input type="text" id="regNum" class="input-box" placeholder="رقم التسجيل">
-    <input type="password" id="password" class="input-box" placeholder="كلمة المرور">
+    <!-- خانات الدخول -->
+    <input type="text" id="username" placeholder="رقم التسجيل">
+    <input type="password" id="password" placeholder="الرقم السري">
 
-    <div class="message" id="messageBox"></div>
-
-    <!-- الأزرار -->
     <div class="buttons">
-      <button class="btn blue" onclick="login()">تسجيل الدخول</button>
-      <button class="btn pink">تسجيل جديد</button>
-      <button class="btn yellow">استعادة كلمة المرور</button>
+      <button class="blue" onclick="login()">تسجيل الدخول</button>
+      <button class="pink">تسجيل جديد</button>
+      <button class="yellow">إستعادة كلمة المرور</button>
     </div>
+
+    <!-- رسائل -->
+    <div id="message" class="message"></div>
   </div>
 
   <script>
     function login() {
-      const regNum = document.getElementById("regNum").value;
-      const password = document.getElementById("password").value;
-      const msgBox = document.getElementById("messageBox");
+      const user = document.getElementById("username").value;
+      const pass = document.getElementById("password").value;
+      const msg = document.getElementById("message");
 
-      if (regNum === "21202505167" && password === "21Ut17174L#U") {
-        msgBox.innerText = "✔ تم تسجيل الدخول بنجاح";
-        msgBox.className = "message success";
-        msgBox.style.display = "block";
+      if (user === "21202505167" && pass === "21Ut17174L#U") {
+        msg.textContent = "✔ تم تسجيل الدخول بنجاح";
+        msg.className = "message success";
+        msg.style.display = "block";
       } else {
-        msgBox.innerText = "❌ رقم التسجيل أو كلمة المرور خاطئة";
-        msgBox.className = "message error";
-        msgBox.style.display = "block";
+        msg.textContent = "❌ رقم التسجيل أو كلمة المرور خاطئة";
+        msg.className = "message error";
+        msg.style.display = "block";
       }
     }
   </script>
