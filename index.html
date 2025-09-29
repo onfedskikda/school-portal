@@ -1,14 +1,75 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>تسجيل الدخول - Diwan</title>
+  <title>فضاء التلميذ - Diwan</title>
+  <style>
+    body {
+      font-family: Tahoma, Arial;
+      background: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    #login-box, #main-content {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      width: 350px;
+      text-align: center;
+    }
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+    button {
+      padding: 10px 20px;
+      background: #0078d7;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background: #005bb5;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      margin: 10px 0;
+      padding: 12px;
+      border-radius: 8px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .reg { background: #0078d7; }
+    .marks { background: #28a745; }
+    .tests { background: #ff5722; }
+    .subjects { background: #9c27b0; }
+    .exams { background: #ffc107; color:black; }
+    .schedule { background: #17a2b8; }
+    .transfer { background: #e91e63; }
+  </style>
+
   <script type="module">
-    // استيراد Firebase
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js";
 
-    // إعدادات مشروعك من Firebase
     const firebaseConfig = {
       apiKey: "AIzaSyB5C8Z8rsRb-wsLv1-Pv5Whqqc3z7NkzrA",
       authDomain: "diwan-8bec0.firebaseapp.com",
@@ -19,44 +80,47 @@
       measurementId: "G-LPC1TFTWFT"
     };
 
-    // تهيئة Firebase
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
-    // عند الضغط على زر تسجيل الدخول
     window.login = function () {
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
 
       signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          alert("تم تسجيل الدخول بنجاح ✅");
-          // هنا تقدر توجه المستخدم إلى صفحة أخرى أو تظهر له الخانات
+        .then(() => {
           document.getElementById("login-box").style.display = "none";
           document.getElementById("main-content").style.display = "block";
         })
         .catch((error) => {
-          alert("خطأ: " + error.message);
+          alert("خطأ في تسجيل الدخول ❌: " + error.message);
         });
     };
   </script>
 </head>
 <body>
-  <h2>تسجيل الدخول</h2>
+
+  <!-- صفحة الدخول -->
   <div id="login-box">
-    <input type="email" id="email" placeholder="البريد الإلكتروني"><br><br>
-    <input type="password" id="password" placeholder="كلمة المرور"><br><br>
+    <h2>تسجيل الدخول</h2>
+    <input type="email" id="email" placeholder="إسم المستخدم"><br>
+    <input type="password" id="password" placeholder="كلمة المرور"><br>
     <button onclick="login()">دخول</button>
   </div>
 
-  <!-- المحتوى بعد تسجيل الدخول -->
+  <!-- الصفحة بعد الدخول -->
   <div id="main-content" style="display:none;">
-    <h3>مرحبا بك 👋</h3>
+    <h2>مرحبا بك 👋</h2>
     <ul>
-      <li><a href="#">تسجيلاتي</a></li>
-      <li><a href="#">كشوف النقاط</a></li>
-      <li><a href="#">الإعلانات</a></li>
+      <li class="reg">📘 تسجيلاتي</li>
+      <li class="marks">📊 كشوف النقاط</li>
+      <li class="tests">📝 نقاط الرقابة المستمرة، الفروض، الاختبارات</li>
+      <li class="subjects">📂 مواضيع الفروض و الاختبارات</li>
+      <li class="exams">🎓 الامتحانات الرسمية</li>
+      <li class="schedule">⏰ توقيت الفروض و الاختبارات</li>
+      <li class="transfer">📑 طلبات التحويل</li>
     </ul>
   </div>
+
 </body>
 </html>
