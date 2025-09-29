@@ -7,91 +7,87 @@
   <style>
     body {
       margin: 0;
-      font-family: 'Cairo', Tahoma, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-      background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Algeria_location_map.svg/800px-Algeria_location_map.svg.png') no-repeat center center/cover;
-      position: relative;
-      color: white;
-    }
-
-    /* طبقة مظللة فوق الخريطة */
-    body::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.55); /* ظل شفاف */
-      z-index: 0;
+      font-family: "Cairo", sans-serif;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/7/77/Flag_of_Algeria.svg') no-repeat center center fixed;
+      background-size: cover;
+      background-color: rgba(0, 0, 0, 0.5); /* لعمل تغطية غامقة */
     }
 
     .overlay {
-      position: relative;
-      z-index: 1;
-      background: rgba(255, 255, 255, 0.9);
-      padding: 30px;
-      border-radius: 15px;
-      width: 360px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      color: #222;
+      background-color: rgba(255, 255, 255, 0.85);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 20px;
     }
 
-    h1 {
-      color: #006d5b;
-      font-size: 24px;
+    .login-box {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      width: 320px;
+    }
+
+    .login-box img {
+      width: 60px;
       margin-bottom: 10px;
     }
 
+    h1 {
+      font-size: 20px;
+      color: #064635;
+      margin: 10px 0;
+    }
+
     p {
+      font-size: 14px;
       color: #444;
-      font-size: 15px;
       margin-bottom: 20px;
     }
 
-    .login-box input {
-      width: 90%;
+    input {
+      width: 100%;
       padding: 10px;
       margin: 8px 0;
       border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 14px;
+      border-radius: 8px;
     }
 
-    .login-box button {
-      background-color: #006d5b;
-      color: white;
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #0b6b4d;
       border: none;
-      padding: 10px 20px;
-      border-radius: 6px;
+      border-radius: 8px;
+      color: white;
+      font-size: 16px;
       cursor: pointer;
-      font-size: 15px;
-      width: 95%;
-      margin-top: 10px;
     }
 
-    .login-box button:hover {
-      background-color: #004f43;
+    button:hover {
+      background: #095a40;
     }
   </style>
 </head>
 <body>
   <div class="overlay">
-    <div class="logo">📚</div>
-    <h1>فضاء التلميذ - الديوان الوطني للتعليم والتكوين عن بعد</h1>
-    <p>منصة لمتابعة النتائج، التسجيلات، وكشوف النقاط.</p>
-
     <div class="login-box">
-      <h2 style="margin-bottom:15px;">تسجيل الدخول</h2>
-      <form onsubmit="event.preventDefault(); window.location.href='dashboard.html';">
-        <input type="text" placeholder="البريد الإلكتروني أو رقم التسجيل" required>
-        <input type="password" placeholder="كلمة المرور" required>
-        <button type="submit">دخول</button>
-      </form>
+      <!-- أيقونة مكتبة -->
+      <img src="https://cdn-icons-png.flaticon.com/512/29/29302.png" alt="مكتبة">
+
+      <!-- العنوان -->
+      <h1>فضاء التلميذ - الديوان الوطني للتعليم والتكوين عن بعد</h1>
+      <p>منصة لمتابعة النتائج، التسجيلات، وكشوف النقاط.</p>
+
+      <!-- تسجيل الدخول -->
+      <h2 style="font-size: 18px; margin-bottom: 15px;">تسجيل الدخول</h2>
+      <input type="text" placeholder="البريد الإلكتروني">
+      <input type="password" placeholder="كلمة المرور">
+      <button>دخول</button>
     </div>
   </div>
 </body>
