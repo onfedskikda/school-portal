@@ -2,53 +2,61 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8">
-  <title>تسجيل الدخول - فضاء الديوان</title>
-  <style>
-    body {
-      font-family: Tahoma, Arial;
-      background: #f0f3f7;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    .login-box {
-      background: white;
-      padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
-      width: 300px;
-      text-align: center;
-    }
-    input {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
-    button {
-      width: 100%;
-      padding: 10px;
-      background: #2980b9;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #1f618d;
-    }
-  </style>
+  <title>تسجيل الدخول - Diwan</title>
+  <script type="module">
+    // استيراد Firebase
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js";
+
+    // إعدادات مشروعك من Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyB5C8Z8rsRb-wsLv1-Pv5Whqqc3z7NkzrA",
+      authDomain: "diwan-8bec0.firebaseapp.com",
+      projectId: "diwan-8bec0",
+      storageBucket: "diwan-8bec0.firebasestorage.app",
+      messagingSenderId: "144048154405",
+      appId: "1:144048154405:web:3ba53185d382040b135ccc",
+      measurementId: "G-LPC1TFTWFT"
+    };
+
+    // تهيئة Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // عند الضغط على زر تسجيل الدخول
+    window.login = function () {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          alert("تم تسجيل الدخول بنجاح ✅");
+          // هنا تقدر توجه المستخدم إلى صفحة أخرى أو تظهر له الخانات
+          document.getElementById("login-box").style.display = "none";
+          document.getElementById("main-content").style.display = "block";
+        })
+        .catch((error) => {
+          alert("خطأ: " + error.message);
+        });
+    };
+  </script>
 </head>
 <body>
-  <div class="login-box">
-    <h2>تسجيل الدخول</h2>
-    <form action="home.html">
-      <input type="text" placeholder="اسم المستخدم" required>
-      <input type="password" placeholder="كلمة المرور" required>
-      <button type="submit">دخول</button>
-    </form>
+  <h2>تسجيل الدخول</h2>
+  <div id="login-box">
+    <input type="email" id="email" placeholder="البريد الإلكتروني"><br><br>
+    <input type="password" id="password" placeholder="كلمة المرور"><br><br>
+    <button onclick="login()">دخول</button>
+  </div>
+
+  <!-- المحتوى بعد تسجيل الدخول -->
+  <div id="main-content" style="display:none;">
+    <h3>مرحبا بك 👋</h3>
+    <ul>
+      <li><a href="#">تسجيلاتي</a></li>
+      <li><a href="#">كشوف النقاط</a></li>
+      <li><a href="#">الإعلانات</a></li>
+    </ul>
   </div>
 </body>
 </html>
