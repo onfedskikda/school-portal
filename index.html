@@ -14,6 +14,13 @@
             font-family: 'Cairo', sans-serif;
         }
 
+        @font-face {
+            font-family: 'TheSans';
+            src: url('https://cdn.jsdelivr.net/gh/mohammed-22/thesans-arabic@main/TheSansArabic-Plain.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         body {
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
                         url('https://images.unsplash.com/photo-1497636577773-f1231844b336?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
@@ -48,13 +55,13 @@
             }
         }
 
-        /* الشريط المتحرك داخل البطاقة - بدون ظل */
+        /* الشريط المتحرك داخل البطاقة - لون أخضر بارد جداً */
         .moving-text-container {
-            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            background: linear-gradient(135deg, #00b894, #00a085);
             margin: -30px -40px 30px -40px;
             padding: 15px;
             border-radius: 0 0 20px 20px;
-            border-bottom: 3px solid #3498db;
+            border-bottom: 3px solid #007b6b;
             overflow: hidden;
             transform: translateY(-100%);
             animation: slideDownHeader 0.8s ease-out 0.5s forwards;
@@ -67,11 +74,12 @@
         }
 
         .premium-moving-text {
-            color: #3498db;
+            color: #000000;
             font-weight: 700;
             font-size: 18px;
             white-space: nowrap;
             animation: premiumMove 15s linear infinite;
+            font-family: 'TheSans', 'Cairo', sans-serif;
         }
 
         @keyframes premiumMove {
@@ -79,7 +87,7 @@
             100% { transform: translateX(-100%); }
         }
 
-        /* العناوين بخط مشابه للرسمي */
+        /* العناوين بخط TheSans */
         .premium-logo-section {
             margin-bottom: 30px;
             transform: translateY(30px);
@@ -99,7 +107,7 @@
             font-size: 16px;
             font-weight: 700;
             margin-bottom: 5px;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'TheSans', 'Cairo', sans-serif;
         }
 
         .premium-ministry {
@@ -107,7 +115,7 @@
             font-size: 18px;
             font-weight: 700;
             margin-bottom: 8px;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'TheSans', 'Cairo', sans-serif;
         }
 
         .premium-office {
@@ -115,7 +123,7 @@
             font-size: 20px;
             font-weight: 800;
             margin-bottom: 15px;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'TheSans', 'Cairo', sans-serif;
         }
 
         .premium-welcome {
@@ -125,7 +133,7 @@
             margin-bottom: 30px;
             position: relative;
             display: inline-block;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'TheSans', 'Cairo', sans-serif;
         }
 
         .premium-welcome::after {
@@ -139,12 +147,18 @@
             border-radius: 10px;
         }
 
-        /* الخط الفاصل */
-        .separator {
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #3498db, transparent);
-            margin: 25px 0;
-            border: none;
+        /* رسالة "لأه السجل الدولي" */
+        .international-message {
+            color: #2c3e50;
+            background: #e8f6f3;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            border: 2px solid #00b894;
+            text-align: center;
+            font-family: 'TheSans', 'Cairo', sans-serif;
+            font-size: 18px;
         }
 
         /* حقول الإدخال */
@@ -169,7 +183,7 @@
             font-size: 16px;
             background: #f8f9fa;
             transition: all 0.3s ease;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'TheSans', 'Cairo', sans-serif;
         }
 
         .premium-input:focus {
@@ -180,61 +194,89 @@
             transform: translateY(-2px);
         }
 
-        /* القائمة الجانبية */
-        .menu-container {
+        /* الخط الفاصل */
+        .separator {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #3498db, transparent);
+            margin: 25px 0;
+            border: none;
+        }
+
+        /* الخانات الثلاث جنب بعض كما كانت */
+        .buttons-container {
             display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 25px;
+            gap: 15px;
+            margin-top: 30px;
             transform: translateY(30px);
             opacity: 0;
             animation: fadeInUp 0.8s ease-out 1.3s forwards;
         }
 
-        .menu-item {
+        .login-btn {
             background: linear-gradient(135deg, #3498db, #2980b9);
             color: white;
             border: none;
-            padding: 15px 20px;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            flex: 1;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+            font-family: 'TheSans', 'Cairo', sans-serif;
+        }
+
+        .login-btn:hover {
+            background: linear-gradient(135deg, #2980b9, #1f618d);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.6);
+        }
+
+        .register-btn {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            border: none;
+            padding: 15px 25px;
             border-radius: 10px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
+            flex: 1;
             transition: all 0.3s ease;
             text-decoration: none;
-            text-align: center;
-            font-family: 'Cairo', sans-serif;
-            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'TheSans', 'Cairo', sans-serif;
         }
 
-        .menu-item:hover {
-            background: linear-gradient(135deg, #2980b9, #1f618d);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 18px rgba(52, 152, 219, 0.4);
-        }
-
-        .menu-item.register {
-            background: linear-gradient(135deg, #2ecc71, #27ae60);
-        }
-
-        .menu-item.register:hover {
+        .register-btn:hover {
             background: linear-gradient(135deg, #27ae60, #219652);
+            transform: translateY(-2px);
         }
 
-        .menu-item.other {
-            background: linear-gradient(135deg, #e67e22, #d35400);
+        .forgot-btn {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            flex: 1;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'TheSans', 'Cairo', sans-serif;
         }
 
-        .menu-item.other:hover {
-            background: linear-gradient(135deg, #d35400, #ba4a00);
-        }
-
-        .menu-item.info {
-            background: linear-gradient(135deg, #9b59b6, #8e44ad);
-        }
-
-        .menu-item.info:hover {
-            background: linear-gradient(135deg, #8e44ad, #7d3c98);
+        .forgot-btn:hover {
+            background: linear-gradient(135deg, #c0392b, #a93226);
+            transform: translateY(-2px);
         }
 
         /* رسالة الخطأ */
@@ -248,7 +290,7 @@
             font-weight: 600;
             border: 1px solid #e74c3c;
             text-align: center;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'TheSans', 'Cairo', sans-serif;
             animation: shake 0.5s ease-in-out;
         }
 
@@ -264,7 +306,7 @@
             border: 2px solid #27ae60;
             text-align: center;
             max-width: 400px;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'TheSans', 'Cairo', sans-serif;
             font-size: 18px;
             box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
             animation: fadeInUp 0.5s ease-out;
@@ -290,7 +332,7 @@
 <body>
     <!-- البطاقة في أعلى الصفحة -->
     <div class="premium-card">
-        <!-- الشريط المتحرك داخل البطاقة - بدون ظل -->
+        <!-- الشريط المتحرك داخل البطاقة - أخضر بارد ونص أسود -->
         <div class="moving-text-container">
             <div class="premium-moving-text">
                 <i class="fas fa-star"></i> مرحباً بكم في فضاء التلميذ - الديوان الوطني للتعليم والتكوين عن بعد <i class="fas fa-star"></i>
@@ -303,6 +345,11 @@
             <div class="premium-ministry">وزارة التربية الوطنية</div>
             <div class="premium-office">الديوان الوطني للتعليم والتكوين عن بعد</div>
             <div class="premium-welcome">مرحبا بكم في الأرضية الرقمية</div>
+        </div>
+
+        <!-- رسالة "لأه السجل الدولي" -->
+        <div class="international-message">
+            <i class="fas fa-globe"></i> لأه السجل الدولي
         </div>
 
         <!-- رسالة الخطأ -->
@@ -325,23 +372,19 @@
             <!-- الخط الفاصل -->
             <hr class="separator">
 
-            <!-- القائمة الجانبية -->
-            <div class="menu-container">
-                <button type="submit" class="menu-item">
-                    <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
-                </button>
+            <!-- الخانات الثلاث جنب بعض كما كانت -->
+            <div class="buttons-container">
+                <a href="#" class="forgot-btn">
+                    <i class="fas fa-key"></i> استعادة كلمة المرور
+                </a>
                 
-                <a href="#" class="menu-item register">
+                <a href="#" class="register-btn">
                     <i class="fas fa-user-plus"></i> تسجيل جديد
                 </a>
                 
-                <a href="#" class="menu-item other">
-                    <i class="fas fa-database"></i> قاعدة بيانات
-                </a>
-                
-                <a href="#" class="menu-item info">
-                    <i class="fas fa-info-circle"></i> القرار
-                </a>
+                <button type="submit" class="login-btn">
+                    <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
+                </button>
             </div>
         </form>
     </div>
