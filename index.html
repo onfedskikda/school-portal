@@ -23,7 +23,7 @@
 
         body {
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                        url('https://images.unsplash.com/photo-1497636577773-f1231844b336?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+                        url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -31,7 +31,6 @@
             padding: 20px;
         }
 
-        /* البطاقة في أعلى الصفحة مع حركة سلسة */
         .premium-card {
             background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
             backdrop-filter: blur(20px);
@@ -55,7 +54,6 @@
             }
         }
 
-        /* العناوين بخط TheSans */
         .premium-logo-section {
             margin-bottom: 30px;
             transform: translateY(30px);
@@ -115,7 +113,6 @@
             border-radius: 10px;
         }
 
-        /* رسالة "ثام السجل الدولي" */
         .international-message {
             color: #2c3e50;
             background: #e8f6f3;
@@ -129,7 +126,6 @@
             font-size: 18px;
         }
 
-        /* حقول الإدخال */
         .premium-form-group {
             margin-bottom: 25px;
             text-align: right;
@@ -162,7 +158,6 @@
             transform: translateY(-2px);
         }
 
-        /* الخط الفاصل */
         .separator {
             height: 2px;
             background: linear-gradient(90deg, transparent, #3498db, transparent);
@@ -170,7 +165,6 @@
             border: none;
         }
 
-        /* الخانات الثلاث جنب بعض */
         .buttons-container {
             display: flex;
             gap: 15px;
@@ -247,7 +241,6 @@
             transform: translateY(-2px);
         }
 
-        /* رسالة الخطأ */
         .error-message {
             color: #e74c3c;
             background: #fadbd8;
@@ -262,7 +255,6 @@
             animation: shake 0.5s ease-in-out;
         }
 
-        /* رسالة النجاح */
         .success-message {
             color: #27ae60;
             background: #d5f4e6;
@@ -286,7 +278,6 @@
             margin-left: 10px;
         }
 
-        /* الأيقونات */
         .input-icon {
             position: absolute;
             left: 15px;
@@ -298,9 +289,7 @@
     </style>
 </head>
 <body>
-    <!-- البطاقة في أعلى الصفحة -->
     <div class="premium-card">
-        <!-- العناوين -->
         <div class="premium-logo-section">
             <div class="premium-national">الجمهورية الجزائرية الديمقراطية الشعبية</div>
             <div class="premium-ministry">وزارة التربية الوطنية</div>
@@ -308,17 +297,10 @@
             <div class="premium-welcome">مرحبا بكم في الأرضية الرقمية</div>
         </div>
 
-        <!-- رسالة "ثام السجل الدولي" -->
-        <div class="international-message">
-            <i class="fas fa-globe"></i> ثام السجل الدولي
-        </div>
-
-        <!-- رسالة الخطأ -->
         <div class="error-message" id="errorMessage">
             <i class="fas fa-exclamation-triangle"></i> إسم المستخدم أو كلمة المرور خاطئة
         </div>
 
-        <!-- نموذج التسجيل -->
         <form id="loginForm">
             <div class="premium-form-group">
                 <i class="fas fa-user input-icon"></i>
@@ -330,10 +312,8 @@
                 <input type="password" class="premium-input" id="password" placeholder="كلمة المرور" required value="21Ut17174L#U">
             </div>
 
-            <!-- الخط الفاصل -->
             <hr class="separator">
 
-            <!-- الخانات الثلاث جنب بعض -->
             <div class="buttons-container">
                 <button type="submit" class="login-btn">
                     <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
@@ -350,18 +330,15 @@
         </form>
     </div>
 
-    <!-- رسالة النجاح -->
     <div class="success-message" id="successMessage">
         <i class="fas fa-check-circle success-icon"></i>
         تم تسجيل الدخول بنجاح
     </div>
 
     <script>
-        // بيانات المستخدم الصحيحة
         const correctUsername = "21202505167";
         const correctPassword = "21Ut17174L#U";
 
-        // إدارة نموذج التسجيل
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -370,27 +347,18 @@
             const errorMessage = document.getElementById('errorMessage');
             const successMessage = document.getElementById('successMessage');
 
-            // التحقق من بيانات المستخدم
             if (username === correctUsername && password === correctPassword) {
-                // إخفاء رسالة الخطأ إذا كانت ظاهرة
                 errorMessage.style.display = 'none';
-                
-                // عرض رسالة النجاح
                 successMessage.style.display = 'block';
-                
-                // التوجيه إلى الصفحة التالية بعد 2 ثانية
                 setTimeout(function() {
                     window.location.href = "dashboard.html";
                 }, 2000);
-                
             } else {
-                // عرض رسالة الخطأ وإخفاء رسالة النجاح
                 errorMessage.style.display = 'block';
                 successMessage.style.display = 'none';
             }
         });
 
-        // إخفاء رسالة الخطأ عند الكتابة
         document.getElementById('username').addEventListener('input', function() {
             document.getElementById('errorMessage').style.display = 'none';
             document.getElementById('successMessage').style.display = 'none';
