@@ -2,149 +2,168 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>فضاء التلميذ</title>
+  <!-- خط Cairo -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: Tahoma, sans-serif;
       margin: 0;
-      padding: 0;
-      background: url('https://img.freepik.com/free-photo/books-shelf-background_1232-2976.jpg') no-repeat center center fixed;
-      background-size: cover;
+      font-family: 'Cairo', sans-serif;
+      background: url('https://i.ibb.co/qjLh0XL/library.jpg') no-repeat center center/cover;
     }
 
     .card {
-      width: 450px;
-      margin: 40px auto;
-      background: white;
-      border-radius: 10px;
+      width: 90%;
+      max-width: 600px;
+      margin: 20px auto;
+      background: #fff;
+      border-radius: 12px;
       padding: 20px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      animation: slideUp 1s ease;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      animation: slideUp 0.8s ease;
     }
 
     @keyframes slideUp {
-      from { transform: translateY(100px); opacity: 0; }
+      from { transform: translateY(50px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
 
-    header {
-      text-align: right;
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 15px;
     }
-    header img {
-      height: 40px;
-      vertical-align: middle;
-      margin-left: 10px;
+
+    .header img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
     }
-    header h2, header h3, header h4 {
-      margin: 2px 0;
+
+    .header-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header-text strong {
       font-size: 14px;
     }
 
     .marquee {
-      background: #a5d6a7;
-      color: #0d47a1;
-      padding: 8px;
-      margin: 15px 0;
+      background: #006400;
+      color: #0000ff;
+      padding: 5px;
+      margin: 10px 0;
       overflow: hidden;
       white-space: nowrap;
-    }
-    .marquee span {
-      display: inline-block;
-      animation: scroll-left 10s linear infinite;
-    }
-    @keyframes scroll-left {
-      from { transform: translateX(100%); }
-      to { transform: translateX(-100%); }
+      position: relative;
     }
 
-    .login input {
-      display: block;
-      width: 90%;
-      margin: 10px auto;
+    .marquee span {
+      display: inline-block;
+      padding-right: 100%;
+      animation: marquee 10s linear infinite;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    .input-box {
+      margin: 10px 0;
+      width: 100%;
       padding: 10px;
       border: 1px solid #ccc;
       border-radius: 6px;
-      font-size: 14px;
     }
 
     .buttons {
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
       margin-top: 15px;
+      gap: 10px;
     }
-    .buttons button {
+
+    .btn {
       flex: 1;
-      margin: 5px;
       padding: 10px;
-      color: white;
       border: none;
       border-radius: 6px;
-      font-size: 14px;
+      color: #fff;
+      font-weight: bold;
       cursor: pointer;
-      transition: 0.3s;
+      transition: transform 0.2s;
     }
-    .blue { background: #1976d2; }
-    .blue:hover { background: #0d47a1; }
-    .pink { background: #e91e63; }
-    .pink:hover { background: #ad1457; }
-    .yellow { background: #fbc02d; }
-    .yellow:hover { background: #f57f17; }
+
+    .btn:hover {
+      transform: scale(1.05);
+    }
+
+    .btn.blue { background: #007BFF; }
+    .btn.pink { background: #FF69B4; }
+    .btn.yellow { background: #FFD700; color: #000; }
 
     .message {
+      margin-top: 10px;
       text-align: center;
-      margin: 10px 0;
       font-weight: bold;
+      padding: 10px;
+      border-radius: 6px;
       display: none;
     }
-    .success { color: green; }
-    .error { color: red; }
+
+    .success { background: #c8e6c9; color: #2e7d32; }
+    .error { background: #ffcdd2; color: #c62828; }
   </style>
 </head>
 <body>
   <div class="card">
-    <header>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Logo_of_Ministry_of_National_Education_of_Algeria.png" alt="شعار">
-      <h2>الجمهورية الجزائرية الديمقراطية الشعبية</h2>
-      <h3>وزارة التربية الوطنية</h3>
-      <h4>الديوان الوطني للتعليم والتكوين عن بعد</h4>
-    </header>
+    <!-- الشعار + النصوص -->
+    <div class="header">
+      <img src="https://i.ibb.co/2ZVZfQd/logo.png" alt="شعار">
+      <div class="header-text">
+        <strong>الجمهورية الجزائرية الديمقراطية الشعبية</strong>
+        <span>وزارة التربية الوطنية</span>
+        <span>الديوان الوطني للتعليم والتكوين عن بعد</span>
+      </div>
+    </div>
 
+    <!-- الشريط المتحرك -->
     <div class="marquee">
       <span>مرحباً بكم في فضاء التلميذ - الديوان الوطني للتعليم والتكوين عن بعد</span>
     </div>
 
-    <div class="login">
-      <input type="text" id="username" placeholder="رقم التسجيل">
-      <input type="password" id="password" placeholder="الرقم السري">
-    </div>
+    <!-- خانات التسجيل -->
+    <input type="text" id="regNum" class="input-box" placeholder="رقم التسجيل">
+    <input type="password" id="password" class="input-box" placeholder="كلمة المرور">
 
-    <div class="message success" id="success">✅ تم تسجيل الدخول بنجاح</div>
-    <div class="message error" id="error">❌ رقم التسجيل أو كلمة المرور خاطئة</div>
+    <div class="message" id="messageBox"></div>
 
+    <!-- الأزرار -->
     <div class="buttons">
-      <button class="blue" onclick="login()">تسجيل الدخول</button>
-      <button class="pink">تسجيل جديد</button>
-      <button class="yellow">استعادة كلمة المرور</button>
+      <button class="btn blue" onclick="login()">تسجيل الدخول</button>
+      <button class="btn pink">تسجيل جديد</button>
+      <button class="btn yellow">استعادة كلمة المرور</button>
     </div>
   </div>
 
   <script>
     function login() {
-      const user = document.getElementById("username").value;
-      const pass = document.getElementById("password").value;
-      const success = document.getElementById("success");
-      const error = document.getElementById("error");
+      const regNum = document.getElementById("regNum").value;
+      const password = document.getElementById("password").value;
+      const msgBox = document.getElementById("messageBox");
 
-      success.style.display = "none";
-      error.style.display = "none";
-
-      if (user === "21202505167" && pass === "21Ut17174L#U") {
-        success.style.display = "block";
-        setTimeout(() => {
-          window.location.href = "dashboard.html";
-        }, 500);
+      if (regNum === "21202505167" && password === "21Ut17174L#U") {
+        msgBox.innerText = "✔ تم تسجيل الدخول بنجاح";
+        msgBox.className = "message success";
+        msgBox.style.display = "block";
       } else {
-        error.style.display = "block";
+        msgBox.innerText = "❌ رقم التسجيل أو كلمة المرور خاطئة";
+        msgBox.className = "message error";
+        msgBox.style.display = "block";
       }
     }
   </script>
