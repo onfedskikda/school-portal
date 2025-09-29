@@ -2,101 +2,89 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>فضاء التلميذ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500&display=swap" rel="stylesheet">
   <style>
     body {
+      font-family: 'Tajawal', sans-serif;
       margin: 0;
-      font-family: "Cairo", sans-serif;
-      background: #f2f2f2; /* خلفية هادئة */
-    }
-
-    .overlay {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      padding: 20px;
-    }
-
-    .login-box {
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
+      padding: 0;
       text-align: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      width: 340px;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/7/77/Algeria_relief_location_map.jpg') no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
     }
-
-    .logos {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 15px;
-      margin-bottom: 10px;
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(255, 255, 255, 0.8);
+      z-index: 0;
     }
-
-    .logos img {
-      width: 65px;
-      height: 65px;
-      object-fit: contain;
+    .content {
+      position: relative;
+      z-index: 1;
+      padding: 30px;
     }
-
+    header img {
+      height: 80px;
+      margin: 10px;
+    }
     h1 {
-      font-size: 20px;
-      color: #064635;
-      margin: 10px 0;
+      color: #00796b;
+      margin: 15px 0;
     }
-
     p {
-      font-size: 14px;
-      color: #444;
-      margin-bottom: 20px;
+      color: #333;
+      font-size: 18px;
+      margin-bottom: 25px;
     }
-
-    input {
-      width: 100%;
+    .login-box {
+      background: #ffffffcc;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      max-width: 350px;
+      margin: auto;
+    }
+    .login-box input {
+      display: block;
+      width: 90%;
+      margin: 10px auto;
       padding: 10px;
-      margin: 8px 0;
       border: 1px solid #ccc;
-      border-radius: 8px;
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      background: #0b6b4d;
-      border: none;
-      border-radius: 8px;
-      color: white;
+      border-radius: 6px;
       font-size: 16px;
-      cursor: pointer;
     }
-
-    button:hover {
-      background: #095a40;
+    .login-box button {
+      background: #00796b;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .login-box button:hover {
+      background: #004d40;
     }
   </style>
 </head>
 <body>
-  <div class="overlay">
-    <div class="login-box">
-      <!-- الشعارين (مكتبة + ONEFD) -->
-      <div class="logos">
-        <img src="https://cdn-icons-png.flaticon.com/512/29/29302.png" alt="مكتبة">
-        <img src="https://upload.wikimedia.org/wikipedia/ar/3/3f/ONEFD_logo.png" alt="ONEFD">
-      </div>
-
-      <!-- العنوان -->
+  <div class="content">
+    <header>
+      <img src="https://cdn-icons-png.flaticon.com/512/29/29302.png" alt="كتب">
       <h1>فضاء التلميذ - الديوان الوطني للتعليم والتكوين عن بعد</h1>
       <p>منصة لمتابعة النتائج، التسجيلات، وكشوف النقاط.</p>
+    </header>
 
-      <!-- تسجيل الدخول -->
-      <h2 style="font-size: 18px; margin-bottom: 15px;">تسجيل الدخول</h2>
-      <input type="text" placeholder="البريد الإلكتروني">
-      <input type="password" placeholder="كلمة المرور">
-      <button>دخول</button>
+    <div class="login-box">
+      <h2>تسجيل الدخول</h2>
+      <form action="dashboard.html" method="get">
+        <input type="text" placeholder="البريد الإلكتروني أو رقم التسجيل" required>
+        <input type="password" placeholder="كلمة المرور" required>
+        <button type="submit">دخول</button>
+      </form>
     </div>
   </div>
 </body>
