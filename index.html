@@ -37,7 +37,7 @@
     .marquee span {
       display: inline-block;
       padding-left: 100%;
-      animation: scroll 20s linear infinite; /* جعلها أبطأ */
+      animation: scroll 20s linear infinite; /* بطيء */
     }
 
     @keyframes scroll {
@@ -45,29 +45,47 @@
       100% { transform: translateX(-100%); }
     }
 
+    /* البطاقة */
     .login-container {
       max-width: 400px;
       margin: 40px auto;
-      padding: 20px;
-      border: 1px solid #ddd;
-      border-radius: 12px;
-      background: #f9f9f9;
+      padding: 25px;
+      border-radius: 16px;
+      background: #fdfdfd;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
       text-align: center;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeInUp 1s ease forwards; /* حركة سلسة */
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .login-container input {
       width: 90%;
-      padding: 10px;
-      margin: 8px 0;
-      border: 1px solid #aaa;
-      border-radius: 6px;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
       font-family: 'Cairo', sans-serif;
+      transition: 0.3s;
+    }
+
+    .login-container input:focus {
+      border-color: #1976d2;
+      box-shadow: 0 0 6px rgba(25,118,210,0.4);
+      outline: none;
     }
 
     .button-row {
       display: flex;
       justify-content: space-between;
-      margin-top: 15px;
+      margin-top: 20px;
     }
 
     .btn {
@@ -75,11 +93,12 @@
       padding: 12px;
       margin: 5px;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       color: white;
       font-size: 16px;
       cursor: pointer;
       font-family: 'Cairo', sans-serif;
+      transition: transform 0.2s ease, opacity 0.2s ease;
     }
 
     .btn-login {
@@ -91,6 +110,7 @@
     }
 
     .btn:hover {
+      transform: translateY(-3px);
       opacity: 0.9;
     }
   </style>
@@ -109,7 +129,7 @@
     <span>أهلا بكم في فضاء التلميذ - الديوان الوطني للتعليم والتكوين عن بعد</span>
   </div>
 
-  <!-- نموذج تسجيل الدخول -->
+  <!-- نموذج تسجيل الدخول كبطاقة -->
   <div class="login-container">
     <input type="text" placeholder="رقم التسجيل">
     <input type="password" placeholder="الرقم السري">
