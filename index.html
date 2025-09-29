@@ -2,132 +2,108 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>فضاء التلميذ</title>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500&display=swap" rel="stylesheet">
+  <title>لوحة التلميذ</title>
   <style>
     body {
-      font-family: 'Tajawal', sans-serif;
       margin: 0;
-      padding: 0;
-      background: #f0f2f5;
+      font-family: "Cairo", Arial, sans-serif;
+      background: #f2f4f8;
     }
-    /* شاشة الدخول */
-    .login-screen, .dashboard {
-      display: none;
-      text-align: center;
-      padding: 30px;
-    }
-    .active { display: block; }
-    header img {
-      height: 80px;
-      margin: 10px;
-    }
-    h1 {
-      color: #00796b;
-      margin: 15px 0;
-    }
-    p {
-      color: #333;
-      font-size: 18px;
-      margin-bottom: 25px;
-    }
-    .login-box {
-      background: #ffffffcc;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      max-width: 350px;
-      margin: auto;
-    }
-    .login-box input {
-      display: block;
-      width: 90%;
-      margin: 10px auto;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 16px;
-    }
-    .login-box button {
-      background: #00796b;
+
+    header {
+      background: #007bff;
       color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 16px;
+      padding: 15px;
+      font-size: 22px;
+      font-weight: bold;
+      text-align: center;
     }
-    .login-box button:hover {
-      background: #004d40;
-    }
-    /* لوحة التلميذ */
-    .dashboard h2 {
-      margin-bottom: 20px;
-      color: #00796b;
-    }
-    .grid {
+
+    .container {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 10px;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 15px;
-      max-width: 800px;
-      margin: auto;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-gap: 20px;
     }
+
     .card {
       background: white;
-      padding: 20px;
       border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+      padding: 25px 20px;
+      text-align: center;
+      transition: transform 0.2s ease-in-out;
       cursor: pointer;
-      transition: transform 0.2s;
-      font-size: 18px;
     }
+
     .card:hover {
       transform: translateY(-5px);
-      background: #e0f7fa;
+    }
+
+    .icon {
+      font-size: 40px;
+      margin-bottom: 15px;
+    }
+
+    .title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    footer {
+      background: #007bff;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      margin-top: 40px;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
 
-  <!-- شاشة الدخول -->
-  <div class="login-screen active">
-    <header>
-      <img src="https://cdn-icons-png.flaticon.com/512/29/29302.png" alt="كتب">
-      <h1>فضاء التلميذ - الديوان الوطني للتعليم والتكوين عن بعد</h1>
-      <p>منصة لمتابعة النتائج، التسجيلات، وكشوف النقاط.</p>
-    </header>
+  <header>
+    📚 لوحة التلميذ
+  </header>
 
-    <div class="login-box">
-      <h2>تسجيل الدخول</h2>
-      <form id="loginForm">
-        <input type="text" placeholder="البريد الإلكتروني أو رقم التسجيل" required>
-        <input type="password" placeholder="كلمة المرور" required>
-        <button type="submit">دخول</button>
-      </form>
+  <div class="container">
+    <div class="card" style="border-top: 5px solid #007bff;">
+      <div class="icon">📘</div>
+      <div class="title">تسجيلاتي</div>
+    </div>
+
+    <div class="card" style="border-top: 5px solid #28a745;">
+      <div class="icon">📑</div>
+      <div class="title">كشوف النقاط</div>
+    </div>
+
+    <div class="card" style="border-top: 5px solid #ffc107;">
+      <div class="icon">✏️</div>
+      <div class="title">نماذج الفروض والاختبارات</div>
+    </div>
+
+    <div class="card" style="border-top: 5px solid #17a2b8;">
+      <div class="icon">📊</div>
+      <div class="title">نتائج المراقبة المستمرة والفروض والاختبارات</div>
+    </div>
+
+    <div class="card" style="border-top: 5px solid #6f42c1;">
+      <div class="icon">📂</div>
+      <div class="title">طلبات التحويل</div>
+    </div>
+
+    <div class="card" style="border-top: 5px solid #dc3545;">
+      <div class="icon">❓</div>
+      <div class="title">طرح إشكاليات</div>
     </div>
   </div>
 
-  <!-- لوحة التلميذ -->
-  <div class="dashboard">
-    <h2>📚 لوحة التلميذ</h2>
-    <div class="grid">
-      <div class="card">📘 تسجيلاتي</div>
-      <div class="card">📑 كشوف النقاط</div>
-      <div class="card">📝 نماذج الفروض والاختبارات</div>
-      <div class="card">📊 نتائج المراقبة المستمرة، الفروض، والاختبارات</div>
-      <div class="card">🔄 طلبات التحويل</div>
-      <div class="card">❓ طرح إشكاليات</div>
-    </div>
-  </div>
-
-  <script>
-    // عند الضغط على دخول
-    document.getElementById("loginForm").addEventListener("submit", function(e){
-      e.preventDefault();
-      document.querySelector(".login-screen").classList.remove("active");
-      document.querySelector(".dashboard").classList.add("active");
-    });
-  </script>
+  <footer>
+    © 2025 - موقع التلميذ
+  </footer>
 
 </body>
 </html>
