@@ -9,20 +9,32 @@
       font-family: 'Tajawal', sans-serif;
       margin: 0;
       padding: 0;
-      background: linear-gradient(135deg, #e0f7fa, #ffffff);
+      background: url('https://img.freepik.com/free-vector/school-teacher-kids-classroom-illustration_1308-93193.jpg') no-repeat center center fixed;
+      background-size: cover;
       display: flex;
       justify-content: center;
-      align-items: flex-start; /* رفع للأعلى */
+      align-items: flex-start;
       min-height: 100vh;
       padding-top: 40px;
     }
 
+    /* طبقة شفافة فوق الصورة */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(255, 255, 255, 0.7);
+      z-index: 0;
+    }
+
     .card {
+      position: relative;
+      z-index: 1;
       background: white;
       border-radius: 16px;
       padding: 25px 35px;
       width: 420px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
       animation: fadeSlide 1.2s ease;
     }
 
@@ -56,7 +68,7 @@
     .banner span {
       display: inline-block;
       padding-left: 100%;
-      animation: marquee 25s linear infinite; /* الحركة أبطأ */
+      animation: marquee 25s linear infinite;
       color: #004d40;
     }
 
