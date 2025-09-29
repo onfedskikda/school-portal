@@ -2,143 +2,141 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>لوحة التلميذ</title>
-  <!-- خط عصري -->
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+  <title>فضاء التلميذ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
     body {
-      font-family: 'Tajawal', sans-serif;
-      background: linear-gradient(135deg, #f9fafb, #eef2f7);
-      color: #333;
+      margin: 0;
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(135deg, #74ABE2, #5563DE);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
     }
 
     header {
-      background: linear-gradient(90deg, #4facfe, #00f2fe);
-      color: white;
-      padding: 20px;
-      font-size: 24px;
-      font-weight: bold;
       text-align: center;
-      border-bottom: 4px solid #00d2ff;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 40px 20px;
+      animation: fadeIn 1.5s ease-in-out;
     }
-
-    .container {
-      max-width: 1200px;
-      margin: 40px auto;
-      padding: 20px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-    }
-
-    .card {
-      background: white;
-      border-radius: 16px;
-      padding: 30px 20px;
-      text-align: center;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-      cursor: pointer;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      top: -50%;
-      right: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(135deg, rgba(79,172,254,0.15), rgba(0,242,254,0.15));
-      transform: rotate(25deg);
-      transition: 0.5s;
-      z-index: 0;
-    }
-
-    .card:hover::before {
-      transform: rotate(0deg);
-      opacity: 0.6;
-    }
-
-    .icon {
-      font-size: 45px;
+    header img {
+      width: 90px;
       margin-bottom: 15px;
-      z-index: 1;
-      position: relative;
     }
-
-    .title {
+    header h1 {
+      font-size: 26px;
+      margin: 10px 0;
+    }
+    header p {
       font-size: 18px;
-      font-weight: bold;
-      z-index: 1;
-      position: relative;
+      opacity: 0.9;
     }
 
-    .card:hover {
-      transform: translateY(-8px) scale(1.03);
-      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+    .login-box {
+      background: rgba(255,255,255,0.1);
+      padding: 25px;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+      max-width: 350px;
+      width: 90%;
+      margin-bottom: 30px;
+      animation: slideDown 1.2s ease;
+    }
+    .login-box input {
+      width: 90%;
+      margin: 10px auto;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      outline: none;
+      display: block;
+    }
+    .login-box button {
+      background: #FF9800;
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 16px;
+      width: 100%;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .login-box button:hover {
+      background: #e68900;
     }
 
-    footer {
-      background: #f1f3f5;
-      color: #555;
+    .dashboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      width: 90%;
+      max-width: 900px;
+      margin-bottom: 40px;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+    .card {
+      background: #fff;
+      color: #333;
+      padding: 20px;
+      border-radius: 15px;
       text-align: center;
-      padding: 15px;
-      margin-top: 50px;
-      font-size: 14px;
-      border-top: 1px solid #ddd;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.3s, background 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      background: #f0f0f0;
+    }
+
+    /* ألوان مختلفة للخانات */
+    .card1 { border-top: 6px solid #FF9800; }
+    .card2 { border-top: 6px solid #4CAF50; }
+    .card3 { border-top: 6px solid #2196F3; }
+    .card4 { border-top: 6px solid #E91E63; }
+    .card5 { border-top: 6px solid #9C27B0; }
+    .card6 { border-top: 6px solid #FFC107; }
+
+    /* أنيميشن */
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    @keyframes slideDown {
+      from {opacity: 0; transform: translateY(-50px);}
+      to {opacity: 1; transform: translateY(0);}
     }
   </style>
 </head>
 <body>
-
   <header>
-    📚 لوحة التلميذ
+    <img src="https://cdn-icons-png.flaticon.com/512/29/29302.png" alt="شعار">
+    <h1>مرحباً بكم في فضاء التلميذ</h1>
+    <p>الديوان الوطني للتعليم والتكوين عن بعد</p>
   </header>
 
-  <div class="container">
-    <div class="card">
-      <div class="icon">📘</div>
-      <div class="title">تسجيلاتي</div>
-    </div>
-
-    <div class="card">
-      <div class="icon">📑</div>
-      <div class="title">كشوف النقاط</div>
-    </div>
-
-    <div class="card">
-      <div class="icon">✏️</div>
-      <div class="title">نماذج الفروض والاختبارات</div>
-    </div>
-
-    <div class="card">
-      <div class="icon">📊</div>
-      <div class="title">نتائج المراقبة المستمرة والفروض والاختبارات</div>
-    </div>
-
-    <div class="card">
-      <div class="icon">📂</div>
-      <div class="title">طلبات التحويل</div>
-    </div>
-
-    <div class="card">
-      <div class="icon">❓</div>
-      <div class="title">طرح إشكاليات</div>
-    </div>
+  <div class="login-box">
+    <h2>تسجيل الدخول</h2>
+    <form>
+      <input type="text" placeholder="رقم التسجيل" required>
+      <input type="password" placeholder="كلمة المرور" required>
+      <button type="submit">دخول</button>
+    </form>
   </div>
 
-  <footer>
-    © 2025 - موقع التلميذ
-  </footer>
-
+  <div class="dashboard">
+    <div class="card card1">📚 تسجيلاتي</div>
+    <div class="card card2">📄 كشوف النقاط</div>
+    <div class="card card3">📝 نماذج الفروض والإختبارات</div>
+    <div class="card card4">📊 نتائج المراقبة المستمرة</div>
+    <div class="card card5">🔄 طلبات التحويل</div>
+    <div class="card card6">❓ طرح إشكاليات</div>
+  </div>
 </body>
 </html>
