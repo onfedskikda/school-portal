@@ -23,7 +23,7 @@
 
         body {
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                        url('https://images.unsplash.com/photo-1497636577773-f1231844b336?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+                        url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -147,7 +147,7 @@
             border-radius: 10px;
         }
 
-        /* رسالة "لأه السجل الدولي" */
+        /* رسالة "ثام السجل الدولي" */
         .international-message {
             color: #2c3e50;
             background: #e8f6f3;
@@ -202,7 +202,7 @@
             border: none;
         }
 
-        /* الخانات الثلاث جنب بعض كما كانت */
+        /* الخانات الثلاث جنب بعض - معكوسة */
         .buttons-container {
             display: flex;
             gap: 15px;
@@ -347,9 +347,9 @@
             <div class="premium-welcome">مرحبا بكم في الأرضية الرقمية</div>
         </div>
 
-        <!-- رسالة "لأه السجل الدولي" -->
+        <!-- رسالة "ثام السجل الدولي" -->
         <div class="international-message">
-            <i class="fas fa-globe"></i> لأه السجل الدولي
+            <i class="fas fa-globe"></i> ثام السجل الدولي
         </div>
 
         <!-- رسالة الخطأ -->
@@ -372,19 +372,22 @@
             <!-- الخط الفاصل -->
             <hr class="separator">
 
-            <!-- الخانات الثلاث جنب بعض كما كانت -->
+            <!-- الخانات الثلاث جنب بعض - معكوسة -->
             <div class="buttons-container">
-                <a href="#" class="forgot-btn">
-                    <i class="fas fa-key"></i> استعادة كلمة المرور
-                </a>
+                <!-- خانة تسجيل الدخول أصبحت أولاً -->
+                <button type="submit" class="login-btn">
+                    <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
+                </button>
                 
+                <!-- خانة تسجيل جديد في المنتصف -->
                 <a href="#" class="register-btn">
                     <i class="fas fa-user-plus"></i> تسجيل جديد
                 </a>
                 
-                <button type="submit" class="login-btn">
-                    <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
-                </button>
+                <!-- خانة استعادة كلمة المرور أصبحت أخيراً -->
+                <a href="#" class="forgot-btn">
+                    <i class="fas fa-key"></i> استعادة كلمة المرور
+                </a>
             </div>
         </form>
     </div>
