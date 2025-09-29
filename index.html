@@ -8,13 +8,10 @@
     body {
       margin: 0;
       font-family: "Cairo", sans-serif;
-      background: url('https://upload.wikimedia.org/wikipedia/commons/7/77/Flag_of_Algeria.svg') no-repeat center center fixed;
-      background-size: cover;
-      background-color: rgba(0, 0, 0, 0.5); /* لعمل تغطية غامقة */
+      background: #f2f2f2; /* خلفية هادئة */
     }
 
     .overlay {
-      background-color: rgba(255, 255, 255, 0.85);
       min-height: 100vh;
       display: flex;
       justify-content: center;
@@ -29,12 +26,21 @@
       border-radius: 12px;
       text-align: center;
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      width: 320px;
+      width: 340px;
     }
 
-    .login-box img {
-      width: 60px;
+    .logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
       margin-bottom: 10px;
+    }
+
+    .logos img {
+      width: 65px;
+      height: 65px;
+      object-fit: contain;
     }
 
     h1 {
@@ -76,8 +82,11 @@
 <body>
   <div class="overlay">
     <div class="login-box">
-      <!-- أيقونة مكتبة -->
-      <img src="https://cdn-icons-png.flaticon.com/512/29/29302.png" alt="مكتبة">
+      <!-- الشعارين (مكتبة + ONEFD) -->
+      <div class="logos">
+        <img src="https://cdn-icons-png.flaticon.com/512/29/29302.png" alt="مكتبة">
+        <img src="https://upload.wikimedia.org/wikipedia/ar/3/3f/ONEFD_logo.png" alt="ONEFD">
+      </div>
 
       <!-- العنوان -->
       <h1>فضاء التلميذ - الديوان الوطني للتعليم والتكوين عن بعد</h1>
