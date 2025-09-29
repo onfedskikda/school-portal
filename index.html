@@ -15,12 +15,50 @@
         }
 
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             min-height: 100vh;
             padding: 20px;
+            animation: backgroundChange 20s infinite;
         }
 
-        /* البطاقة في أعلى الصفحة */
+        @keyframes backgroundChange {
+            0% {
+                background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                            url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+                background-size: cover;
+                background-position: center;
+            }
+            25% {
+                background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                            url('https://images.unsplash.com/photo-1497636577773-f1231844b336?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+                background-size: cover;
+                background-position: center;
+            }
+            50% {
+                background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                            url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+                background-size: cover;
+                background-position: center;
+            }
+            75% {
+                background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                            url('https://images.unsplash.com/photo-1524178234883-0433e39b6b79?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+                background-size: cover;
+                background-position: center;
+            }
+            100% {
+                background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                            url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+                background-size: cover;
+                background-position: center;
+            }
+        }
+
+        /* البطاقة في أعلى الصفحة مع حركة سلسة */
         .premium-card {
             background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
             backdrop-filter: blur(20px);
@@ -32,6 +70,16 @@
             margin: 0 auto;
             text-align: center;
             border: 1px solid rgba(255,255,255,0.3);
+            transform: translateY(-100%);
+            opacity: 0;
+            animation: slideDown 1s ease-out 0.5s forwards;
+        }
+
+        @keyframes slideDown {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         /* الشريط المتحرك داخل البطاقة - بدون ظل */
@@ -42,6 +90,14 @@
             border-radius: 0 0 20px 20px;
             border-bottom: 3px solid #8e44ad;
             overflow: hidden;
+            transform: translateY(-100%);
+            animation: slideDownHeader 0.8s ease-out 0.8s forwards;
+        }
+
+        @keyframes slideDownHeader {
+            to {
+                transform: translateY(0);
+            }
         }
 
         .premium-moving-text {
@@ -50,7 +106,6 @@
             font-size: 18px;
             white-space: nowrap;
             animation: premiumMove 15s linear infinite;
-            /* تم إزالة text-shadow */
         }
 
         @keyframes premiumMove {
@@ -61,6 +116,16 @@
         /* العناوين بخط مشابه للرسمي */
         .premium-logo-section {
             margin-bottom: 30px;
+            transform: translateY(30px);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 1s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         .premium-national {
@@ -113,6 +178,13 @@
             margin-bottom: 25px;
             text-align: right;
             position: relative;
+            transform: translateY(30px);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 1.2s forwards;
+        }
+
+        .premium-form-group:nth-child(2) {
+            animation-delay: 1.4s;
         }
 
         .premium-input {
@@ -139,6 +211,9 @@
             display: flex;
             gap: 15px;
             margin-top: 30px;
+            transform: translateY(30px);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 1.6s forwards;
         }
 
         .login-btn {
@@ -220,6 +295,7 @@
             border: 1px solid #e74c3c;
             text-align: center;
             font-family: 'Cairo', sans-serif;
+            animation: shake 0.5s ease-in-out;
         }
 
         /* رسالة النجاح */
@@ -238,17 +314,6 @@
             font-size: 18px;
             box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
             animation: fadeInUp 0.5s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .success-icon {
@@ -305,17 +370,17 @@
 
             <!-- الخانات الثلاث جنب بعض -->
             <div class="buttons-container">
-                <button type="submit" class="login-btn">
-                    <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
-                </button>
+                <a href="#" class="forgot-btn">
+                    <i class="fas fa-key"></i> استعادة كلمة المرور
+                </a>
                 
                 <a href="#" class="register-btn">
                     <i class="fas fa-user-plus"></i> تسجيل جديد
                 </a>
                 
-                <a href="#" class="forgot-btn">
-                    <i class="fas fa-key"></i> استعادة كلمة المرور
-                </a>
+                <button type="submit" class="login-btn">
+                    <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
+                </button>
             </div>
         </form>
     </div>
