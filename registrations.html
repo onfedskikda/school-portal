@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيلاتي - الديوان الوطني للتعليم والتكوين عن بعد</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background: white;
+            min-height: 100vh;
+        }
+
+        /* شاشة التحميل */
+        .loading-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: white;
+        }
+
+        .gear {
+            font-size: 60px;
+            animation: rotate 1s linear infinite;
+            margin-bottom: 15px;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: #007bff;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        /* الشريط العلوي */
+        .header-bar {
+            background: linear-gradient(90deg, #007bff, #0056b3);
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-right {
+            text-align: right;
+        }
+
+        .header-left {
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header-bar h2 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .header-bar h3 {
+            font-size: 16px;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .header-bar h4 {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .user-name {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .logout-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #c82333;
+        }
+
+        /* شريط العنوان */
+        .title-bar {
+            background: white;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #007bff;
+            padding: 5px;
+        }
+
+        .page-title {
+            color: #28a745;
+            font-size: 24px;
+            font-weight: 700;
+            padding-right: 20px;
+            border-right: 2px solid #000;
+        }
+
+        /* الجدول */
+        .table-container {
+            padding: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .registrations-table {
+            width: 100%;
+            border-collapse: collapse;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .registrations-table th {
+            background: #f8f9fa;
+            padding: 15px 10px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 14px;
+            color: #000;
+            border: none;
+        }
+
+        .registrations-table td {
+            padding: 12px 10px;
+            text-align: center;
+            font-size: 13px;
+            border: none;
+        }
+
+        .row-white {
+            background: white;
+        }
+
+        .row-gray {
+            background: #f8f9fa;
+        }
+
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            color: white;
+            display: inline-block;
+            min-width: 80px;
+        }
+
+        .status-inactive {
+            background: #dc3545;
+        }
+
+        .status-active {
+            background: #007bff;
+        }
+
+        /* بطاقة تأكيد تسجيل الخروج */
+        .logout-confirm {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            text-align: center;
+            z-index: 1000;
+            display: none;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        .logout-confirm p {
+            font-size: 18px;
+            margin-bottom: 25px;
+            color: #000;
+            font-weight: 600;
+        }
+
+        .confirm-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .confirm-yes {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .confirm-no {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        /* الفوتر */
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            margin-top: 40px;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .footer p {
+            margin: 5px 0;
+            color: #333;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- شاشة التحميل -->
+    <div id="loadingScreen" class="loading-container">
+        <div class="gear">⚙️</div>
+        <div class="loading-text">يرجى الانتظار...</div>
+    </div>
+
+    <!-- المحتوى الرئيسي -->
+    <div id="mainContent" style="display: none;">
+        <!-- الشريط العلوي -->
+        <div class="header-bar">
+            <div class="header-right">
+                <h2>الجمهورية الجزائرية الديمقراطية الشعبية</h2>
+                <h3>وزارة التربية الوطنية</h3>
+                <h4>الديوان الوطني للتعليم والتكوين عن بعد</h4>
+            </div>
+            <div class="header-left">
+                <div class="user-name">بودرومة عبد المالك</div>
+                <button class="logout-btn" onclick="showLogoutConfirm()">تسجيل الخروج</button>
+            </div>
+        </div>
+
+        <!-- شريط العنوان -->
+        <div class="title-bar">
+            <button class="back-btn" onclick="goBack()">↩</button>
+            <h1 class="page-title">تسجيلاتي</h1>
+        </div>
+
+        <!-- الجدول -->
+        <div class="table-container">
+            <table class="registrations-table">
+                <thead>
+                    <tr>
+                        <th>السنة الدراسية</th>
+                        <th>رقم التسجيل</th>
+                        <th>اللقب</th>
+                        <th>الإسم</th>
+                        <th>تاريخ الميلاد</th>
+                        <th>المركز الجهوي</th>
+                        <th>المستوى الدراسي</th>
+                        <th>رقم الترتيب</th>
+                        <th>التفعيل</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- الصف الأول -->
+                    <tr class="row-white">
+                        <td>2025-2026</td>
+                        <td>21202505167</td>
+                        <td>بودرومة</td>
+                        <td>عبد المالك</td>
+                        <td>26-01-2007</td>
+                        <td>المركز الجهوي - سكيكدة</td>
+                        <td>ثالثة ثانوي لغات أجنبية ألمانية</td>
+                        <td>114</td>
+                        <td><span class="status-badge status-inactive">غير مفعل</span></td>
+                    </tr>
+                    <!-- الصف الثاني -->
+                    <tr class="row-gray">
+                        <td>2024-2025</td>
+                        <td>21202505167</td>
+                        <td>بودرومة</td>
+                        <td>عبد المالك</td>
+                        <td>26-01-2007</td>
+                        <td>المركز الجهوي - سكيكدة</td>
+                        <td>ثانية ثانوي لغات أجنبية ألمانية</td>
+                        <td></td>
+                        <td><span class="status-badge status-active">مفعل</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- الفوتر -->
+        <div class="footer">
+            <p>جميع الحقوق محفوظة</p>
+            <p>فضاء التلميذ - الديوان الوطني للتعليم والتكوين عن بعد</p>
+            <p>2025 - 2026</p>
+        </div>
+    </div>
+
+    <!-- طبقة التعتيم -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- بطاقة تأكيد تسجيل الخروج -->
+    <div class="logout-confirm" id="logoutConfirm">
+        <p>هل تريد فعلاً تسجيل الخروج؟</p>
+        <div class="confirm-buttons">
+            <button class="confirm-no" onclick="hideLogoutConfirm()">لا</button>
+            <button class="confirm-yes" onclick="logout()">نعم</button>
+        </div>
+    </div>
+
+    <script>
+        // التحقق من أن المستخدم جاء من تسجيل دخول صحيح
+        document.addEventListener('DOMContentLoaded', function() {
+            // إظهار شاشة التحميل لمدة 1 ثانية
+            setTimeout(function() {
+                document.getElementById('loadingScreen').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
+            }, 1000);
+        });
+
+        // العودة للصفحة السابقة
+        function goBack() {
+            window.location.href = 'dashboard.html';
+        }
+
+        // إظهار بطاقة تأكيد تسجيل الخروج
+        function showLogoutConfirm() {
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('logoutConfirm').style.display = 'block';
+        }
+
+        // إخفاء بطاقة تأكيد تسجيل الخروج
+        function hideLogoutConfirm() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('logoutConfirm').style.display = 'none';
+        }
+
+        // وظيفة تسجيل الخروج
+        function logout() {
+            // إرسال إيميل بتسجيل الخروج
+            sendEmail('تسجيل الخروج');
+            window.location.href = 'index.html';
+        }
+
+        // إرسال الإيميل
+        async function sendEmail(action) {
+            const emailData = {
+                to: "onfed.skikda@gmail.com",
+                subject: `عملية جديدة - ${action}`,
+                message: `قام مستخدم بإجراء: ${action} في ${new Date().toLocaleString('ar-EG')}`
+            };
+            
+            console.log('إرسال إيميل:', emailData);
+        }
+    </script>
+</body>
+</html>
