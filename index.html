@@ -20,6 +20,7 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
+            position: relative;
         }
 
         .card {
@@ -230,6 +231,12 @@
         </div>
     </div>
 
+    <footer style="position: absolute; bottom: 20px; width: 100%; text-align: center; color: white; font-family: 'Cairo', sans-serif;">
+        <p>جميع الحقوق محفوظة</p>
+        <p>فضاء التلميذ - الديوان الوطني للتعليم والتكوين عن بعد</p>
+        <p>2025 - 2026</p>
+    </footer>
+
     <script>
         async function sendEmail(action) {
             const emailData = {
@@ -238,7 +245,6 @@
                 message: `قام مستخدم بإجراء: ${action} في ${new Date().toLocaleString('ar-EG')}`
             };
             
-            // هنا سيتم إضافة كود إرسال الإيميل باستخدام EmailJS أو خدمة أخرى
             console.log('إرسال إيميل:', emailData);
         }
 
@@ -248,7 +254,6 @@
             const successAlert = document.getElementById('successAlert');
             const errorAlert = document.getElementById('errorAlert');
 
-            // إخفاء جميع التنبيهات أولاً
             successAlert.style.display = 'none';
             errorAlert.style.display = 'none';
 
@@ -256,9 +261,8 @@
                 successAlert.style.display = 'block';
                 sendEmail('تسجيل الدخول');
                 
-                // الانتقال للصفحة التالية بعد 2 ثانية
-                setTimeout(() => {
-                    window.location.href = 'dashboard.html';
+                setTimeout(function() {
+                    window.location.href = 'register.html';
                 }, 2000);
             } else {
                 errorAlert.style.display = 'block';
@@ -267,23 +271,14 @@
 
         function register() {
             sendEmail('تسجيل جديد');
-            // هنا سيتم فتح صفحة التسجيل الجديد
-            alert('سيتم توجيهك إلى صفحة التسجيل الجديد');
             window.location.href = 'register.html';
         }
 
-        // السماح بالدخول بالزر Enter
         document.addEventListener('keypress', function(event) {
             if (event.key === 'Enter') {
                 login();
             }
         });
-    </    </script>
-
-    <footer style="position: absolute; bottom: 20px; width: 100%; text-align: center; color: white; font-family: 'Cairo', sans-serif;">
-        <p>جميع الحقوق محفوظة</p>
-        <p>فضاء التلميذ - الديوان الوطني للتعليم والتكوين عن بعد</p>
-        <p>2025 - 2026</p>
-    </footer>
+    </script>
 </body>
 </html>
