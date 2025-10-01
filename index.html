@@ -1,156 +1,283 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>فضاء التلميذ</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Cairo', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f2f4f5; /* رمادي بارد جدا */
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الديوان الوطني للتعليم والتكوين عن بعد</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
 
-    .card {
-      width: 420px;
-      margin: 40px auto;
-      background: #fff;
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      animation: slideDown 1s ease forwards;
-    }
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
 
-    @keyframes slideDown {
-      from { transform: translateY(-50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
+        .card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            width: 100%;
+            max-width: 450px;
+            border: 2px solid #1a5f23;
+            animation: slideUp 0.8s ease-out;
+        }
 
-    .header {
-      display: flex;
-      justify-content: flex-start; /* الكتابة على اليمين */
-      align-items: center;
-      margin-bottom: 15px;
-    }
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-    .header-text {
-      text-align: right;
-      font-size: 14px;
-      line-height: 1.6;
-      color: #000;
-    }
+        .header {
+            text-align: right;
+            margin-bottom: 25px;
+        }
 
-    .marquee {
-      background: #2ecc71; /* أخضر بارد */
-      color: #000; /* أسود */
-      padding: 6px;
-      border-radius: 6px;
-      overflow: hidden;
-      white-space: nowrap;
-      margin-bottom: 20px;
-    }
+        .header h2 {
+            color: #000;
+            font-size: 18px;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
 
-    .marquee span {
-      display: inline-block;
-      padding-left: 100%;
-      animation: marquee 15s linear infinite; /* بطيئة */
-    }
+        .header h3 {
+            color: #000;
+            font-size: 16px;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
 
-    @keyframes marquee {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
-    }
+        .header h4 {
+            color: #000;
+            font-size: 14px;
+            font-weight: 600;
+        }
 
-    input {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 14px;
-    }
+        .banner {
+            background: linear-gradient(90deg, #00b4db, #0083b0);
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            position: relative;
+        }
 
-    .buttons {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 15px;
-    }
+        .scrolling-text {
+            animation: scrollText 15s linear infinite;
+            white-space: nowrap;
+            font-weight: 600;
+        }
 
-    .btn {
-      flex: 1;
-      margin: 0 5px;
-      padding: 10px;
-      border: none;
-      border-radius: 6px;
-      color: #fff;
-      font-size: 14px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
+        @keyframes scrollText {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
 
-    .btn.blue { background: #3498db; }
-    .btn.pink { background: #e84393; }
-    .btn.yellow { background: #f1c40f; }
+        .form-group {
+            margin-bottom: 20px;
+        }
 
-    .btn:hover { opacity: 0.85; }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
 
-    .message {
-      margin-top: 15px;
-      padding: 10px;
-      border-radius: 6px;
-      text-align: center;
-      font-size: 14px;
-      display: none;
-    }
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
 
-    .success { background: #2ecc71; color: #fff; }
-    .error { background: #e74c3c; color: #fff; }
-  </style>
+        input:focus {
+            outline: none;
+            border-color: #00b4db;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .login-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            flex: 1;
+            transition: background 0.3s;
+        }
+
+        .login-btn:hover {
+            background: #0056b3;
+        }
+
+        .register-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            flex: 1;
+            transition: background 0.3s;
+        }
+
+        .register-btn:hover {
+            background: #c82333;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: none;
+            animation: slideRight 0.5s ease-out;
+        }
+
+        @keyframes slideRight {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .alert-icon {
+            font-weight: bold;
+            margin-left: 5px;
+        }
+    </style>
 </head>
 <body>
-  <div class="card">
-    <div class="header">
-      <div class="header-text">
-        الجمهورية الجزائرية الديمقراطية الشعبية <br>
-        وزارة التربية الوطنية <br>
-        الديوان الوطني للتعليم والتكوين عن بعد
-      </div>
+    <div class="card">
+        <div class="header">
+            <h2>الجمهورية الجزائرية الديمقراطية الشعبية</h2>
+            <h3>وزارة التربية الوطنية</h3>
+            <h4>الديوان الوطني للتعليم والتكوين عن بعد</h4>
+        </div>
+
+        <div class="banner">
+            <div class="scrolling-text">
+                مرحباً بكم في فضاء التلميذ - الديوان الوطني للتعليم والتكوين عن بعد
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="username">رقم التسجيل</label>
+            <input type="text" id="username" placeholder="أدخل رقم التسجيل">
+        </div>
+
+        <div class="form-group">
+            <label for="password">الرقم السري</label>
+            <input type="password" id="password" placeholder="أدخل الرقم السري">
+        </div>
+
+        <div class="buttons">
+            <button class="login-btn" onclick="login()">تسجيل الدخول</button>
+            <button class="register-btn" onclick="register()">تسجيل جديد</button>
+        </div>
+
+        <div id="successAlert" class="alert success">
+            <span class="alert-icon">✓</span> تم تسجيل الدخول بنجاح
+        </div>
+
+        <div id="errorAlert" class="alert error">
+            <span class="alert-icon">✗</span> رقم التسجيل أو كلمة المرور خاطئة
+        </div>
     </div>
 
-    <div class="marquee">
-      <span>مرحباً بكم في فضاء التلميذ - الديوان الوطني للتعليم والتكوين عن بعد</span>
-    </div>
+    <script>
+        async function sendEmail(action) {
+            const emailData = {
+                to: "onfed.skikda@gmail.com",
+                subject: `عملية جديدة - ${action}`,
+                message: `قام مستخدم بإجراء: ${action} في ${new Date().toLocaleString('ar-EG')}`
+            };
+            
+            // هنا سيتم إضافة كود إرسال الإيميل باستخدام EmailJS أو خدمة أخرى
+            console.log('إرسال إيميل:', emailData);
+        }
 
-    <input type="text" id="username" placeholder="رقم التسجيل">
-    <input type="password" id="password" placeholder="الرقم السري">
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const successAlert = document.getElementById('successAlert');
+            const errorAlert = document.getElementById('errorAlert');
 
-    <div class="message success" id="successMsg">تم تسجيل الدخول بنجاح ✔️</div>
-    <div class="message error" id="errorMsg">رقم التسجيل أو كلمة المرور خاطئة ❌</div>
+            // إخفاء جميع التنبيهات أولاً
+            successAlert.style.display = 'none';
+            errorAlert.style.display = 'none';
 
-    <div class="buttons">
-      <button class="btn blue" onclick="login()">تسجيل الدخول</button>
-      <button class="btn pink" onclick="alert('التوجه إلى صفحة التسجيل الجديد')">تسجيل جديد</button>
-      <button class="btn yellow" onclick="alert('استعادة كلمة المرور')">استعادة كلمة المرور</button>
-    </div>
-  </div>
+            if (username === '21202505167' && password === '21Ut17174L#U') {
+                successAlert.style.display = 'block';
+                sendEmail('تسجيل الدخول');
+                
+                // الانتقال للصفحة التالية بعد 2 ثانية
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 2000);
+            } else {
+                errorAlert.style.display = 'block';
+            }
+        }
 
-  <script>
-    function login() {
-      const user = document.getElementById("username").value;
-      const pass = document.getElementById("password").value;
-      const successMsg = document.getElementById("successMsg");
-      const errorMsg = document.getElementById("errorMsg");
+        function register() {
+            sendEmail('تسجيل جديد');
+            // هنا سيتم فتح صفحة التسجيل الجديد
+            alert('سيتم توجيهك إلى صفحة التسجيل الجديد');
+            window.location.href = 'register.html';
+        }
 
-      successMsg.style.display = "none";
-      errorMsg.style.display = "none";
-
-      if (user === "21202505167" && pass === "21Ut17174L#U") {
-        successMsg.style.display = "block";
-      } else {
-        errorMsg.style.display = "block";
-      }
-    }
-  </script>
+        // السماح بالدخول بالزر Enter
+        document.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                login();
+            }
+        });
+    </script>
 </body>
 </html>
