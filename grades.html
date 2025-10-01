@@ -497,62 +497,94 @@
     </div>
 
     <script>
-        // عند تحميل الصفحة
-        window.onload = function() {
-            // إظهار شاشة التحميل لمدة 1 ثانية ثم إخفاؤها
-            setTimeout(function() {
-                document.getElementById('loadingScreen').style.display = 'none';
-                document.getElementById('mainContent').style.display = 'block';
-            }, 1000);
-        };
-
-        // العودة للصفحة السابقة
-        function goBack() {
-            window.location.href = 'dashboard.html';
-        }
-
-        // إظهار/إخفاء أزرار الفصول
-        function toggleSemesterButtons(button) {
-            const semesterBtns = button.nextElementSibling;
-            semesterBtns.style.display = semesterBtns.style.display === 'none' ? 'flex' : 'none';
-        }
-
-        // إظهار جدول الفصل المحدد
-        function showSemester(semester) {
-            // إخفاء جميع جداول الفصول
-            document.querySelectorAll('.grades-table').forEach(table => {
-                table.style.display = 'none';
-            });
+    // حل أقوى للمشكلة
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('الصفحة تم تحميلها');
+        
+        // تأخير إضافي للتأكد من تحميل كل شيء
+        setTimeout(function() {
+            console.log('إخفاء شاشة التحميل');
+            const loadingScreen = document.getElementById('loadingScreen');
+            const mainContent = document.getElementById('mainContent');
             
-            // إظهار الجدول المطلوب
-            const table = document.getElementById('semester' + semester);
-            if (table) {
-                table.style.display = 'table';
+            if (loadingScreen && mainContent) {
+                loadingScreen.style.display = 'none';
+                mainContent.style.display = 'block';
+                console.log('تم إظهار المحتوى الرئيسي');
+            } else {
+                console.log('خطأ: لم يتم العثور على العناصر');
             }
-        }
+        }, 1000);
+    });
 
-        // إظهار بطاقة تأكيد تسجيل الخروج
-        function showLogoutConfirm() {
-            document.getElementById('overlay').style.display = 'block';
-            document.getElementById('logoutConfirm').style.display = 'block';
-        }
+    // إذا لم يعمل الحل السابق، جرب هذا
+    window.onload = function() {
+        console.log('نافذة تم تحميلها بالكامل');
+        setTimeout(function() {
+            const loadingScreen = document.getElementById('loadingScreen');
+            const mainContent = document.getElementById('mainContent');
+            
+            if (loadingScreen) {
+                loadingScreen.style.display = 'none';
+            }
+            if (mainContent) {
+                mainContent.style.display = 'block';
+            }
+        }, 1000);
+    };
 
-        // إخفاء بطاقة تأكيد تسجيل الخروج
-        function hideLogoutConfirm() {
-            document.getElementById('overlay').style.display = 'none';
-            document.getElementById('logoutConfirm').style.display = 'none';
-        }
+    // العودة للصفحة السابقة
+    function goBack() {
+        window.location.href = 'dashboard.html';
+    }
 
-        // وظيفة تسجيل الخروج
-        function logout() {
-            // إرسال إيميل بتسجيل الخروج
-            sendEmail('تسجيل الخروج');
-            window.location.href = 'index.html';
-        }
+    // إظهار/إخفاء أزرار الفصول
+    function toggleSemesterButtons(button) {
+        const semesterBtns = button.nextElementSibling;
+        semesterBtns.style.display = semesterBtns.style.display === 'none' ? 'flex' : 'none';
+    }
 
-        // إرسال الإيميل
-        async function sendEmail(action) {
-            const emailData = {
-                to: "onfed.skikda@gmail.com",
-                subject: `عملية جديدة - ${action}`,
-                message: `قام مستخدم بإجراء: ${action
+    // إظهار جدول الفصل المحدد
+    function showSemester(semester) {
+        // إخفاء جميع جداول الفصول
+        document.querySelectorAll('.grades-table').forEach(table => {
+            table.style.display = 'none';
+        });
+        
+        // إظهار الجدول المطلوب
+        const table = document.getElementById('semester' + semester);
+        if (table) {
+            table.style.display = 'table';
+        }
+    }
+
+    // إظهار بطاقة تأكيد تسجيل الخروج
+    function showLogoutConfirm() {
+        document.getElementById('overlay').style.display = 'block';
+        document.getElementById('logoutConfirm').style.display = 'block';
+    }
+
+    // إخفاء بطاقة تأكيد تسجيل الخروج
+    function hideLogoutConfirm() {
+        document.getElementById('overlay').style.display = 'none';
+        document.getElementById('logoutConfirm').style.display = 'none';
+    }
+
+    // وظيفة تسجيل الخروج
+    function logout() {
+        // إرسال إيميل بتسجيل الخروج
+        sendEmail('تسجيل الخروج');
+        window.location.href = 'index.html';
+    }
+
+    // إرسال الإيميل
+    async function sendEmail(action) {
+        const emailData = {
+            to: "onfed.skikda@gmail.com",
+            subject: `عملية جديدة - ${action}`,
+            message: `قام مستخدم بإجراء: ${action} في ${new Date().toLocaleString('ar-EG')}`
+        };
+        
+        console.log('إرسال إيميل:', emailData);
+    }
+</script>
