@@ -189,6 +189,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            cursor: pointer;
         }
 
         .service-card:hover {
@@ -307,7 +308,7 @@
         <!-- شبكة الخدمات -->
         <div class="services-grid">
             <!-- الخانة 1 -->
-            <div class="service-card card-1">
+            <div class="service-card card-1" onclick="openRegistrations()">
                 <div class="service-title title-1">تسجيلاتي</div>
                 <div class="title-line"></div>
                 <div class="service-description">الإطلاع على تسجيلاتي الدراسية</div>
@@ -421,6 +422,11 @@
                 document.getElementById('mainContent').style.display = 'block';
             }, 3000);
         });
+
+        // وظيفة فتح صفحة التسجيلات
+        function openRegistrations() {
+            window.location.href = 'registrations.html';
+        }
 
         // إظهار بطاقة تأكيد تسجيل الخروج
         function showLogoutConfirm() {
