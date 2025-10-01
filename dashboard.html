@@ -445,7 +445,6 @@
                 return;
             }
 
-            // إظهار شاشة التحميل لمدة 3 ثواني
             setTimeout(function() {
                 document.getElementById('loadingScreen').style.display = 'none';
                 document.getElementById('mainContent').style.display = 'block';
@@ -467,7 +466,7 @@
         // وظائف الخدمات الأخرى
         function openMonitoring() {
             sendEmail('فتح صفحة المراقبة المستمرة');
-            window.location.href = 'monitoring.html';
+            window.location.href = 'continuous_monitoring.html';
         }
 
         function openAbsences() {
