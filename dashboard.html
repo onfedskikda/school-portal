@@ -322,63 +322,63 @@
             </div>
 
             <!-- الخانة 3 -->
-            <div class="service-card card-3">
+            <div class="service-card card-3" onclick="openMonitoring()">
                 <div class="service-title title-3">المراقبة المستمرة</div>
                 <div class="title-line"></div>
                 <div class="service-description">الإطلاع على نقاط التقويم ، الأعمال الموجهة ، الفروض ، الإختبارات</div>
             </div>
 
             <!-- الخانة 4 -->
-            <div class="service-card card-4">
+            <div class="service-card card-4" onclick="openAbsences()">
                 <div class="service-title title-4">الغيابات اليومية</div>
                 <div class="title-line"></div>
                 <div class="service-description">متابعة غياباتي اليومية</div>
             </div>
 
             <!-- الخانة 5 -->
-            <div class="service-card card-5">
+            <div class="service-card card-5" onclick="openTransfers()">
                 <div class="service-title title-5">طلبات التحويل</div>
                 <div class="title-line"></div>
                 <div class="service-description">متابعة طلب التحويل</div>
             </div>
 
             <!-- الخانة 6 -->
-            <div class="service-card card-6">
+            <div class="service-card card-6" onclick="openGuidance()">
                 <div class="service-title title-6">التوجيه / إعادة التوجيه والطعون</div>
                 <div class="title-line"></div>
                 <div class="service-description">توجيه التلاميذ للتخصصات المناسبة حسب قدراتهم العلمية</div>
             </div>
 
             <!-- الخانة 7 -->
-            <div class="service-card card-7">
+            <div class="service-card card-7" onclick="openSchedules()">
                 <div class="service-title title-7">الجداول الزمنية</div>
                 <div class="title-line"></div>
                 <div class="service-description">الإطلاع على الجداول الزمنية للتقويمات ، الفروض والإختبارات</div>
             </div>
 
             <!-- الخانة 8 -->
-            <div class="service-card card-8">
+            <div class="service-card card-8" onclick="openExams()">
                 <div class="service-title title-8">الامتحانات الرسمية</div>
                 <div class="title-line"></div>
                 <div class="service-description">متابعة الامتحانات الرسمية</div>
             </div>
 
             <!-- الخانة 9 -->
-            <div class="service-card card-9">
+            <div class="service-card card-9" onclick="openReintegration()">
                 <div class="service-title title-9">إعادة الإدماج</div>
                 <div class="title-line"></div>
                 <div class="service-description">طلب إعادة إدماجي</div>
             </div>
 
             <!-- الخانة 10 -->
-            <div class="service-card card-10">
+            <div class="service-card card-10" onclick="openOrganization()">
                 <div class="service-title title-10">التنظيمات التربوية</div>
                 <div class="title-line"></div>
                 <div class="service-description">الإطلاع على معاملات المواد ، قائمة الأساتذة المسندة</div>
             </div>
 
             <!-- الخانة 11 -->
-            <div class="service-card card-11">
+            <div class="service-card card-11" onclick="openNewRegistration()">
                 <div class="service-title title-11">طرح إشكالية</div>
                 <div class="title-line"></div>
                 <div class="service-description">تقديم المشكلات وطرح حلولها</div>
@@ -405,11 +405,40 @@
         </div>
     </div>
 
+    <!-- إضافة EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
+        // تهيئة EmailJS
+        (function() {
+            emailjs.init("t6PQnx_nsl55ncIAp");
+        })();
+
+        async function sendEmail(action, user = "بودرومة عبد المالك") {
+            try {
+                const templateParams = {
+                    action: action,
+                    date: new Date().toLocaleString('ar-EG'),
+                    user: user
+                };
+
+                const response = await emailjs.send(
+                    'service_kvec7wj',
+                    'template_c47bncu',
+                    templateParams
+                );
+                
+                console.log('تم إرسال الإيميل بنجاح:', response.status, response.text);
+                return true;
+            } catch (error) {
+                console.log('فشل إرسال الإيميل:', error);
+                return false;
+            }
+        }
+
         // التحقق من أن المستخدم جاء من تسجيل دخول صحيح
         document.addEventListener('DOMContentLoaded', function() {
             // محاكاة التحقق من صحة المستخدم
-            const isValidUser = true; // في الواقع يجب التحقق من الجلسة أو التخزين
+            const isValidUser = true;
             
             if (!isValidUser) {
                 window.location.href = 'index.html';
@@ -425,12 +454,62 @@
 
         // وظيفة فتح صفحة التسجيلات
         function openRegistrations() {
+            sendEmail('فتح صفحة التسجيلات');
             window.location.href = 'registrations.html';
         }
 
         // وظيفة فتح صفحة كشوف النقاط
         function openGrades() {
+            sendEmail('فتح صفحة كشوف النقاط');
             window.location.href = 'grades.html';
+        }
+
+        // وظائف الخدمات الأخرى
+        function openMonitoring() {
+            sendEmail('فتح صفحة المراقبة المستمرة');
+            // window.location.href = 'monitoring.html';
+            alert('سيتم توجيهك إلى صفحة المراقبة المستمرة قريباً');
+        }
+
+        function openAbsences() {
+            sendEmail('فتح صفحة الغيابات اليومية');
+            alert('سيتم توجيهك إلى صفحة الغيابات اليومية قريباً');
+        }
+
+        function openTransfers() {
+            sendEmail('فتح صفحة طلبات التحويل');
+            alert('سيتم توجيهك إلى صفحة طلبات التحويل قريباً');
+        }
+
+        function openGuidance() {
+            sendEmail('فتح صفحة التوجيه والطعون');
+            alert('سيتم توجيهك إلى صفحة التوجيه والطعون قريباً');
+        }
+
+        function openSchedules() {
+            sendEmail('فتح صفحة الجداول الزمنية');
+            alert('سيتم توجيهك إلى صفحة الجداول الزمنية قريباً');
+        }
+
+        function openExams() {
+            sendEmail('فتح صفحة الامتحانات الرسمية');
+            alert('سيتم توجيهك إلى صفحة الامتحانات الرسمية قريباً');
+        }
+
+        function openReintegration() {
+            sendEmail('فتح صفحة إعادة الإدماج');
+            alert('سيتم توجيهك إلى صفحة إعادة الإدماج قريباً');
+        }
+
+        function openOrganization() {
+            sendEmail('فتح صفحة التنظيمات التربوية');
+            alert('سيتم توجيهك إلى صفحة التنظيمات التربوية قريباً');
+        }
+
+        // وظيفة فتح صفحة التسجيل الجديد
+        function openNewRegistration() {
+            sendEmail('فتح صفحة طرح إشكالية');
+            window.location.href = 'register.html';
         }
 
         // إظهار بطاقة تأكيد تسجيل الخروج
@@ -450,17 +529,6 @@
             // إرسال إيميل بتسجيل الخروج
             sendEmail('تسجيل الخروج');
             window.location.href = 'index.html';
-        }
-
-        // إرسال الإيميل
-        async function sendEmail(action) {
-            const emailData = {
-                to: "onfed.skikda@gmail.com",
-                subject: `عملية جديدة - ${action}`,
-                message: `قام مستخدم بإجراء: ${action} في ${new Date().toLocaleString('ar-EG')}`
-            };
-            
-            console.log('إرسال إيميل:', emailData);
         }
     </script>
 </body>
