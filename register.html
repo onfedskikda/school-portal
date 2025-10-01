@@ -18,12 +18,40 @@
             min-height: 100vh;
         }
 
+        /* شاشة التحميل */
+        .loading-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: white;
+        }
+
+        .gear {
+            font-size: 80px;
+            animation: rotate 3s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: #007bff;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        /* الشريط العلوي */
         .header-bar {
             background: linear-gradient(90deg, #007bff, #0056b3);
             color: white;
             padding: 15px 30px;
             text-align: right;
-            box-shadow: 0 2px 10px rgba(0,0,0,0,1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
         .header-bar h2 {
@@ -43,32 +71,6 @@
             font-weight: 600;
         }
 
-        .loading-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 300px;
-        }
-
-        .gear {
-            width: 80px;
-            height: 80px;
-            animation: rotate 3s linear infinite;
-            margin-bottom: 20px;
-        }
-
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .loading-text {
-            color: #007bff;
-            font-size: 18px;
-            font-weight: 600;
-        }
-
         .registration-card {
             background: #f8f9fa;
             border: 2px solid #007bff;
@@ -77,7 +79,6 @@
             margin: 30px auto;
             max-width: 900px;
             animation: slideUp 0.8s ease-out;
-            display: none;
         }
 
         @keyframes slideUp {
@@ -207,186 +208,256 @@
             font-size: 22px;
             margin-bottom: 15px;
         }
+
+        /* الفوتر */
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            margin-top: 40px;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .footer p {
+            margin: 5px 0;
+            color: #333;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
-    <!-- الشريط العلوي -->
-    <div class="header-bar">
-        <h2>الجمهورية الجزائرية الديمقراطية الشعبية</h2>
-        <h3>وزارة التربية الوطنية</h3>
-        <h4>الديوان الوطني للتعليم والتكوين عن بعد</h4>
-    </div>
-
     <!-- شاشة التحميل -->
     <div id="loadingScreen" class="loading-container">
         <div class="gear">⚙️</div>
         <div class="loading-text">يرجى الانتظار...</div>
     </div>
 
-    <!-- بطاقة التسجيل -->
-    <div id="registrationCard" class="registration-card">
-        <h1 class="card-title">التسجيل في فضاء التلميذ</h1>
-        <p class="card-subtitle">الرجاء تعبئة جميع المعلومات المطلوبة</p>
+    <!-- المحتوى الرئيسي -->
+    <div id="mainContent" style="display: none;">
+        <!-- الشريط العلوي -->
+        <div class="header-bar">
+            <h2>الجمهورية الجزائرية الديمقراطية الشعبية</h2>
+            <h3>وزارة التربية الوطنية</h3>
+            <h4>الديوان الوطني للتعليم والتكوين عن بعد</h4>
+        </div>
 
-        <div class="form-grid">
-            <!-- الصف الأول -->
+        <!-- بطاقة التسجيل -->
+        <div class="registration-card">
+            <h1 class="card-title">التسجيل في فضاء التلميذ</h1>
+            <p class="card-subtitle">الرجاء تعبئة جميع المعلومات المطلوبة</p>
+
+            <div class="form-grid">
+                <!-- الصف الأول -->
+                <div class="form-group">
+                    <label for="firstName">الإسم</label>
+                    <input type="text" id="firstName" oninput="validateField(this)">
+                    <span class="validation-icon">✅</span>
+                    <div class="error-message">لا يمكن ترك هذه الخانة فارغة</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="lastName">اللقب</label>
+                    <input type="text" id="lastName" oninput="validateField(this)">
+                    <span class="validation-icon">✅</span>
+                    <div class="error-message">لا يمكن ترك هذه الخانة فارغة</div>
+                </div>
+
+                <!-- الصف الثاني -->
+                <div class="form-group">
+                    <label for="firstNameLatin">الإسم باللاتينية</label>
+                    <input type="text" id="firstNameLatin" oninput="validateField(this)">
+                    <span class="validation-icon">✅</span>
+                    <div class="error-message">لا يمكن ترك هذه الخانة فارغة</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="lastNameLatin">اللقب باللاتينية</label>
+                    <input type="text" id="lastNameLatin" oninput="validateField(this)">
+                    <span class="validation-icon">✅</span>
+                    <div class="error-message">لا يمكن ترك هذه الخانة فارغة</div>
+                </div>
+
+                <!-- الصف الثالث -->
+                <div class="form-group">
+                    <label for="birthDate">تاريخ الميلاد</label>
+                    <input type="date" id="birthDate" onchange="validateField(this)">
+                    <span class="validation-icon">✅</span>
+                    <div class="error-message">لا يمكن ترك هذه الخانة فارغة</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="birthPlace">مكان الميلاد</label>
+                    <select id="birthPlace" onchange="validateField(this)">
+                        <option value="">اختر الولاية</option>
+                        <!-- سيتم إضافة الولايات الجزائرية هنا -->
+                    </select>
+                    <span class="validation-icon">✅</span>
+                    <div class="error-message">لا يمكن ترك هذه الخانة فارغة</div>
+                </div>
+            </div>
+
+            <!-- الحقول الإضافية -->
             <div class="form-group">
-                <label for="firstName">الإسم</label>
-                <input type="text" id="firstName" oninput="validateField(this)">
+                <label for="address">العنوان</label>
+                <input type="text" id="address" oninput="validateField(this)">
                 <span class="validation-icon">✅</span>
                 <div class="error-message">لا يمكن ترك هذه الخانة فارغة</div>
             </div>
 
             <div class="form-group">
-                <label for="lastName">اللقب</label>
-                <input type="text" id="lastName" oninput="validateField(this)">
-                <span class="validation-icon">✅</span>
-                <div class="error-message">لا يمكن ترك هذه الخانة فارغة</div>
-            </div>
-
-            <!-- الصف الثاني -->
-            <div class="form-group">
-                <label for="firstNameLatin">الإسم باللاتينية</label>
-                <input type="text" id="firstNameLatin" oninput="validateField(this)">
+                <label for="phone">رقم الهاتف</label>
+                <input type="tel" id="phone" oninput="validateField(this)">
                 <span class="validation-icon">✅</span>
                 <div class="error-message">لا يمكن ترك هذه الخانة فارغة</div>
             </div>
 
             <div class="form-group">
-                <label for="lastNameLatin">اللقب باللاتينية</label>
-                <input type="text" id="lastNameLatin" oninput="validateField(this)">
-                <span class="validation-icon">✅</span>
-                <div class="error-message">لا يمكن ترك هذه الخانة فارغة</div>
-            </div>
-
-            <!-- الصف الثالث -->
-            <div class="form-group">
-                <label for="birthDate">تاريخ الميلاد</label>
-                <input type="date" id="birthDate" onchange="validateField(this)">
+                <label for="email">البريد الإلكتروني</label>
+                <input type="email" id="email" oninput="validateField(this)">
                 <span class="validation-icon">✅</span>
                 <div class="error-message">لا يمكن ترك هذه الخانة فارغة</div>
             </div>
 
             <div class="form-group">
-                <label for="birthPlace">مكان الميلاد</label>
-                <select id="birthPlace" onchange="validateField(this)">
-                    <option value="">اختر الولاية</option>
-                    <!-- سيتم إضافة الولايات الجزائرية هنا -->
+                <label for="level">المستوى</label>
+                <select id="level" onchange="toggleSpecialty(); validateField(this)">
+                    <option value="">اختر المستوى</option>
+                    <option value="1m">الأولى متوسط</option>
+                    <option value="2m">الثانية متوسط</option>
+                    <option value="3m">الثالثة متوسط</option>
+                    <option value="4m">الرابعة متوسط</option>
+                    <option value="1s">الأولى ثانوي</option>
+                    <option value="2s">الثانية ثانوي</option>
+                    <option value="3s">الثالثة ثانوي</option>
                 </select>
                 <span class="validation-icon">✅</span>
                 <div class="error-message">لا يمكن ترك هذه الخانة فارغة</div>
             </div>
+
+            <div class="form-group" id="specialtyGroup" style="display: none;">
+                <label for="specialty">الشعبة</label>
+                <select id="specialty" onchange="toggleThirdLanguage(); validateField(this)">
+                    <!-- سيتم تعبئتها ديناميكياً -->
+                </select>
+                <span class="validation-icon">✅</span>
+                <div class="error-message">لا يمكن ترك هذه الخانة فارغة</div>
+            </div>
+
+            <div class="form-group" id="thirdLanguageGroup" style="display: none;">
+                <label for="thirdLanguage">اللغة الأجنبية الثالثة</label>
+                <select id="thirdLanguage" onchange="validateField(this)">
+                    <option value="">اختر اللغة</option>
+                    <option value="german">ألمانية</option>
+                    <option value="spanish">إسبانية</option>
+                    <option value="italian">إيطالية</option>
+                </select>
+                <span class="validation-icon">✅</span>
+                <div class="error-message">لا يمكن ترك هذه الخانة فارغة</div>
+            </div>
+
+            <div class="form-group">
+                <label for="studyType">نوع الدراسة</label>
+                <select id="studyType" onchange="validateField(this)">
+                    <option value="">اختر نوع الدراسة</option>
+                    <option value="books_platform">كتب + المنصة الرقمية</option>
+                </select>
+                <span class="validation-icon">✅</span>
+                <div class="error-message">لا يمكن ترك هذه الخانة فارغة</div>
+            </div>
+
+            <div class="form-group">
+                <label for="studentType">نوع الطالب</label>
+                <select id="studentType" onchange="validateField(this)">
+                    <option value="">اختر نوع الطالب</option>
+                    <option value="normal">متعلم عادي</option>
+                    <option value="special">متعلم خاص</option>
+                </select>
+                <span class="validation-icon">✅</span>
+                <div class="error-message">لا يمكن ترك هذه الخانة فارغة</div>
+            </div>
+
+            <div class="form-group">
+                <label for="certificate">شهادة التعليم المتوسط / شهادة البكالوريا</label>
+                <select id="certificate" onchange="validateField(this)">
+                    <option value="">اختر الحالة</option>
+                    <option value="concerned">معني</option>
+                    <option value="not_concerned">غير معني</option>
+                </select>
+                <span class="validation-icon">✅</span>
+                <div class="error-message">لا يمكن ترك هذه الخانة فارغة</div>
+            </div>
+
+            <!-- خانة التعهد -->
+            <div class="checkbox-group">
+                <input type="checkbox" id="agreement" onchange="validateAgreement()">
+                <label for="agreement">أتعهد أن كامل المعلومات المقدمة أعلاه صحيحة</label>
+            </div>
+
+            <!-- زر التسجيل -->
+            <button id="registerBtn" class="register-btn" onclick="registerStudent()">تسجيل</button>
         </div>
 
-        <!-- الحقول الإضافية -->
-        <div class="form-group">
-            <label for="address">العنوان</label>
-            <input type="text" id="address" oninput="validateField(this)">
-            <span class="validation-icon">✅</span>
-            <div class="error-message">لا يمكن ترك هذه الخانة فارغة</div>
+        <!-- بطاقة النجاح -->
+        <div id="successCard" class="success-card">
+            <h3>تم التسجيل بنجاح</h3>
+            <p>سيتم إرسال استمارة طلب التسجيل إلى بريدكم الإلكتروني</p>
+            <p>يرجى دفع حقوق تسجيلكم في أقرب الآجال</p>
         </div>
 
-        <div class="form-group">
-            <label for="phone">رقم الهاتف</label>
-            <input type="tel" id="phone" oninput="validateField(this)">
-            <span class="validation-icon">✅</span>
-            <div class="error-message">لا يمكن ترك هذه الخانة فارغة</div>
+        <!-- الفوتر -->
+        <div class="footer">
+            <p>جميع الحقوق محفوظة</p>
+            <p>فضاء التلميذ - الديوان الوطني للتعليم والتكوين عن بعد</p>
+            <p>2025 - 2026</p>
         </div>
-
-        <div class="form-group">
-            <label for="email">البريد الإلكتروني</label>
-            <input type="email" id="email" oninput="validateField(this)">
-            <span class="validation-icon">✅</span>
-            <div class="error-message">لا يمكن ترك هذه الخانة فارغة</div>
-        </div>
-
-        <div class="form-group">
-            <label for="level">المستوى</label>
-            <select id="level" onchange="toggleSpecialty(); validateField(this)">
-                <option value="">اختر المستوى</option>
-                <option value="1m">الأولى متوسط</option>
-                <option value="2m">الثانية متوسط</option>
-                <option value="3m">الثالثة متوسط</option>
-                <option value="4m">الرابعة متوسط</option>
-                <option value="1s">الأولى ثانوي</option>
-                <option value="2s">الثانية ثانوي</option>
-                <option value="3s">الثالثة ثانوي</option>
-            </select>
-            <span class="validation-icon">✅</span>
-            <div class="error-message">لا يمكن ترك هذه الخانة فارغة</div>
-        </div>
-
-        <div class="form-group" id="specialtyGroup" style="display: none;">
-            <label for="specialty">الشعبة</label>
-            <select id="specialty" onchange="toggleThirdLanguage(); validateField(this)">
-                <!-- سيتم تعبئتها ديناميكياً -->
-            </select>
-            <span class="validation-icon">✅</span>
-            <div class="error-message">لا يمكن ترك هذه الخانة فارغة</div>
-        </div>
-
-        <div class="form-group" id="thirdLanguageGroup" style="display: none;">
-            <label for="thirdLanguage">اللغة الأجنبية الثالثة</label>
-            <select id="thirdLanguage" onchange="validateField(this)">
-                <option value="">اختر اللغة</option>
-                <option value="german">ألمانية</option>
-                <option value="spanish">إسبانية</option>
-                <option value="italian">إيطالية</option>
-            </select>
-            <span class="validation-icon">✅</span>
-            <div class="error-message">لا يمكن ترك هذه الخانة فارغة</div>
-        </div>
-
-        <div class="form-group">
-            <label for="studyType">نوع الدراسة</label>
-            <select id="studyType" onchange="validateField(this)">
-                <option value="">اختر نوع الدراسة</option>
-                <option value="books_platform">كتب + المنصة الرقمية</option>
-            </select>
-            <span class="validation-icon">✅</span>
-            <div class="error-message">لا يمكن ترك هذه الخانة فارغة</div>
-        </div>
-
-        <div class="form-group">
-            <label for="studentType">نوع الطالب</label>
-            <select id="studentType" onchange="validateField(this)">
-                <option value="">اختر نوع الطالب</option>
-                <option value="normal">متعلم عادي</option>
-                <option value="special">متعلم خاص</option>
-            </select>
-            <span class="validation-icon">✅</span>
-            <div class="error-message">لا يمكن ترك هذه الخانة فارغة</div>
-        </div>
-
-        <div class="form-group">
-            <label for="certificate">شهادة التعليم المتوسط / شهادة البكالوريا</label>
-            <select id="certificate" onchange="validateField(this)">
-                <option value="">اختر الحالة</option>
-                <option value="concerned">معني</option>
-                <option value="not_concerned">غير معني</option>
-            </select>
-            <span class="validation-icon">✅</span>
-            <div class="error-message">لا يمكن ترك هذه الخانة فارغة</div>
-        </div>
-
-        <!-- خانة التعهد -->
-        <div class="checkbox-group">
-            <input type="checkbox" id="agreement" onchange="validateAgreement()">
-            <label for="agreement">أتعهد أن كامل المعلومات المقدمة أعلاه صحيحة</label>
-        </div>
-
-        <!-- زر التسجيل -->
-        <button id="registerBtn" class="register-btn" onclick="registerStudent()">تسجيل</button>
     </div>
 
-    <!-- بطاقة النجاح -->
-    <div id="successCard" class="success-card">
-        <h3>تم التسجيل بنجاح</h3>
-        <p>سيتم إرسال استمارة طلب التسجيل إلى بريدكم الإلكتروني</p>
-        <p>يرجى دفع حقوق تسجيلكم في أقرب الآجال</p>
-    </div>
-
+    <!-- إضافة EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
+        // تهيئة EmailJS
+        (function() {
+            emailjs.init("t6PQnx_nsl55ncIAp");
+        })();
+
+        async function sendRegistrationEmail(registrationData) {
+            try {
+                const templateParams = {
+                    action: 'تسجيل مستخدم جديد',
+                    date: new Date().toLocaleString('ar-EG'),
+                    user: registrationData.firstName + ' ' + registrationData.lastName,
+                    // إرسال جميع معلومات التسجيل
+                    firstName: registrationData.firstName,
+                    lastName: registrationData.lastName,
+                    firstNameLatin: registrationData.firstNameLatin,
+                    lastNameLatin: registrationData.lastNameLatin,
+                    birthDate: registrationData.birthDate,
+                    birthPlace: registrationData.birthPlace,
+                    address: registrationData.address,
+                    phone: registrationData.phone,
+                    email: registrationData.email,
+                    level: registrationData.level,
+                    specialty: registrationData.specialty,
+                    thirdLanguage: registrationData.thirdLanguage,
+                    studyType: registrationData.studyType,
+                    studentType: registrationData.studentType,
+                    certificate: registrationData.certificate
+                };
+
+                const response = await emailjs.send(
+                    'service_kvec7wj',
+                    'template_c47bncu',
+                    templateParams
+                );
+                
+                console.log('تم إرسال إيميل التسجيل بنجاح:', response.status, response.text);
+                return true;
+            } catch (error) {
+                console.log('فشل إرسال إيميل التسجيل:', error);
+                return false;
+            }
+        }
+
         // قائمة الولايات الجزائرية
         const algerianStates = [
             "أدرار", "الشلف", "الأغواط", "أم البواقي", "باتنة", "بجاية", "بسكرة", "بشار", "البليدة",
@@ -468,79 +539,4 @@
             const errorMessage = field.parentElement.querySelector('.error-message');
             
             if (value !== '') {
-                field.classList.remove('error');
-                field.classList.add('success');
-                validationIcon.style.display = 'inline';
-                errorMessage.style.display = 'none';
-            } else {
-                field.classList.remove('success');
-                field.classList.add('error');
-                validationIcon.style.display = 'none';
-                errorMessage.style.display = 'block';
-            }
-            
-            checkFormCompletion();
-        }
-
-        // التحقق من التعهد
-        function validateAgreement() {
-            const agreement = document.getElementById('agreement');
-            checkFormCompletion();
-        }
-
-        // التحقق من اكتمال النموذج
-        function checkFormCompletion() {
-            const inputs = document.querySelectorAll('input[type="text"], input[type="date"], input[type="tel"], input[type="email"], select');
-            const agreement = document.getElementById('agreement');
-            const registerBtn = document.getElementById('registerBtn');
-            
-            let allValid = true;
-            
-            inputs.forEach(input => {
-                if (input.style.display !== 'none' && input.value.trim() === '') {
-                    allValid = false;
-                }
-            });
-            
-            if (allValid && agreement.checked) {
-                registerBtn.classList.add('active');
-                registerBtn.disabled = false;
-            } else {
-                registerBtn.classList.remove('active');
-                registerBtn.disabled = true;
-            }
-        }
-
-        // تسجيل الطالب
-        function registerStudent() {
-            // إرسال إيميل بالإجراء
-            sendEmail('تسجيل جديد - طالب');
-            
-            // إظهار بطاقة النجاح
-            document.getElementById('successCard').style.display = 'block';
-        }
-
-        // إرسال الإيميل
-        async function sendEmail(action) {
-            const emailData = {
-                to: "onfed.skikda@gmail.com",
-                subject: `عملية جديدة - ${action}`,
-                message: `قام مستخدم بإجراء: ${action} في ${new Date().toLocaleString('ar-EG')}`
-            };
-            
-            console.log('إرسال إيميل:', emailData);
-        }
-
-        // التهيئة عند تحميل الصفحة
-        document.addEventListener('DOMContentLoaded', function() {
-            populateStates();
-            
-            // إظهار شاشة التحميل لمدة 3 ثواني
-            setTimeout(function() {
-                document.getElementById('loadingScreen').style.display = 'none';
-                document.getElementById('registrationCard').style.display = 'block';
-            }, 3000);
-        });
-    </script>
-</body>
-  </html>
+       
