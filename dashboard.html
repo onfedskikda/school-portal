@@ -18,6 +18,33 @@
             min-height: 100vh;
         }
 
+        /* شاشة التحميل */
+        .loading-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: white;
+        }
+
+        .gear {
+            font-size: 80px;
+            animation: rotate 3s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: #007bff;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
         /* الشريط العلوي */
         .header-bar {
             background: linear-gradient(90deg, #007bff, #0056b3);
@@ -257,8 +284,14 @@
     </style>
 </head>
 <body>
+    <!-- شاشة التحميل -->
+    <div id="loadingScreen" class="loading-container">
+        <div class="gear">⚙️</div>
+        <div class="loading-text">يرجى الانتظار...</div>
+    </div>
+
     <!-- المحتوى الرئيسي -->
-    <div id="mainContent">
+    <div id="mainContent" style="display: none;">
         <!-- الشريط العلوي -->
         <div class="header-bar">
             <div class="header-right">
@@ -402,6 +435,23 @@
             }
         }
 
+        // التحقق من أن المستخدم جاء من تسجيل دخول صحيح
+        document.addEventListener('DOMContentLoaded', function() {
+            // محاكاة التحقق من صحة المستخدم
+            const isValidUser = true;
+            
+            if (!isValidUser) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // إظهار شاشة التحميل لمدة 3 ثواني
+            setTimeout(function() {
+                document.getElementById('loadingScreen').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
+            }, 3000);
+        });
+
         // وظيفة فتح صفحة التسجيلات
         function openRegistrations() {
             sendEmail('فتح صفحة التسجيلات');
@@ -417,7 +467,7 @@
         // وظائف الخدمات الأخرى
         function openMonitoring() {
             sendEmail('فتح صفحة المراقبة المستمرة');
-            window.location.href = 'continuous_monitoring.html';
+            window.location.href = 'monitoring.html';
         }
 
         function openAbsences() {
