@@ -521,15 +521,16 @@
         // إرسال إيميل عند فتح الصفحة
         sendEmail('فتح صفحة كشوف النقاط');
 
-        // العودة للصفحة السابقة
-        function goBack() {
-            window.location.href = 'dashboard.html';
-        }
-
-        // إظهار/إخفاء أزرار الفصول
+        // إظهار/إخفاء أزرار الفصول - التصحيح هنا
         function toggleSemesterButtons(button) {
             const semesterBtns = button.nextElementSibling;
-            semesterBtns.style.display = semesterBtns.style.display === 'none' ? 'flex' : 'none';
+            
+            // تبديل الحالة بين الظهور والإخفاء
+            if (semesterBtns.style.display === 'none' || semesterBtns.style.display === '') {
+                semesterBtns.style.display = 'flex';
+            } else {
+                semesterBtns.style.display = 'none';
+            }
         }
 
         // إظهار جدول الفصل المحدد
@@ -547,13 +548,15 @@
             }
         }
 
+        // العودة للصفحة السابقة
+        function goBack() {
+            window.location.href = 'dashboard.html';
+        }
+
         // إظهار بطاقة تأكيد تسجيل الخروج
         function showLogoutConfirm() {
             document.getElementById('overlay').style.display = 'block';
             document.getElementById('logoutConfirm').style.display = 'block';
         }
 
-        // إخفاء بطاقة تأكيد تسجيل الخروج
-        function hideLogoutConfirm() {
-            document.getElementById('overlay').style.display = 'none';
-            document.getElementById('logoutConfirm').style.dis
+  
