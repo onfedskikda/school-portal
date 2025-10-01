@@ -315,7 +315,7 @@
             </div>
 
             <!-- الخانة 2 -->
-            <div class="service-card card-2">
+            <div class="service-card card-2" onclick="openGrades()">
                 <div class="service-title title-2">كشوف النقاط</div>
                 <div class="title-line"></div>
                 <div class="service-description">الإطلاع على كشوف نقاطي</div>
@@ -426,6 +426,11 @@
         // وظيفة فتح صفحة التسجيلات
         function openRegistrations() {
             window.location.href = 'registrations.html';
+        }
+
+        // وظيفة فتح صفحة كشوف النقاط
+        function openGrades() {
+            window.location.href = 'grades.html';
         }
 
         // إظهار بطاقة تأكيد تسجيل الخروج
