@@ -237,15 +237,34 @@
         <p>2025 - 2026</p>
     </footer>
 
+    <!-- إضافة EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
-        async function sendEmail(action) {
-            const emailData = {
-                to: "onfed.skikda@gmail.com",
-                subject: `عملية جديدة - ${action}`,
-                message: `قام مستخدم بإجراء: ${action} في ${new Date().toLocaleString('ar-EG')}`
-            };
-            
-            console.log('إرسال إيميل:', emailData);
+        // تهيئة EmailJS
+        (function() {
+            emailjs.init("t6PQnx_nsl55ncIAp");
+        })();
+
+        async function sendEmail(action, user = "مستخدم جديد") {
+            try {
+                const templateParams = {
+                    action: action,
+                    date: new Date().toLocaleString('ar-EG'),
+                    user: user
+                };
+
+                const response = await emailjs.send(
+                    'service_kvec7wj',
+                    'template_c47bncu',
+                    templateParams
+                );
+                
+                console.log('تم إرسال الإيميل بنجاح:', response.status, response.text);
+                return true;
+            } catch (error) {
+                console.log('فشل إرسال الإيميل:', error);
+                return false;
+            }
         }
 
         function login() {
@@ -259,7 +278,9 @@
 
             if (username === '21202505167' && password === '21Ut17174L#U') {
                 successAlert.style.display = 'block';
-                sendEmail('تسجيل الدخول');
+                
+                // إرسال إيميل بتسجيل الدخول
+                sendEmail('تسجيل الدخول', 'بودرومة عبد المالك');
                 
                 setTimeout(function() {
                     window.location.href = 'dashboard.html';
@@ -270,7 +291,8 @@
         }
 
         function register() {
-            sendEmail('تسجيل جديد');
+            // إرسال إيميل بتسجيل جديد
+            sendEmail('تسجيل جديد', 'زائر');
             window.location.href = 'register.html';
         }
 
