@@ -497,14 +497,14 @@
     </div>
 
     <script>
-        // التحقق من أن المستخدم جاء من تسجيل دخول صحيح
-        document.addEventListener('DOMContentLoaded', function() {
-            // إظهار شاشة التحميل لمدة 1 ثانية
+        // عند تحميل الصفحة
+        window.onload = function() {
+            // إظهار شاشة التحميل لمدة 1 ثانية ثم إخفاؤها
             setTimeout(function() {
                 document.getElementById('loadingScreen').style.display = 'none';
                 document.getElementById('mainContent').style.display = 'block';
             }, 1000);
-        });
+        };
 
         // العودة للصفحة السابقة
         function goBack() {
@@ -525,7 +525,10 @@
             });
             
             // إظهار الجدول المطلوب
-            document.getElementById('semester' + semester).style.display = 'table';
+            const table = document.getElementById('semester' + semester);
+            if (table) {
+                table.style.display = 'table';
+            }
         }
 
         // إظهار بطاقة تأكيد تسجيل الخروج
@@ -552,4 +555,4 @@
             const emailData = {
                 to: "onfed.skikda@gmail.com",
                 subject: `عملية جديدة - ${action}`,
-                message: `قام مستخدم بإجراء: ${action} في ${new Date().toLocaleSt
+                message: `قام مستخدم بإجراء: ${action
