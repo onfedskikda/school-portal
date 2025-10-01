@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المراقبة المستمرة - المنصة التعليمية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: white;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        /* شريط العنوان العلوي */
+        .header-bar {
+            background-color: #1e3a8a;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .right-text {
+            text-align: right;
+        }
+
+        .right-text p {
+            margin: 2px 0;
+            font-size: 14px;
+        }
+
+        .left-text {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-name {
+            font-weight: bold;
+        }
+
+        .logout-btn {
+            background-color: #ef4444;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .logout-btn:hover {
+            background-color: #dc2626;
+        }
+
+        /* شريط العنوان الثاني */
+        .sub-header {
+            background-color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            margin-left: 10px;
+            color: #4b5563;
+            transition: color 0.3s;
+        }
+
+        .back-btn:hover {
+            color: #1e40af;
+        }
+
+        .page-title {
+            color: #f97316;
+            font-size: 22px;
+            font-weight: 600;
+            position: relative;
+            padding-right: 15px;
+        }
+
+        .page-title::before {
+            content: "";
+            position: absolute;
+            right: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 25px;
+            width: 1px;
+            background-color: #000;
+        }
+
+        /* أزرار التبويب */
+        .tabs-container {
+            padding: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .tab-btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Cairo', sans-serif;
+            position: relative;
+            min-width: 180px;
+        }
+
+        .tab-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .tab-btn.active {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .tab-1 { background-color: #3b82f6; }
+        .tab-2 { background-color: #10b981; }
+        .tab-3 { background-color: #8b5cf6; }
+        .tab-4 { background-color: #f59e0b; }
+        .tab-5 { background-color: #ec4899; position: relative; }
+
+        .new-badge {
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            background-color: #ef4444;
+            color: white;
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+
+        /* محتوى التبويبات */
+        .tab-content {
+            padding: 0 20px 20px;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* الجداول */
+        .table-container {
+            margin-top: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: right;
+        }
+
+        th {
+            background-color: #f8fafc;
+            font-weight: 700;
+            color: #000;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f1f5f9;
+        }
+
+        tr:nth-child(odd) {
+            background-color: white;
+        }
+
+        /* رسالة الفروض الإلكترونية */
+        .message-box {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f1f5f9;
+            border-radius: 8px;
+            text-align: center;
+            color: #000;
+            font-size: 16px;
+        }
+
+        /* نافذة تسجيل الخروج */
+        .logout-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .logout-modal.active {
+            display: flex;
+        }
+
+        .logout-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            animation: scaleIn 0.3s ease;
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .logout-card p {
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: #000;
+        }
+
+        .logout-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .logout-no {
+            background-color: #10b981;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .logout-no:hover {
+            background-color: #059669;
+        }
+
+        .logout-yes {
+            background-color: #ef4444;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .logout-yes:hover {
+            background-color: #dc2626;
+        }
+
+        /* تذييل الصفحة */
+        footer {
+            background-color: #f8fafc;
+            padding: 15px 20px;
+            text-align: center;
+            border-top: 1px solid #e5e7eb;
+            margin-top: 30px;
+            color: #4b5563;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط العنوان العلوي -->
+    <div class="header-bar">
+        <div class="right-text">
+            <p>الجمهورية الجزائرية الديمقراطية الشعبية</p>
+            <p>وزارة التربية الوطنية</p>
+            <p>الديوان الوطني للتعليم والتكوين عن بعد</p>
+        </div>
+        <div class="left-text">
+            <span class="user-name">بودرومة عبد المالك</span>
+            <button class="logout-btn" id="logoutBtn">تسجيل الخروج</button>
+        </div>
+    </div>
+
+    <!-- شريط العنوان الثاني -->
+    <div class="sub-header">
+        <button class="back-btn" id="backBtn">←</button>
+        <h1 class="page-title">المراقبة المستمرة</h1>
+    </div>
+
+    <!-- أزرار التبويبات -->
+    <div class="tabs-container">
+        <button class="tab-btn tab-1 active" data-tab="tab1">التقويم المستمر</button>
+        <button class="tab-btn tab-2" data-tab="tab2">الفروض الأساسية والثانوية</button>
+        <button class="tab-btn tab-3" data-tab="tab3">الإختبارات</button>
+        <button class="tab-btn tab-4" data-tab="tab4">الفروض الإلكترونية</button>
+        <button class="tab-btn tab-5" data-tab="tab5">الأعمال الموجهة
+            <span class="new-badge">جديد</span>
+        </button>
+    </div>
+
+    <!-- محتويات التبويبات -->
+    
+    <!-- تبويب التقويم المستمر -->
+    <div class="tab-content active" id="tab1">
+        <div class="table-container">
+            <table>
+                <tr>
+                    <th>نقطة التقويم المستمر</th>
+                    <th>المادة</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>اللغة العربية وآدابها</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>الرياضيات</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>اللغة الإنجليزية</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>اللغة الفرنسية</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>العلوم الإسلامية</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>التاريخ والجغرافيا</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>اللغة الأجنبية الثالثة</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>الفلسفة</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- تبويب الفروض الأساسية والثانوية -->
+    <div class="tab-content" id="tab2">
+        <div class="table-container">
+            <table>
+                <tr>
+                    <th>نقطة الفرض الثاني</th>
+                    <th>نقطة الفرض الأول</th>
+                    <th>المادة</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>اللغة العربية وآدابها</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>الرياضيات</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>اللغة الإنجليزية</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>اللغة الفرنسية</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>العلوم الإسلامية</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>التاريخ والجغرافيا</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>اللغة الأجنبية الثالثة</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>الفلسفة</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- تبويب الإختبارات -->
+    <div class="tab-content" id="tab3">
+        <div class="table-container">
+            <table>
+                <tr>
+                    <th>نقطة الإختبار</th>
+                    <th>المادة</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>اللغة العربية وآدابها</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>الرياضيات</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>اللغة الإنجليزية</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>اللغة الفرنسية</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>العلوم الإسلامية</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>التاريخ والجغرافيا</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>اللغة الأجنبية الثالثة</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>الفلسفة</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- تبويب الفروض الإلكترونية -->
+    <div class="tab-content" id="tab4">
+        <div class="message-box">
+            لم يتم تحديد آجال هذه العملية
+        </div>
+    </div>
+
+    <!-- تبويب الأعمال الموجهة -->
+    <div class="tab-content" id="tab5">
+        <div class="table-container">
+            <table>
+                <tr>
+                    <th>النقطة</th>
+                    <th>مضمون العمل الموجه</th>
+                    <th>المادة</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>اللغة العربية وآدابها</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>اللغة الإنجليزية</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>اللغة الفرنسية</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>اللغة الأجنبية الثالثة</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- نافذة تسجيل الخروج -->
+    <div class="logout-modal" id="logoutModal">
+        <div class="logout-card">
+            <p>هل تريد فعلاً تسجيل الخروج</p>
+            <div class="logout-buttons">
+                <button class="logout-no" id="logoutNo">لا</button>
+                <button class="logout-yes" id="logoutYes">نعم</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- تذييل الصفحة -->
+    <footer>
+        جميع الحقوق محفوظة <br>
+        فضاء التلميذ - الديوان الوطني للتعليم والتكوين عن بعد <br>
+        2025 - 2026
+    </footer>
+
+    <script>
+        // التحكم في التبويبات
+        document.querySelectorAll('.tab-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                // إزالة النشاط من جميع الأزرار والمحتويات
+                document.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // إضافة النشاط للزر والمحتوى المحدد
+                button.classList.add('active');
+                const tabId = button.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // التحكم في زر العودة
+        document.getElementById('backBtn').addEventListener('click', () => {
+            // هنا يمكنك إضافة وظيفة العودة للصفحة السابقة
+            alert('سيتم العودة إلى صفحة البطاقات الرئيسية');
+            // window.location.href = 'dashboard.html'; // في حالة الربط الفعلي
+        });
+
+        // التحكم في نافذة تسجيل الخروج
+        const logoutBtn = document.getElementById('logoutBtn');
+        const logoutModal = document.getElementById('logoutModal');
+        const logoutNo = document.getElementById('logoutNo');
+        const logoutYes = document.getElementById('logoutYes');
+
+        logoutBtn.addEventListener('click', () => {
+            logoutModal.classList.add('active');
+        });
+
+        logoutNo.addEventListener('click', () => {
+            logoutModal.classList.remove('active');
+            // الانتقال إلى صفحة تسجيل الدخول
+            alert('سيتم الانتقال إلى صفحة تسجيل الدخول');
+            // window.location.href = 'login.html'; // في حالة الربط الفعلي
+        });
+
+        logoutYes.addEventListener('click', () => {
+            logoutModal.classList.remove('active');
+            // البقاء في الصفحة الحالية
+        });
+    </script>
+</body>
+                      </html>
