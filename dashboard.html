@@ -467,7 +467,14 @@
         // وظائف الخدمات الأخرى
         function openMonitoring() {
             sendEmail('فتح صفحة المراقبة المستمرة');
-            window.location.href = 'monitoring.html';
+            
+            // إظهار شاشة التحميل
+            document.getElementById('loadingScreen').style.display = 'flex';
+            document.getElementById('mainContent').style.display = 'none';
+            
+            setTimeout(function() {
+                window.location.href = 'continuous_monitoring.html';
+            }, 500);
         }
 
         function openAbsences() {
