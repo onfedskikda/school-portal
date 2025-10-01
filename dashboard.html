@@ -50,8 +50,21 @@
             background: linear-gradient(90deg, #007bff, #0056b3);
             color: white;
             padding: 15px 30px;
-            text-align: right;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-right {
+            text-align: right;
+        }
+
+        .header-left {
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
         .header-bar h2 {
@@ -69,6 +82,27 @@
         .header-bar h4 {
             font-size: 14px;
             font-weight: 600;
+        }
+
+        .user-name {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .logout-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #c82333;
         }
 
         /* شبكة الخدمات */
@@ -194,9 +228,15 @@
     <div id="mainContent" style="display: none;">
         <!-- الشريط العلوي -->
         <div class="header-bar">
-            <h2>الجمهورية الجزائرية الديمقراطية الشعبية</h2>
-            <h3>وزارة التربية الوطنية</h3>
-            <h4>الديوان الوطني للتعليم والتكوين عن بعد</h4>
+            <div class="header-right">
+                <h2>الجمهورية الجزائرية الديمقراطية الشعبية</h2>
+                <h3>وزارة التربية الوطنية</h3>
+                <h4>الديوان الوطني للتعليم والتكوين عن بعد</h4>
+            </div>
+            <div class="header-left">
+                <div class="user-name">بودرومة عبد المالك</div>
+                <button class="logout-btn" onclick="logout()">تسجيل الخروج</button>
+            </div>
         </div>
 
         <!-- شبكة الخدمات -->
@@ -297,6 +337,26 @@
                 document.getElementById('mainContent').style.display = 'block';
             }, 3000);
         });
+
+        // وظيفة تسجيل الخروج
+        function logout() {
+            if (confirm('هل تريد تسجيل الخروج؟')) {
+                // إرسال إيميل بتسجيل الخروج
+                sendEmail('تسجيل الخروج');
+                window.location.href = 'index.html';
+            }
+        }
+
+        // إرسال الإيميل
+        async function sendEmail(action) {
+            const emailData = {
+                to: "onfed.skikda@gmail.com",
+                subject: `عملية جديدة - ${action}`,
+                message: `قام مستخدم بإجراء: ${action} في ${new Date().toLocaleString('ar-EG')}`
+            };
+            
+            console.log('إرسال إيميل:', emailData);
+        }
     </script>
 </body>
 </html>
