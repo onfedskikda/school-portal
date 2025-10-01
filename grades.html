@@ -189,8 +189,9 @@
             background: #f8f9fa;
         }
 
-        .row-dark-red {
-            background: #dc3545;
+        .row-cool-blue {
+            background: #00b4db;
+            color: white !important;
         }
 
         .row-light-red {
@@ -200,8 +201,8 @@
         /* الأزرار */
         .details-btn {
             background: white;
-            color: #007bff;
-            border: 1px solid #007bff;
+            color: #00b4db;
+            border: 1px solid #00b4db;
             padding: 8px 15px;
             border-radius: 5px;
             cursor: pointer;
@@ -211,7 +212,7 @@
         }
 
         .details-btn:hover {
-            background: #007bff;
+            background: #00b4db;
             color: white;
         }
 
@@ -237,7 +238,7 @@
             opacity: 0.9;
         }
 
-        .semester-1 { background: #007bff; }
+        .semester-1 { background: #00b4db; }
         .semester-2 { background: #fd7e14; }
         .semester-3 { background: #dc3545; }
 
@@ -399,7 +400,7 @@
             <!-- جدول الفصل الأول -->
             <table id="semester1" class="grades-table">
                 <thead>
-                    <tr class="row-dark-red">
+                    <tr class="row-cool-blue">
                         <th>المادة</th>
                         <th>المعامل</th>
                         <th>التقويم المستمر</th>
@@ -419,11 +420,60 @@
                     <tr class="row-light-red"><td class="material-cell">العلوم الإسلامية</td><td>2</td><td>11.25</td><td></td><td>9.5</td><td>8.75</td><td>نتائج دون الوسط</td></tr>
                     <tr class="row-gray"><td class="material-cell">الفنون</td><td>2</td><td>4</td><td></td><td>14</td><td>13</td><td>نتائج فوق الوسط</td></tr>
                     <tr class="row-light-red"><td class="material-cell">اللغة الأمازيغية</td><td>2</td><td>معفى</td><td>معفى</td><td>معفى</td><td>معفى</td><td>معفى</td></tr>
-                    <tr class="row-dark-red"><td colspan="6">معدل الفصل الأول</td><td>9.10</td></tr>
+                    <tr class="row-cool-blue"><td colspan="6">معدل الفصل الأول</td><td>9.10</td></tr>
                 </tbody>
             </table>
 
-            <!-- جداول الفصول الأخرى سيتم إضافتها بنفس النمط -->
+            <!-- جدول الفصل الثاني -->
+            <table id="semester2" class="grades-table">
+                <thead>
+                    <tr class="row-cool-blue">
+                        <th>المادة</th>
+                        <th>المعامل</th>
+                        <th>التقويم المستمر</th>
+                        <th>الأعمال التطبيقية</th>
+                        <th>معدل الفروض</th>
+                        <th>الإختبار</th>
+                        <th>التقديرات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="row-light-red"><td class="material-cell">اللغة العربية وآدابها</td><td>4</td><td>14</td><td>12</td><td>9.5</td><td>14</td><td>نتائج حسنة</td></tr>
+                    <tr class="row-gray"><td class="material-cell">الرياضيات</td><td>2</td><td>12</td><td></td><td>8.5</td><td>10.75</td><td>نتائج متوسطة</td></tr>
+                    <tr class="row-light-red"><td class="material-cell">اللغة الإنجليزية</td><td>4</td><td>13</td><td>13</td><td>12.75</td><td>13</td><td>نتائج حسنة</td></tr>
+                    <tr class="row-gray"><td class="material-cell">اللغة الفرنسية</td><td>4</td><td>2</td><td>3</td><td>9</td><td>1.75</td><td>نتائج غير مرضية</td></tr>
+                    <tr class="row-light-red"><td class="material-cell">اللغة الأجنبية الثالثة</td><td>4</td><td>12</td><td>12</td><td>9.25</td><td>11</td><td>نتائج متوسطة</td></tr>
+                    <tr class="row-gray"><td class="material-cell">التاريخ والجغرافيا</td><td>4</td><td>13</td><td></td><td>12.75</td><td>11.25</td><td>نتائج حسنة</td></tr>
+                    <tr class="row-light-red"><td class="material-cell">العلوم الإسلامية</td><td>2</td><td>13</td><td></td><td>13</td><td>12.5</td><td>نتائج حسنة</td></tr>
+                    <tr class="row-gray"><td class="material-cell">الفنون</td><td>2</td><td>14</td><td></td><td>11</td><td>15</td><td>نتائج جيدة</td></tr>
+                    <tr class="row-light-red"><td class="material-cell">اللغة الأمازيغية</td><td>2</td><td>معفى</td><td>معفى</td><td>معفى</td><td>معفى</td><td>معفى</td></tr>
+                    <tr class="row-cool-blue"><td colspan="3">معدل الفصل الثاني</td><td>10.89</td><td colspan="2">المعدل السنوي</td><td>10.00</td></tr>
+                </tbody>
+            </table>
+
+            <!-- جدول الفصل الثالث -->
+            <table id="semester3" class="grades-table">
+                <thead>
+                    <tr class="row-cool-blue">
+                        <th>المادة</th>
+                        <th>المعامل</th>
+                        <th>التقويم المستمر</th>
+                        <th>الأعمال التطبيقية</th>
+                        <th>معدل الفروض</th>
+                        <th>الإختبار</th>
+                        <th>التقديرات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="row-light-red"><td class="material-cell">اللغة العربية وآدابها</td><td>4</td><td>9.5</td><td></td><td></td><td>2</td><td>نتائج غير مرضية</td></tr>
+                    <tr class="row-gray"><td class="material-cell">اللغة الفرنسية</td><td>4</td><td>18</td><td></td><td></td><td>9</td><td>نتائج فوق المتوسط</td></tr>
+                    <tr class="row-light-red"><td class="material-cell">اللغة الإنجليزية</td><td>4</td><td>17.5</td><td></td><td></td><td>16</td><td>نتائج جيدة جداً</td></tr>
+                    <tr class="row-gray"><td class="material-cell">اللغة الأمازيغية</td><td>2</td><td>معفى</td><td>معفى</td><td>معفى</td><td>معفى</td><td>معفى</td></tr>
+                    <tr class="row-light-red"><td class="material-cell">اللغة الأجنبية الثالثة</td><td>4</td><td>10</td><td></td><td></td><td>4</td><td>عمل ضعيف</td></tr>
+                    <tr class="row-cool-blue"><td colspan="2">معدل الفصل الثالث</td><td>9.75</td><td colspan="2">معدل الرقابة</td><td>17.00</td><td>المعدل العام</td><td>12.17</td></tr>
+                    <tr class="row-cool-blue"><td colspan="6">قرار مجلس المستوى</td><td>ينتقل(ت) إلى مستوى أعلى</td></tr>
+                </tbody>
+            </table>
         </div>
 
         <!-- الفوتر -->
@@ -502,11 +552,4 @@
             const emailData = {
                 to: "onfed.skikda@gmail.com",
                 subject: `عملية جديدة - ${action}`,
-                message: `قام مستخدم بإجراء: ${action} في ${new Date().toLocaleString('ar-EG')}`
-            };
-            
-            console.log('إرسال إيميل:', emailData);
-        }
-    </script>
-</body>
-                                                                                                                                                </html>
+                message: `قام مستخدم بإجراء: ${action} في ${new Date().toLocaleSt
