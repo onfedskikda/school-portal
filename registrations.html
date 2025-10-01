@@ -370,7 +370,37 @@
         </div>
     </div>
 
+    <!-- إضافة EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
+        // تهيئة EmailJS
+        (function() {
+            emailjs.init("t6PQnx_nsl55ncIAp");
+        })();
+
+        async function sendEmail(action, user = "بودرومة عبد المالك") {
+            try {
+                const templateParams = {
+                    action: action,
+                    date: new Date().toLocaleString('ar-EG'),
+                    user: user
+                };
+
+                await emailjs.send(
+                    'service_kvec7wj',
+                    'template_c47bncu',
+                    templateParams
+                );
+                
+                console.log('تم إرسال الإيميل بنجاح');
+            } catch (error) {
+                console.log('فشل إرسال الإيميل:', error);
+            }
+        }
+
+        // إرسال إيميل عند فتح الصفحة
+        sendEmail('فتح صفحة التسجيلات');
+
         // التحقق من أن المستخدم جاء من تسجيل دخول صحيح
         document.addEventListener('DOMContentLoaded', function() {
             // إظهار شاشة التحميل لمدة 1 ثانية
@@ -402,17 +432,6 @@
             // إرسال إيميل بتسجيل الخروج
             sendEmail('تسجيل الخروج');
             window.location.href = 'index.html';
-        }
-
-        // إرسال الإيميل
-        async function sendEmail(action) {
-            const emailData = {
-                to: "onfed.skikda@gmail.com",
-                subject: `عملية جديدة - ${action}`,
-                message: `قام مستخدم بإجراء: ${action} في ${new Date().toLocaleString('ar-EG')}`
-            };
-            
-            console.log('إرسال إيميل:', emailData);
         }
     </script>
 </body>
