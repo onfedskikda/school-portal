@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فضاء التلميذ - الديوان الوطني للتعليم والتكوين عن بعد</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background: white;
+            min-height: 100vh;
+        }
+
+        /* شاشة التحميل */
+        .loading-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: white;
+        }
+
+        .gear {
+            font-size: 80px;
+            animation: rotate 3s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: #007bff;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        /* الشريط العلوي */
+        .header-bar {
+            background: linear-gradient(90deg, #007bff, #0056b3);
+            color: white;
+            padding: 15px 30px;
+            text-align: right;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-bar h2 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .header-bar h3 {
+            font-size: 16px;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .header-bar h4 {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* شبكة الخدمات */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            padding: 40px 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px 20px;
+            text-align: center;
+            animation: slideUp 0.6s ease-out;
+            border: 3px solid;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ألوان الإطارات */
+        .card-1 { border-color: #20c997; }
+        .card-2 { border-color: #e83e8c; }
+        .card-3 { border-color: #fd7e14; }
+        .card-4 { border-color: #20c997; }
+        .card-5 { border-color: #e83e8c; }
+        .card-6 { border-color: #fd7e14; }
+        .card-7 { border-color: #e83e8c; }
+        .card-8 { border-color: #fd7e14; }
+        .card-9 { border-color: #20c997; }
+        .card-10 { border-color: #fd7e14; }
+
+        /* ألوان العناوين */
+        .title-1 { color: #20c997; }
+        .title-2 { color: #e83e8c; }
+        .title-3 { color: #fd7e14; }
+        .title-4 { color: #20c997; }
+        .title-5 { color: #e83e8c; }
+        .title-6 { color: #fd7e14; }
+        .title-7 { color: #e83e8c; }
+        .title-8 { color: #fd7e14; }
+        .title-9 { color: #20c997; }
+        .title-10 { color: #fd7e14; }
+
+        .service-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .title-line {
+            width: 60px;
+            height: 2px;
+            background: black;
+            margin: 0 auto 12px auto;
+        }
+
+        .service-description {
+            color: #000;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-top: 8px;
+        }
+
+        /* الفوتر */
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            margin-top: 40px;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .footer p {
+            margin: 5px 0;
+            color: #333;
+            font-weight: 600;
+        }
+
+        /* التأخير في ظهور البطاقات */
+        .service-card:nth-child(1) { animation-delay: 0.1s; }
+        .service-card:nth-child(2) { animation-delay: 0.2s; }
+        .service-card:nth-child(3) { animation-delay: 0.3s; }
+        .service-card:nth-child(4) { animation-delay: 0.4s; }
+        .service-card:nth-child(5) { animation-delay: 0.5s; }
+        .service-card:nth-child(6) { animation-delay: 0.6s; }
+        .service-card:nth-child(7) { animation-delay: 0.7s; }
+        .service-card:nth-child(8) { animation-delay: 0.8s; }
+        .service-card:nth-child(9) { animation-delay: 0.9s; }
+        .service-card:nth-child(10) { animation-delay: 1.0s; }
+    </style>
+</head>
+<body>
+    <!-- شاشة التحميل -->
+    <div id="loadingScreen" class="loading-container">
+        <div class="gear">⚙️</div>
+        <div class="loading-text">يرجى الانتظار...</div>
+    </div>
+
+    <!-- المحتوى الرئيسي -->
+    <div id="mainContent" style="display: none;">
+        <!-- الشريط العلوي -->
+        <div class="header-bar">
+            <h2>الجمهورية الجزائرية الديمقراطية الشعبية</h2>
+            <h3>وزارة التربية الوطنية</h3>
+            <h4>الديوان الوطني للتعليم والتكوين عن بعد</h4>
+        </div>
+
+        <!-- شبكة الخدمات -->
+        <div class="services-grid">
+            <!-- الخانة 1 -->
+            <div class="service-card card-1">
+                <div class="service-title title-1">تسجيلاتي</div>
+                <div class="title-line"></div>
+                <div class="service-description">الإطلاع على تسجيلاتي الدراسية</div>
+            </div>
+
+            <!-- الخانة 2 -->
+            <div class="service-card card-2">
+                <div class="service-title title-2">كشوف النقاط</div>
+                <div class="title-line"></div>
+                <div class="service-description">الإطلاع على كشوف نقاطي</div>
+            </div>
+
+            <!-- الخانة 3 -->
+            <div class="service-card card-3">
+                <div class="service-title title-3">المراقبة المستمرة</div>
+                <div class="title-line"></div>
+                <div class="service-description">الإطلاع على نقاط التقويم ، الأعمال الموجهة ، الفروض ، الإختبارات</div>
+            </div>
+
+            <!-- الخانة 4 -->
+            <div class="service-card card-4">
+                <div class="service-title title-4">الغيابات اليومية</div>
+                <div class="title-line"></div>
+                <div class="service-description">متابعة غياباتي اليومية</div>
+            </div>
+
+            <!-- الخانة 5 -->
+            <div class="service-card card-5">
+                <div class="service-title title-5">طلبات التحويل</div>
+                <div class="title-line"></div>
+                <div class="service-description">متابعة طلب التحويل</div>
+            </div>
+
+            <!-- الخانة 6 -->
+            <div class="service-card card-6">
+                <div class="service-title title-6">التوجيه / إعادة التوجيه والطعون</div>
+                <div class="title-line"></div>
+                <div class="service-description">توجيه التلاميذ للتخصصات المناسبة حسب قدراتهم العلمية</div>
+            </div>
+
+            <!-- الخانة 7 -->
+            <div class="service-card card-7">
+                <div class="service-title title-7">الجداول الزمنية</div>
+                <div class="title-line"></div>
+                <div class="service-description">الإطلاع على الجداول الزمنية للتقويمات ، الفروض والإختبارات</div>
+            </div>
+
+            <!-- الخانة 8 -->
+            <div class="service-card card-8">
+                <div class="service-title title-8">الامتحانات الرسمية</div>
+                <div class="title-line"></div>
+                <div class="service-description">متابعة الامتحانات الرسمية</div>
+            </div>
+
+            <!-- الخانة 9 -->
+            <div class="service-card card-9">
+                <div class="service-title title-9">إعادة الإدماج</div>
+                <div class="title-line"></div>
+                <div class="service-description">طلب إعادة إدماجي</div>
+            </div>
+
+            <!-- الخانة 10 -->
+            <div class="service-card card-10">
+                <div class="service-title title-10">التنظيمات التربوية</div>
+                <div class="title-line"></div>
+                <div class="service-description">الإطلاع على معاملات المواد ، قائمة الأساتذة المسندة</div>
+            </div>
+        </div>
+
+        <!-- الفوتر -->
+        <div class="footer">
+            <p>جميع الحقوق محفوظة</p>
+            <p>فضاء التلميذ - الديوان الوطني للتعليم والتكوين عن بعد</p>
+            <p>2025 - 2026</p>
+        </div>
+    </div>
+
+    <script>
+        // التحقق من أن المستخدم جاء من تسجيل دخول صحيح
+        document.addEventListener('DOMContentLoaded', function() {
+            // محاكاة التحقق من صحة المستخدم
+            const isValidUser = true; // في الواقع يجب التحقق من الجلسة أو التخزين
+            
+            if (!isValidUser) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // إظهار شاشة التحميل لمدة 3 ثواني
+            setTimeout(function() {
+                document.getElementById('loadingScreen').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
