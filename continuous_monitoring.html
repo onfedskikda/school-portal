@@ -22,16 +22,15 @@
             flex-direction: column;
         }
 
-        /* شريط العنوان العلوي - مطابق لصفحة البطاقات */
+        /* شريط العنوان العلوي */
         .header-bar {
             background: linear-gradient(90deg, #1e40af 0%, #3b82f6 100%);
             color: white;
-            padding: 8px 20px;
+            padding: 10px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            height: 60px;
         }
 
         .right-text {
@@ -39,36 +38,32 @@
         }
 
         .right-text p {
-            margin: 1px 0;
-            font-size: 13px;
-            line-height: 1.2;
+            margin: 2px 0;
+            font-size: 14px;
         }
 
         .right-text p:first-child {
             font-weight: 700;
-            font-size: 14px;
         }
 
         .left-text {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
         }
 
         .user-name {
             font-weight: 400;
-            font-size: 14px;
         }
 
         .logout-btn {
             background-color: #ef4444;
             color: white;
             border: none;
-            padding: 4px 12px;
-            border-radius: 3px;
+            padding: 5px 15px;
+            border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.3s;
-            font-size: 13px;
         }
 
         .logout-btn:hover {
@@ -187,7 +182,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* الجداول */
+        /* الجداول - المحاذاة المعكوسة */
         .table-container {
             margin-top: 20px;
             border-radius: 8px;
@@ -234,7 +229,7 @@
             background-color: white;
         }
 
-        /* رسالة الفروض الإلكترونية */
+        /* بقية الأنماط بدون تغيير */
         .message-box {
             margin-top: 20px;
             padding: 20px;
@@ -245,7 +240,6 @@
             font-size: 16px;
         }
 
-        /* نافذة تسجيل الخروج */
         .logout-modal {
             display: none;
             position: fixed;
@@ -322,7 +316,6 @@
             background-color: #dc2626;
         }
 
-        /* تذييل الصفحة */
         footer {
             background-color: #f8fafc;
             padding: 15px 20px;
@@ -612,4 +605,4 @@
         });
     </script>
 </body>
-    </html>
+</html>
