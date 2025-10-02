@@ -21,48 +21,6 @@
             flex-direction: column;
         }
 
-        /* شاشة التحميل */
-        #loadingScreen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
-
-        .loader {
-            width: 60px;
-            height: 60px;
-            border: 5px solid #e5e7eb;
-            border-top: 5px solid #3b82f6;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .loading-text {
-            color: #3b82f6;
-            font-size: 18px;
-            font-weight: 600;
-        }
-
-        /* المحتوى الرئيسي */
-        #mainContent {
-            display: none;
-            flex: 1;
-        }
-
         /* شريط العنوان العلوي */
         .header-bar {
             background: linear-gradient(90deg, #1e40af 0%, #3b82f6 100%);
@@ -295,12 +253,6 @@
     </style>
 </head>
 <body>
-    <!-- شاشة التحميل -->
-    <div id="loadingScreen">
-        <div class="loader"></div>
-        <div class="loading-text">يرجى الإنتظار</div>
-    </div>
-
     <!-- المحتوى الرئيسي -->
     <div id="mainContent">
         <!-- شريط العنوان العلوي -->
@@ -416,27 +368,6 @@
     </div>
 
     <script>
-        // التحقق من بيانات تسجيل الدخول
-        function validateLogin() {
-            const registrationNumber = document.getElementById('registrationNumber').value;
-            const password = document.getElementById('password').value;
-            
-            if (registrationNumber === '21202505167' && password === '21Ut17174L#U') {
-                document.getElementById('loginForm').style.display = 'none';
-                document.getElementById('loadingScreen').style.display = 'flex';
-                
-                setTimeout(function() {
-                    document.getElementById('loadingScreen').style.display = 'none';
-                    document.getElementById('mainContent').style.display = 'block';
-                }, 3000);
-                
-                return false;
-            } else {
-                alert('رقم التسجيل أو الرقم السري غير صحيح');
-                return false;
-            }
-        }
-
         // وظائف فتح الصفحات
         function openRegistrations() {
             window.location.href = 'registrations.html';
