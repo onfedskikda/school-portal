@@ -180,6 +180,14 @@
             font-size: 14px;
         }
 
+        .status-waiting {
+            background-color: #f59e0b;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
         .transfer-btn {
             background-color: white;
             color: #10b981;
@@ -219,7 +227,6 @@
             justify-content: center;
             align-items: center;
             z-index: 1000;
-            animation: fadeIn 0.3s ease;
         }
 
         .transfer-modal.active {
@@ -673,7 +680,6 @@
         const transferBtn = document.getElementById('transferBtn');
         const transferModal = document.getElementById('transferModal');
         const statusCell = document.getElementById('statusCell');
-        const institutionName = document.getElementById('institutionName');
         const modalCloseBtn = document.getElementById('modalCloseBtn');
         const saveBtn = document.getElementById('saveBtn');
         const confirmSaveModal = document.getElementById('confirmSaveModal');
@@ -682,5 +688,4 @@
         const confirmCancelModal = document.getElementById('confirmCancelModal');
         const confirmCancelYes = document.getElementById('confirmCancelYes');
         const confirmCancelNo = document.getElementById('confirmCancelNo');
-        const successModal = document.getElementById('successModal');
-        con
+   
