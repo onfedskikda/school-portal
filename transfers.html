@@ -198,12 +198,18 @@
         }
 
         .transfer-btn.requested {
+            background-color: #10b981;
+            color: white;
+            border: 2px solid #10b981;
+        }
+
+        .transfer-btn.cancel {
             background-color: white;
             color: #ef4444;
             border: 2px solid #ef4444;
         }
 
-        .transfer-btn.requested:hover {
+        .transfer-btn.cancel:hover {
             background-color: #ef4444;
             color: white;
         }
@@ -254,6 +260,7 @@
 
         .form-group {
             margin-bottom: 15px;
+            position: relative;
         }
 
         .form-label {
@@ -272,10 +279,41 @@
             width: 200px;
             text-align: center;
             transition: all 0.3s ease;
+            position: relative;
         }
 
         .select-btn:hover {
             border-color: #3b82f6;
+        }
+
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 100%;
+            background-color: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            z-index: 100;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .dropdown.active {
+            display: block;
+        }
+
+        .dropdown-item {
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            text-align: right;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f1f5f9;
         }
 
         .input-field {
@@ -308,6 +346,18 @@
             font-weight: 600;
             transition: all 0.3s ease;
             margin-top: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .file-btn input {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
         }
 
         .file-btn.success {
@@ -351,6 +401,92 @@
 
         .close-btn:hover {
             background-color: #db2777;
+        }
+
+        /* نافذة التأكيد */
+        .confirmation-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .confirmation-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .confirmation-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            width: 90%;
+            max-width: 500px;
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+
+        .confirmation-modal.active .confirmation-card {
+            transform: translateY(0);
+        }
+
+        .confirmation-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #000;
+            text-align: center;
+        }
+
+        .confirmation-text {
+            margin-bottom: 25px;
+            text-align: center;
+            color: #4b5563;
+        }
+
+        .confirmation-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .confirm-btn {
+            background-color: #10b981;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .confirm-btn:hover {
+            background-color: #059669;
+        }
+
+        .cancel-confirm-btn {
+            background-color: #ef4444;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .cancel-confirm-btn:hover {
+            background-color: #dc2626;
         }
 
         /* تذييل الصفحة */
@@ -434,11 +570,19 @@
         <div class="form-group">
             <label class="form-label">أحد الإخوة يدرس بالمؤسسة المراد التحويل اليها ؟</label>
             <button class="select-btn" id="siblingStudyBtn">اختر</button>
+            <div class="dropdown" id="siblingStudyDropdown">
+                <div class="dropdown-item" data-value="نعم">نعم</div>
+                <div class="dropdown-item" data-value="لا">لا</div>
+            </div>
         </div>
 
         <div class="form-group">
             <label class="form-label">ولي التلميذ يعمل بالمؤسسة المراد التحويل اليها ؟</label>
             <button class="select-btn" id="parentWorkBtn">اختر</button>
+            <div class="dropdown" id="parentWorkDropdown">
+                <div class="dropdown-item" data-value="نعم">نعم</div>
+                <div class="dropdown-item" data-value="لا">لا</div>
+            </div>
             <div class="hidden" id="parentWorkIdGroup">
                 <input type="text" class="input-field" id="parentWorkId" placeholder="رقم التعريف الوظيفي">
                 <div class="error-message" id="parentWorkIdError">حقل مطلوب</div>
@@ -448,6 +592,10 @@
         <div class="form-group">
             <label class="form-label">أحد الوالدين في القطاع ؟</label>
             <button class="select-btn" id="parentSectorBtn">اختر</button>
+            <div class="dropdown" id="parentSectorDropdown">
+                <div class="dropdown-item" data-value="نعم">نعم</div>
+                <div class="dropdown-item" data-value="لا">لا</div>
+            </div>
             <div class="hidden" id="parentSectorIdGroup">
                 <input type="text" class="input-field" id="parentSectorId" placeholder="رقم التعريف الوظيفي">
                 <div class="error-message" id="parentSectorIdError">حقل مطلوب</div>
@@ -460,40 +608,65 @@
         <div class="form-group">
             <label class="form-label">الولاية</label>
             <button class="select-btn" id="stateBtn">اختر الولاية</button>
+            <div class="dropdown" id="stateDropdown"></div>
         </div>
 
         <div class="form-group">
             <label class="form-label">البلدية</label>
-            <button class="select-btn" id="municipalityBtn">اختر البلدية</button>
+            <button class="select-btn" id="municipalityBtn" disabled>اختر البلدية</button>
+            <div class="dropdown" id="municipalityDropdown"></div>
         </div>
 
         <div class="form-group">
             <label class="form-label">المؤسسة</label>
-            <button class="select-btn" id="institutionBtn">اختر المؤسسة</button>
+            <button class="select-btn" id="institutionBtn" disabled>اختر المؤسسة</button>
+            <div class="dropdown" id="institutionDropdown"></div>
         </div>
 
         <div class="form-group">
             <label class="form-label">سبب التحويل</label>
             <button class="select-btn" id="reasonBtn">اختر السبب</button>
+            <div class="dropdown" id="reasonDropdown">
+                <div class="dropdown-item" data-value="تغيير مقر إقامة الولي أو الوصي الشرعي">تغيير مقر إقامة الولي أو الوصي الشرعي</div>
+                <div class="dropdown-item" data-value="تغيير مقر عمل الولي أو الوصي الشرعي">تغيير مقر عمل الولي أو الوصي الشرعي</div>
+            </div>
         </div>
 
         <!-- حقول إضافية بناءً على السبب -->
         <div class="hidden" id="residenceFields">
             <input type="text" class="input-field" id="residenceAddress" placeholder="عنوان مكان الإقامة">
             <div class="error-message" id="residenceAddressError">حقل مطلوب</div>
-            <button class="file-btn" id="residenceDocBtn">وثيقة تثبت الإقامة</button>
+            <button class="file-btn" id="residenceDocBtn">
+                وثيقة تثبت الإقامة
+                <input type="file" id="residenceDocInput" accept=".pdf,.jpg,.jpeg,.png">
+            </button>
         </div>
 
         <div class="hidden" id="workFields">
             <input type="text" class="input-field" id="workAddress" placeholder="عنوان مكان العمل">
             <div class="error-message" id="workAddressError">حقل مطلوب</div>
-            <button class="file-btn" id="workDocBtn">وثيقة تثبت العمل</button>
+            <button class="file-btn" id="workDocBtn">
+                وثيقة تثبت العمل
+                <input type="file" id="workDocInput" accept=".pdf,.jpg,.jpeg,.png">
+            </button>
         </div>
 
         <!-- أزرار الحفظ والإغلاق -->
         <div class="form-buttons">
             <button class="save-btn" id="saveBtn">حفظ</button>
             <button class="close-btn" id="formCloseBtn">غلق</button>
+        </div>
+    </div>
+
+    <!-- نافذة التأكيد -->
+    <div class="confirmation-modal" id="confirmationModal">
+        <div class="confirmation-card">
+            <div class="confirmation-title">تأكيد الطلب</div>
+            <div class="confirmation-text">هل أنت متأكد من أنك تريد تأكيد طلب التحويل؟</div>
+            <div class="confirmation-buttons">
+                <button class="confirm-btn" id="confirmBtn">تأكيد</button>
+                <button class="cancel-confirm-btn" id="cancelConfirmBtn">تراجع</button>
+            </div>
         </div>
     </div>
 
@@ -505,112 +678,9 @@
     </footer>
 
     <script>
-        // عناصر DOM
-        const transferBtn = document.getElementById('transferBtn');
-        const transferForm = document.getElementById('transferForm');
-        const formCloseBtn = document.getElementById('formCloseBtn');
-        const statusCell = document.getElementById('statusCell');
-        const saveBtn = document.getElementById('saveBtn');
-
-        // حالة الطلب
-        let hasRequest = false;
-
-        // فتح نموذج طلب التحويل
-        transferBtn.addEventListener('click', function() {
-            if (!hasRequest) {
-                transferForm.classList.add('active');
-                this.classList.add('requested');
-            }
-        });
-
-        // إغلاق نموذج طلب التحويل
-        formCloseBtn.addEventListener('click', function() {
-            transferForm.classList.remove('active');
-            transferBtn.classList.remove('requested');
-        });
-
-        // حفظ الطلب
-        saveBtn.addEventListener('click', function() {
-            // تحديث الحالة
-            hasRequest = true;
-            statusCell.textContent = 'في انتظار الدراسة و ابداء الرأي من طرف مدير المؤسسة';
-            statusCell.className = 'status-waiting';
-            transferBtn.textContent = 'طلب التحويل';
-            transferBtn.classList.add('requested');
-            
-            // إغلاق النموذج
-            transferForm.classList.remove('active');
-            
-            alert('تم تأكيد الطلب بنجاح');
-        });
-
-        // التحكم في أزرار الاختيار
-        document.querySelectorAll('.select-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                if (this.id === 'siblingStudyBtn' || this.id === 'parentWorkBtn' || this.id === 'parentSectorBtn') {
-                    const options = ['نعم', 'لا'];
-                    const randomOption = options[Math.floor(Math.random() * options.length)];
-                    this.textContent = randomOption;
-                    
-                    // إظهار/إخفاء الحقول الإضافية
-                    if (this.id === 'parentWorkBtn' && randomOption === 'نعم') {
-                        document.getElementById('parentWorkIdGroup').classList.remove('hidden');
-                    } else if (this.id === 'parentWorkBtn') {
-                        document.getElementById('parentWorkIdGroup').classList.add('hidden');
-                    }
-                    
-                    if (this.id === 'parentSectorBtn' && randomOption === 'نعم') {
-                        document.getElementById('parentSectorIdGroup').classList.remove('hidden');
-                    } else if (this.id === 'parentSectorBtn') {
-                        document.getElementById('parentSectorIdGroup').classList.add('hidden');
-                    }
-                }
-                
-                if (this.id === 'stateBtn') {
-                    this.textContent = 'الجزائر وسط';
-                }
-                
-                if (this.id === 'municipalityBtn') {
-                    this.textContent = 'بلدية الجزائر الوسطى';
-                }
-                
-                if (this.id === 'institutionBtn') {
-                    this.textContent = 'مركز الجزائر الوسطى';
-                }
-                
-                if (this.id === 'reasonBtn') {
-                    const options = ['تغيير مقر إقامة الولي أو الوصي الشرعي', 'تغيير مقر عمل الولي أو الوصي الشرعي'];
-                    const randomOption = options[Math.floor(Math.random() * options.length)];
-                    this.textContent = randomOption;
-                    
-                    if (randomOption === 'تغيير مقر إقامة الولي أو الوصي الشرعي') {
-                        document.getElementById('residenceFields').classList.remove('hidden');
-                        document.getElementById('workFields').classList.add('hidden');
-                    } else {
-                        document.getElementById('workFields').classList.remove('hidden');
-                        document.getElementById('residenceFields').classList.add('hidden');
-                    }
-                }
-            });
-        });
-
-        // التحكم في أزرار رفع الملفات
-        document.querySelectorAll('.file-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                this.textContent = 'تم إختيار الملف بنجاح';
-                this.classList.add('success');
-            });
-        });
-
-        // التحكم في زر العودة
-        document.getElementById('backBtn').addEventListener('click', function() {
-            window.location.href = 'dashboard.html';
-        });
-
-        // التحكم في زر تسجيل الخروج
-        document.getElementById('logoutBtn').addEventListener('click', function() {
-            window.location.href = 'index.html';
-        });
-    </script>
-</body>
-</html>
+        // بيانات الولايات والبلديات
+        const algeriaStates = [
+            "أدرار", "الشلف", "الأغواط", "أم البواقي", "باتنة", "بجاية", "بسكرة", "بشار", "البليدة", "البويرة",
+            "تمنراست", "تبسة", "تلمسان", "تيارت", "تيزي وزو", "الجزائر", "الجلفة", "جيجل", "سطيف", "سعيدة",
+            "سكيكدة", "سيدي بلعباس", "عنابة", "قالمة", "قسنطينة", "المدية", "مستغانم", "المسيلة", "معسكر", "ورقلة",
+            "وهران", "البيض", "إليزي", "برج بوعريريج", "بومرداس", "الطارف", "تندوف", "تيسمسيلت", "الوادي", "خنش
