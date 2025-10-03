@@ -131,12 +131,6 @@
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         table {
@@ -242,12 +236,6 @@
             max-width: 600px;
             max-height: 80vh;
             overflow-y: auto;
-            animation: slideUp 0.3s ease;
-        }
-
-        @keyframes slideUp {
-            from { transform: translateY(30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
         }
 
         .card-header {
@@ -406,7 +394,6 @@
             text-align: center;
             width: 90%;
             max-width: 400px;
-            animation: slideUp 0.3s ease;
         }
 
         .confirm-title {
@@ -475,7 +462,6 @@
             width: 90%;
             max-width: 400px;
             border: 3px solid #10b981;
-            animation: slideUp 0.3s ease;
         }
 
         .success-icon {
@@ -688,4 +674,16 @@
         const confirmCancelModal = document.getElementById('confirmCancelModal');
         const confirmCancelYes = document.getElementById('confirmCancelYes');
         const confirmCancelNo = document.getElementById('confirmCancelNo');
-   
+        const successModal = document.getElementById('successModal');
+        const successMessage = document.getElementById('successMessage');
+
+        // حالة الطلب
+        let hasRequest = false;
+
+        // فتح نافذة طلب التحويل
+        transferBtn.addEventListener('click', function() {
+            console.log('تم الضغط على زر طلب التحويل');
+            if (!hasRequest) {
+                transferModal.style.display = 'flex';
+                this.classList.add('requested');
+     
