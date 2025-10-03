@@ -1,21 +1,226 @@
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>طلبات التحويل - المنصة التعليمية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
         }
 
-        .transfer-modal.active {
+        body {
+            background-color: white;
+            color: #333;
+            min-height: 100vh;
             display: flex;
+            flex-direction: column;
         }
 
-        .transfer-card {
+        /* شريط العنوان العلوي */
+        .header-bar {
+            background: linear-gradient(90deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .right-text {
+            text-align: right;
+        }
+
+        .right-text p {
+            margin: 2px 0;
+            font-size: 14px;
+        }
+
+        .right-text p:first-child {
+            font-weight: 700;
+        }
+
+        .left-text {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-name {
+            font-weight: 400;
+        }
+
+        .logout-btn {
+            background-color: #ef4444;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .logout-btn:hover {
+            background-color: #dc2626;
+        }
+
+        /* شريط العنوان الثاني */
+        .sub-header {
+            background-color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            margin-left: 20px;
+            color: #4b5563;
+            transition: color 0.3s;
+            padding: 5px;
+        }
+
+        .back-btn:hover {
+            color: #1e40af;
+        }
+
+        .page-title {
+            color: #8b5cf6;
+            font-size: 22px;
+            font-weight: 700;
+            position: relative;
+            padding-right: 25px;
+        }
+
+        .page-title::before {
+            content: "";
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 25px;
+            width: 1px;
+            background-color: #000;
+        }
+
+        /* شريط المعلومات */
+        .info-bar {
+            background-color: #fef3c7;
+            color: #92400e;
+            padding: 15px 20px;
+            margin: 0 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            text-align: center;
+            border: 1px solid #f59e0b;
+        }
+
+        /* الجدول */
+        .table-container {
+            margin: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border: none;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f8fafc;
+            font-weight: 700;
+            color: #000;
+        }
+
+        tr:nth-child(1) {
+            background-color: white;
+        }
+
+        tr:nth-child(2) {
+            background-color: #f1f5f9;
+        }
+
+        .status-pending {
+            background-color: #3b82f6;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .status-no-request {
+            background-color: #3b82f6;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .status-waiting {
+            background-color: #f59e0b;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .transfer-btn {
+            background-color: white;
+            color: #10b981;
+            border: 2px solid #10b981;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .transfer-btn:hover {
+            background-color: #10b981;
+            color: white;
+        }
+
+        .transfer-btn.requested {
+            background-color: white;
+            color: #ef4444;
+            border: 2px solid #ef4444;
+        }
+
+        .transfer-btn.requested:hover {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        /* نافذة طلب التحويل - تحت الجدول */
+        .transfer-form {
+            display: none;
             background-color: white;
             padding: 30px;
+            margin: 0 20px 20px 20px;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            width: 90%;
-            max-width: 600px;
-            max-height: 80vh;
-            overflow-y: auto;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 2px solid #e5e7eb;
+        }
+
+        .transfer-form.active {
+            display: block;
         }
 
         .card-header {
@@ -148,114 +353,6 @@
             background-color: #db2777;
         }
 
-        /* نافذة التأكيد */
-        .confirm-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-        }
-
-        .confirm-modal.active {
-            display: flex;
-        }
-
-        .confirm-card {
-            background-color: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            text-align: center;
-            width: 90%;
-            max-width: 400px;
-        }
-
-        .confirm-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: #000;
-            margin-bottom: 10px;
-        }
-
-        .confirm-message {
-            color: #000;
-            font-size: 14px;
-            margin-bottom: 25px;
-        }
-
-        .confirm-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .confirm-yes {
-            background-color: #10b981;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 700;
-        }
-
-        .confirm-no {
-            background-color: #ef4444;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 700;
-        }
-
-        /* نافذة النجاح */
-        .success-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            justify-content: center;
-            align-items: center;
-            z-index: 3000;
-        }
-
-        .success-modal.active {
-            display: flex;
-        }
-
-        .success-card {
-            background-color: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            text-align: center;
-            width: 90%;
-            max-width: 400px;
-            border: 3px solid #10b981;
-        }
-
-        .success-icon {
-            font-size: 40px;
-            color: #10b981;
-            margin-bottom: 20px;
-        }
-
-        .success-message {
-            color: #000;
-            font-size: 16px;
-            font-weight: 600;
-        }
-
         /* تذييل الصفحة */
         footer {
             background-color: #f8fafc;
@@ -325,112 +422,78 @@
         </table>
     </div>
 
-    <!-- نافذة طلب التحويل -->
-    <div class="transfer-modal" id="transferModal">
-        <div class="transfer-card">
-            <div class="card-header">
-                <div class="card-title">طلب التحويل</div>
-            </div>
-            
-            <!-- معلومات عامة -->
-            <div class="section-title">معلومات عامة</div>
-            
-            <div class="form-group">
-                <label class="form-label">أحد الإخوة يدرس بالمؤسسة المراد التحويل اليها ؟</label>
-                <button class="select-btn" id="siblingStudyBtn">اختر</button>
-            </div>
+    <!-- نافذة طلب التحويل - تحت الجدول -->
+    <div class="transfer-form" id="transferForm">
+        <div class="card-header">
+            <div class="card-title">طلب التحويل</div>
+        </div>
+        
+        <!-- معلومات عامة -->
+        <div class="section-title">معلومات عامة</div>
+        
+        <div class="form-group">
+            <label class="form-label">أحد الإخوة يدرس بالمؤسسة المراد التحويل اليها ؟</label>
+            <button class="select-btn" id="siblingStudyBtn">اختر</button>
+        </div>
 
-            <div class="form-group">
-                <label class="form-label">ولي التلميذ يعمل بالمؤسسة المراد التحويل اليها ؟</label>
-                <button class="select-btn" id="parentWorkBtn">اختر</button>
-                <div class="hidden" id="parentWorkIdGroup">
-                    <input type="text" class="input-field" id="parentWorkId" placeholder="رقم التعريف الوظيفي">
-                    <div class="error-message" id="parentWorkIdError">حقل مطلوب</div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">أحد الوالدين في القطاع ؟</label>
-                <button class="select-btn" id="parentSectorBtn">اختر</button>
-                <div class="hidden" id="parentSectorIdGroup">
-                    <input type="text" class="input-field" id="parentSectorId" placeholder="رقم التعريف الوظيفي">
-                    <div class="error-message" id="parentSectorIdError">حقل مطلوب</div>
-                </div>
-            </div>
-
-            <!-- معلومات التحويل -->
-            <div class="section-title red">من أجل طلب تحويل إبنكم يرجى إدخال</div>
-            
-            <div class="form-group">
-                <label class="form-label">الولاية</label>
-                <button class="select-btn" id="stateBtn">اختر الولاية</button>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">البلدية</label>
-                <button class="select-btn" id="municipalityBtn">اختر البلدية</button>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">المؤسسة</label>
-                <button class="select-btn" id="institutionBtn">اختر المؤسسة</button>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">سبب التحويل</label>
-                <button class="select-btn" id="reasonBtn">اختر السبب</button>
-            </div>
-
-            <!-- حقول إضافية بناءً على السبب -->
-            <div class="hidden" id="residenceFields">
-                <input type="text" class="input-field" id="residenceAddress" placeholder="عنوان مكان الإقامة">
-                <div class="error-message" id="residenceAddressError">حقل مطلوب</div>
-                <button class="file-btn" id="residenceDocBtn">وثيقة تثبت الإقامة</button>
-            </div>
-
-            <div class="hidden" id="workFields">
-                <input type="text" class="input-field" id="workAddress" placeholder="عنوان مكان العمل">
-                <div class="error-message" id="workAddressError">حقل مطلوب</div>
-                <button class="file-btn" id="workDocBtn">وثيقة تثبت العمل</button>
-            </div>
-
-            <!-- أزرار الحفظ والإغلاق -->
-            <div class="form-buttons">
-                <button class="save-btn" id="saveBtn">حفظ</button>
-                <button class="close-btn" id="modalCloseBtn">غلق</button>
+        <div class="form-group">
+            <label class="form-label">ولي التلميذ يعمل بالمؤسسة المراد التحويل اليها ؟</label>
+            <button class="select-btn" id="parentWorkBtn">اختر</button>
+            <div class="hidden" id="parentWorkIdGroup">
+                <input type="text" class="input-field" id="parentWorkId" placeholder="رقم التعريف الوظيفي">
+                <div class="error-message" id="parentWorkIdError">حقل مطلوب</div>
             </div>
         </div>
-    </div>
 
-    <!-- نافذة تأكيد الحفظ -->
-    <div class="confirm-modal" id="confirmSaveModal">
-        <div class="confirm-card">
-            <div class="confirm-title">هل أنت متأكد من العملية؟</div>
-            <div class="confirm-message">سيظهر طلبك عند مدير المؤسسة. في إنتظار معالجة الطلبات والنتائج النهائية.</div>
-            <div class="confirm-buttons">
-                <button class="confirm-yes" id="confirmSaveYes">تأكيد</button>
-                <button class="confirm-no" id="confirmSaveNo">تراجع</button>
+        <div class="form-group">
+            <label class="form-label">أحد الوالدين في القطاع ؟</label>
+            <button class="select-btn" id="parentSectorBtn">اختر</button>
+            <div class="hidden" id="parentSectorIdGroup">
+                <input type="text" class="input-field" id="parentSectorId" placeholder="رقم التعريف الوظيفي">
+                <div class="error-message" id="parentSectorIdError">حقل مطلوب</div>
             </div>
         </div>
-    </div>
 
-    <!-- نافذة تأكيد الإلغاء -->
-    <div class="confirm-modal" id="confirmCancelModal">
-        <div class="confirm-card">
-            <div class="confirm-title">هل أنت متأكد من العملية؟</div>
-            <div class="confirm-message">سيتم حذف طلب التحويل.</div>
-            <div class="confirm-buttons">
-                <button class="confirm-yes" id="confirmCancelYes">تأكيد</button>
-                <button class="confirm-no" id="confirmCancelNo">تراجع</button>
-            </div>
+        <!-- معلومات التحويل -->
+        <div class="section-title red">من أجل طلب تحويل إبنكم يرجى إدخال</div>
+        
+        <div class="form-group">
+            <label class="form-label">الولاية</label>
+            <button class="select-btn" id="stateBtn">اختر الولاية</button>
         </div>
-    </div>
 
-    <!-- نافذة النجاح -->
-    <div class="success-modal" id="successModal">
-        <div class="success-card">
-            <div class="success-icon">✅</div>
-            <div class="success-message" id="successMessage">تم تأكيد الطلب بنجاح</div>
+        <div class="form-group">
+            <label class="form-label">البلدية</label>
+            <button class="select-btn" id="municipalityBtn">اختر البلدية</button>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">المؤسسة</label>
+            <button class="select-btn" id="institutionBtn">اختر المؤسسة</button>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">سبب التحويل</label>
+            <button class="select-btn" id="reasonBtn">اختر السبب</button>
+        </div>
+
+        <!-- حقول إضافية بناءً على السبب -->
+        <div class="hidden" id="residenceFields">
+            <input type="text" class="input-field" id="residenceAddress" placeholder="عنوان مكان الإقامة">
+            <div class="error-message" id="residenceAddressError">حقل مطلوب</div>
+            <button class="file-btn" id="residenceDocBtn">وثيقة تثبت الإقامة</button>
+        </div>
+
+        <div class="hidden" id="workFields">
+            <input type="text" class="input-field" id="workAddress" placeholder="عنوان مكان العمل">
+            <div class="error-message" id="workAddressError">حقل مطلوب</div>
+            <button class="file-btn" id="workDocBtn">وثيقة تثبت العمل</button>
+        </div>
+
+        <!-- أزرار الحفظ والإغلاق -->
+        <div class="form-buttons">
+            <button class="save-btn" id="saveBtn">حفظ</button>
+            <button class="close-btn" id="formCloseBtn">غلق</button>
         </div>
     </div>
 
@@ -444,26 +507,110 @@
     <script>
         // عناصر DOM
         const transferBtn = document.getElementById('transferBtn');
-        const transferModal = document.getElementById('transferModal');
+        const transferForm = document.getElementById('transferForm');
+        const formCloseBtn = document.getElementById('formCloseBtn');
         const statusCell = document.getElementById('statusCell');
-        const modalCloseBtn = document.getElementById('modalCloseBtn');
         const saveBtn = document.getElementById('saveBtn');
-        const confirmSaveModal = document.getElementById('confirmSaveModal');
-        const confirmSaveYes = document.getElementById('confirmSaveYes');
-        const confirmSaveNo = document.getElementById('confirmSaveNo');
-        const confirmCancelModal = document.getElementById('confirmCancelModal');
-        const confirmCancelYes = document.getElementById('confirmCancelYes');
-        const confirmCancelNo = document.getElementById('confirmCancelNo');
-        const successModal = document.getElementById('successModal');
-        const successMessage = document.getElementById('successMessage');
 
         // حالة الطلب
         let hasRequest = false;
 
-        // فتح نافذة طلب التحويل
+        // فتح نموذج طلب التحويل
         transferBtn.addEventListener('click', function() {
-            console.log('تم الضغط على زر طلب التحويل');
             if (!hasRequest) {
-                transferModal.style.display = 'flex';
+                transferForm.classList.add('active');
                 this.classList.add('requested');
-     
+            }
+        });
+
+        // إغلاق نموذج طلب التحويل
+        formCloseBtn.addEventListener('click', function() {
+            transferForm.classList.remove('active');
+            transferBtn.classList.remove('requested');
+        });
+
+        // حفظ الطلب
+        saveBtn.addEventListener('click', function() {
+            // تحديث الحالة
+            hasRequest = true;
+            statusCell.textContent = 'في انتظار الدراسة و ابداء الرأي من طرف مدير المؤسسة';
+            statusCell.className = 'status-waiting';
+            transferBtn.textContent = 'طلب التحويل';
+            transferBtn.classList.add('requested');
+            
+            // إغلاق النموذج
+            transferForm.classList.remove('active');
+            
+            alert('تم تأكيد الطلب بنجاح');
+        });
+
+        // التحكم في أزرار الاختيار
+        document.querySelectorAll('.select-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (this.id === 'siblingStudyBtn' || this.id === 'parentWorkBtn' || this.id === 'parentSectorBtn') {
+                    const options = ['نعم', 'لا'];
+                    const randomOption = options[Math.floor(Math.random() * options.length)];
+                    this.textContent = randomOption;
+                    
+                    // إظهار/إخفاء الحقول الإضافية
+                    if (this.id === 'parentWorkBtn' && randomOption === 'نعم') {
+                        document.getElementById('parentWorkIdGroup').classList.remove('hidden');
+                    } else if (this.id === 'parentWorkBtn') {
+                        document.getElementById('parentWorkIdGroup').classList.add('hidden');
+                    }
+                    
+                    if (this.id === 'parentSectorBtn' && randomOption === 'نعم') {
+                        document.getElementById('parentSectorIdGroup').classList.remove('hidden');
+                    } else if (this.id === 'parentSectorBtn') {
+                        document.getElementById('parentSectorIdGroup').classList.add('hidden');
+                    }
+                }
+                
+                if (this.id === 'stateBtn') {
+                    this.textContent = 'الجزائر وسط';
+                }
+                
+                if (this.id === 'municipalityBtn') {
+                    this.textContent = 'بلدية الجزائر الوسطى';
+                }
+                
+                if (this.id === 'institutionBtn') {
+                    this.textContent = 'مركز الجزائر الوسطى';
+                }
+                
+                if (this.id === 'reasonBtn') {
+                    const options = ['تغيير مقر إقامة الولي أو الوصي الشرعي', 'تغيير مقر عمل الولي أو الوصي الشرعي'];
+                    const randomOption = options[Math.floor(Math.random() * options.length)];
+                    this.textContent = randomOption;
+                    
+                    if (randomOption === 'تغيير مقر إقامة الولي أو الوصي الشرعي') {
+                        document.getElementById('residenceFields').classList.remove('hidden');
+                        document.getElementById('workFields').classList.add('hidden');
+                    } else {
+                        document.getElementById('workFields').classList.remove('hidden');
+                        document.getElementById('residenceFields').classList.add('hidden');
+                    }
+                }
+            });
+        });
+
+        // التحكم في أزرار رفع الملفات
+        document.querySelectorAll('.file-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.textContent = 'تم إختيار الملف بنجاح';
+                this.classList.add('success');
+            });
+        });
+
+        // التحكم في زر العودة
+        document.getElementById('backBtn').addEventListener('click', function() {
+            window.location.href = 'dashboard.html';
+        });
+
+        // التحكم في زر تسجيل الخروج
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
