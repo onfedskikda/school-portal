@@ -21,7 +21,6 @@
             flex-direction: column;
         }
 
-        /* شريط العنوان العلوي */
         .header-bar {
             background: linear-gradient(90deg, #1e40af 0%, #3b82f6 100%);
             color: white;
@@ -29,47 +28,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        .right-text {
-            text-align: right;
-        }
-
-        .right-text p {
-            margin: 2px 0;
-            font-size: 14px;
-        }
-
-        .right-text p:first-child {
-            font-weight: 700;
-        }
-
-        .left-text {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .user-name {
-            font-weight: 400;
-        }
-
-        .logout-btn {
-            background-color: #ef4444;
-            color: white;
-            border: none;
-            padding: 5px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .logout-btn:hover {
-            background-color: #dc2626;
-        }
-
-        /* شريط العنوان الثاني */
         .sub-header {
             background-color: white;
             padding: 15px 20px;
@@ -78,53 +38,16 @@
             border-bottom: 1px solid #e5e7eb;
         }
 
-        .back-btn {
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            margin-left: 20px;
-            color: #4b5563;
-            transition: color 0.3s;
-            padding: 5px;
-        }
-
-        .back-btn:hover {
-            color: #1e40af;
-        }
-
-        .page-title {
-            color: #8b5cf6;
-            font-size: 22px;
-            font-weight: 700;
-            position: relative;
-            padding-right: 25px;
-        }
-
-        .page-title::before {
-            content: "";
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            height: 25px;
-            width: 1px;
-            background-color: #000;
-        }
-
-        /* شريط المعلومات */
         .info-bar {
             background-color: #fef3c7;
             color: #92400e;
             padding: 15px 20px;
             margin: 0 20px;
             border-radius: 8px;
-            font-size: 14px;
             text-align: center;
             border: 1px solid #f59e0b;
         }
 
-        /* الجدول */
         .table-container {
             margin: 20px;
             border-radius: 8px;
@@ -139,46 +62,7 @@
 
         th, td {
             padding: 12px 15px;
-            border: none;
             text-align: center;
-        }
-
-        th {
-            background-color: #f8fafc;
-            font-weight: 700;
-            color: #000;
-        }
-
-        tr:nth-child(1) {
-            background-color: white;
-        }
-
-        tr:nth-child(2) {
-            background-color: #f1f5f9;
-        }
-
-        .status-pending {
-            background-color: #3b82f6;
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 14px;
-        }
-
-        .status-no-request {
-            background-color: #3b82f6;
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 14px;
-        }
-
-        .status-waiting {
-            background-color: #f59e0b;
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 14px;
         }
 
         .transfer-btn {
@@ -189,18 +73,11 @@
             border-radius: 6px;
             cursor: pointer;
             font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .transfer-btn:hover {
-            background-color: #10b981;
-            color: white;
         }
 
         .transfer-btn.requested {
             background-color: #10b981;
             color: white;
-            border: 2px solid #10b981;
         }
 
         .transfer-btn.cancel {
@@ -209,17 +86,11 @@
             border: 2px solid #ef4444;
         }
 
-        .transfer-btn.cancel:hover {
-            background-color: #ef4444;
-            color: white;
-        }
-
-        /* نافذة طلب التحويل - تحت الجدول */
         .transfer-form {
             display: none;
             background-color: white;
             padding: 30px;
-            margin: 0 20px 20px 20px;
+            margin: 20px;
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             border: 2px solid #e5e7eb;
@@ -229,45 +100,9 @@
             display: block;
         }
 
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #e5e7eb;
-        }
-
-        .card-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: #000;
-        }
-
-        .section-title {
-            background-color: #10b981;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: 600;
-            margin: 20px 0 15px 0;
-        }
-
-        .section-title.red {
-            background-color: #ef4444;
-        }
-
         .form-group {
             margin-bottom: 15px;
             position: relative;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #000;
         }
 
         .select-btn {
@@ -277,28 +112,20 @@
             border-radius: 6px;
             cursor: pointer;
             width: 200px;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .select-btn:hover {
-            border-color: #3b82f6;
         }
 
         .dropdown {
+            display: none;
             position: absolute;
-            top: 100%;
-            right: 0;
-            width: 100%;
-            background-color: white;
+            background: white;
             border: 1px solid #e5e7eb;
             border-radius: 6px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            z-index: 100;
-            max-height: 200px;
+            width: 200px;
+            max-height: 150px;
             overflow-y: auto;
-            display: none;
+            z-index: 1000;
+            top: 100%;
+            right: 0;
         }
 
         .dropdown.active {
@@ -306,14 +133,12 @@
         }
 
         .dropdown-item {
-            padding: 10px 15px;
+            padding: 10px;
             cursor: pointer;
-            transition: background-color 0.2s;
-            text-align: right;
         }
 
         .dropdown-item:hover {
-            background-color: #f1f5f9;
+            background: #f1f5f9;
         }
 
         .input-field {
@@ -321,8 +146,6 @@
             padding: 10px 15px;
             border: 2px solid #e5e7eb;
             border-radius: 6px;
-            font-size: 14px;
-            transition: all 0.3s ease;
         }
 
         .input-field.error {
@@ -343,9 +166,6 @@
             padding: 8px 15px;
             border-radius: 6px;
             cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            margin-top: 10px;
             position: relative;
             overflow: hidden;
         }
@@ -366,13 +186,6 @@
             border-color: #10b981;
         }
 
-        .form-buttons {
-            display: flex;
-            justify-content: flex-start;
-            gap: 15px;
-            margin-top: 25px;
-        }
-
         .save-btn {
             background-color: #10b981;
             color: white;
@@ -380,12 +193,6 @@
             padding: 12px 25px;
             border-radius: 6px;
             cursor: pointer;
-            font-weight: 700;
-            transition: all 0.3s ease;
-        }
-
-        .save-btn:hover {
-            background-color: #059669;
         }
 
         .close-btn {
@@ -395,15 +202,8 @@
             padding: 12px 25px;
             border-radius: 6px;
             cursor: pointer;
-            font-weight: 700;
-            transition: all 0.3s ease;
         }
 
-        .close-btn:hover {
-            background-color: #db2777;
-        }
-
-        /* نافذة التأكيد */
         .confirmation-modal {
             display: none;
             position: fixed;
@@ -411,98 +211,39 @@
             right: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0,0,0,0.5);
             z-index: 1000;
             justify-content: center;
             align-items: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
         }
 
         .confirmation-modal.active {
             display: flex;
-            opacity: 1;
         }
 
         .confirmation-card {
-            background-color: white;
+            background: white;
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            width: 90%;
-            max-width: 500px;
-            transform: translateY(-20px);
-            transition: transform 0.3s ease;
-        }
-
-        .confirmation-modal.active .confirmation-card {
-            transform: translateY(0);
-        }
-
-        .confirmation-title {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: #000;
             text-align: center;
         }
 
-        .confirmation-text {
-            margin-bottom: 25px;
-            text-align: center;
-            color: #4b5563;
-        }
-
-        .confirmation-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .confirm-btn {
-            background-color: #10b981;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 700;
-            transition: all 0.3s ease;
-        }
-
-        .confirm-btn:hover {
-            background-color: #059669;
-        }
-
-        .cancel-confirm-btn {
-            background-color: #ef4444;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 700;
-            transition: all 0.3s ease;
-        }
-
-        .cancel-confirm-btn:hover {
-            background-color: #dc2626;
-        }
-
-        /* تذييل الصفحة */
-        footer {
-            background-color: #f8fafc;
-            padding: 15px 20px;
-            text-align: center;
-            border-top: 1px solid #e5e7eb;
-            margin-top: auto;
-            color: #4b5563;
-            font-size: 14px;
-        }
-
-        /* إظهار/إخفاء العناصر */
         .hidden {
             display: none;
+        }
+
+        .status-no-request {
+            background-color: #3b82f6;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+
+        .status-waiting {
+            background-color: #f59e0b;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
         }
     </style>
 </head>
@@ -558,13 +299,12 @@
         </table>
     </div>
 
-    <!-- نافذة طلب التحويل - تحت الجدول -->
+    <!-- نافذة طلب التحويل -->
     <div class="transfer-form" id="transferForm">
         <div class="card-header">
             <div class="card-title">طلب التحويل</div>
         </div>
         
-        <!-- معلومات عامة -->
         <div class="section-title">معلومات عامة</div>
         
         <div class="form-group">
@@ -577,49 +317,14 @@
         </div>
 
         <div class="form-group">
-            <label class="form-label">ولي التلميذ يعمل بالمؤسسة المراد التحويل اليها ؟</label>
-            <button class="select-btn" id="parentWorkBtn">اختر</button>
-            <div class="dropdown" id="parentWorkDropdown">
-                <div class="dropdown-item" data-value="نعم">نعم</div>
-                <div class="dropdown-item" data-value="لا">لا</div>
-            </div>
-            <div class="hidden" id="parentWorkIdGroup">
-                <input type="text" class="input-field" id="parentWorkId" placeholder="رقم التعريف الوظيفي">
-                <div class="error-message" id="parentWorkIdError">حقل مطلوب</div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="form-label">أحد الوالدين في القطاع ؟</label>
-            <button class="select-btn" id="parentSectorBtn">اختر</button>
-            <div class="dropdown" id="parentSectorDropdown">
-                <div class="dropdown-item" data-value="نعم">نعم</div>
-                <div class="dropdown-item" data-value="لا">لا</div>
-            </div>
-            <div class="hidden" id="parentSectorIdGroup">
-                <input type="text" class="input-field" id="parentSectorId" placeholder="رقم التعريف الوظيفي">
-                <div class="error-message" id="parentSectorIdError">حقل مطلوب</div>
-            </div>
-        </div>
-
-        <!-- معلومات التحويل -->
-        <div class="section-title red">من أجل طلب تحويل إبنكم يرجى إدخال</div>
-        
-        <div class="form-group">
             <label class="form-label">الولاية</label>
             <button class="select-btn" id="stateBtn">اختر الولاية</button>
             <div class="dropdown" id="stateDropdown"></div>
         </div>
 
         <div class="form-group">
-            <label class="form-label">البلدية</label>
-            <button class="select-btn" id="municipalityBtn" disabled>اختر البلدية</button>
-            <div class="dropdown" id="municipalityDropdown"></div>
-        </div>
-
-        <div class="form-group">
             <label class="form-label">المؤسسة</label>
-            <button class="select-btn" id="institutionBtn" disabled>اختر المؤسسة</button>
+            <button class="select-btn" id="institutionBtn">اختر المؤسسة</button>
             <div class="dropdown" id="institutionDropdown"></div>
         </div>
 
@@ -630,25 +335,6 @@
                 <div class="dropdown-item" data-value="تغيير مقر إقامة الولي أو الوصي الشرعي">تغيير مقر إقامة الولي أو الوصي الشرعي</div>
                 <div class="dropdown-item" data-value="تغيير مقر عمل الولي أو الوصي الشرعي">تغيير مقر عمل الولي أو الوصي الشرعي</div>
             </div>
-        </div>
-
-        <!-- حقول إضافية بناءً على السبب -->
-        <div class="hidden" id="residenceFields">
-            <input type="text" class="input-field" id="residenceAddress" placeholder="عنوان مكان الإقامة">
-            <div class="error-message" id="residenceAddressError">حقل مطلوب</div>
-            <button class="file-btn" id="residenceDocBtn">
-                وثيقة تثبت الإقامة
-                <input type="file" id="residenceDocInput" accept=".pdf,.jpg,.jpeg,.png">
-            </button>
-        </div>
-
-        <div class="hidden" id="workFields">
-            <input type="text" class="input-field" id="workAddress" placeholder="عنوان مكان العمل">
-            <div class="error-message" id="workAddressError">حقل مطلوب</div>
-            <button class="file-btn" id="workDocBtn">
-                وثيقة تثبت العمل
-                <input type="file" id="workDocInput" accept=".pdf,.jpg,.jpeg,.png">
-            </button>
         </div>
 
         <!-- أزرار الحفظ والإغلاق -->
@@ -670,17 +356,141 @@
         </div>
     </div>
 
-    <!-- تذييل الصفحة -->
-    <footer>
-        جميع الحقوق محفوظة <br>
-        فضاء التلميذ - الديوان الوطني للتعليم والتكوين عن بعد <br>
-        2025 - 2026
-    </footer>
-
     <script>
-        // بيانات الولايات والبلديات
+        // بيانات الولايات
         const algeriaStates = [
             "أدرار", "الشلف", "الأغواط", "أم البواقي", "باتنة", "بجاية", "بسكرة", "بشار", "البليدة", "البويرة",
             "تمنراست", "تبسة", "تلمسان", "تيارت", "تيزي وزو", "الجزائر", "الجلفة", "جيجل", "سطيف", "سعيدة",
             "سكيكدة", "سيدي بلعباس", "عنابة", "قالمة", "قسنطينة", "المدية", "مستغانم", "المسيلة", "معسكر", "ورقلة",
-            "وهران", "البيض", "إليزي", "برج بوعريريج", "بومرداس", "الطارف", "تندوف", "تيسمسيلت", "الوادي", "خنش
+            "وهران", "البيض", "إليزي", "برج بوعريريج", "بومرداس", "الطارف", "تندوف", "تيسمسيلت", "الوادي", "خنشلة",
+            "سوق أهراس", "تيبازة", "ميلة", "عين الدفلى", "النعامة", "عين تموشنت", "غرداية", "غليزان", "تيميمون", "برج البحري",
+            "أولاد جلال", "بني عباس", "عين صالح", "عين قزام", "تقرت", "جانت", "المغير", "المنيعة"
+        ];
+
+        // تهيئة الصفحة عند التحميل
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('تم تحميل الصفحة');
+            
+            const transferBtn = document.getElementById('transferBtn');
+            const transferForm = document.getElementById('transferForm');
+            const formCloseBtn = document.getElementById('formCloseBtn');
+            const saveBtn = document.getElementById('saveBtn');
+            const confirmationModal = document.getElementById('confirmationModal');
+            const confirmBtn = document.getElementById('confirmBtn');
+            const cancelConfirmBtn = document.getElementById('cancelConfirmBtn');
+            const statusCell = document.getElementById('statusCell');
+            const institutionName = document.getElementById('institutionName');
+
+            let hasRequest = false;
+            let selectedInstitution = "";
+
+            // تهيئة القوائم
+            function initializeDropdowns() {
+                // قائمة الولايات
+                const stateDropdown = document.getElementById('stateDropdown');
+                algeriaStates.forEach(state => {
+                    const item = document.createElement('div');
+                    item.className = 'dropdown-item';
+                    item.textContent = state;
+                    item.setAttribute('data-value', state);
+                    stateDropdown.appendChild(item);
+                });
+
+                // قائمة المؤسسات
+                const institutionDropdown = document.getElementById('institutionDropdown');
+                algeriaStates.forEach(state => {
+                    const item = document.createElement('div');
+                    item.className = 'dropdown-item';
+                    item.textContent = `مركز ${state}`;
+                    item.setAttribute('data-value', `مركز ${state}`);
+                    institutionDropdown.appendChild(item);
+                });
+            }
+
+            // فتح النموذج
+            transferBtn.addEventListener('click', function() {
+                if (!hasRequest) {
+                    transferForm.classList.add('active');
+                }
+            });
+
+            // إغلاق النموذج
+            formCloseBtn.addEventListener('click', function() {
+                transferForm.classList.remove('active');
+            });
+
+            // حفظ الطلب
+            saveBtn.addEventListener('click', function() {
+                confirmationModal.classList.add('active');
+            });
+
+            // تأكيد الطلب
+            confirmBtn.addEventListener('click', function() {
+                hasRequest = true;
+                statusCell.textContent = 'في انتظار الدراسة و ابداء الرأي من طرف مدير المؤسسة';
+                statusCell.className = 'status-waiting';
+                transferBtn.textContent = 'إلغاء التحويل';
+                transferBtn.classList.add('cancel');
+                
+                institutionName.textContent = selectedInstitution;
+                institutionName.classList.remove('hidden');
+                
+                confirmationModal.classList.remove('active');
+                transferForm.classList.remove('active');
+            });
+
+            // إلغاء التأكيد
+            cancelConfirmBtn.addEventListener('click', function() {
+                confirmationModal.classList.remove('active');
+            });
+
+            // التحكم في القوائم المنسدلة
+            document.querySelectorAll('.select-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const dropdown = this.nextElementSibling;
+                    dropdown.classList.toggle('active');
+                });
+            });
+
+            // اختيار من القوائم
+            document.querySelectorAll('.dropdown-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const dropdown = this.parentElement;
+                    const button = dropdown.previousElementSibling;
+                    const value = this.getAttribute('data-value');
+                    
+                    button.textContent = value;
+                    dropdown.classList.remove('active');
+                    
+                    if (button.id === 'institutionBtn') {
+                        selectedInstitution = value;
+                    }
+                });
+            });
+
+            // إغلاق القوائم عند النقر خارجها
+            document.addEventListener('click', function() {
+                document.querySelectorAll('.dropdown').forEach(dropdown => {
+                    dropdown.classList.remove('active');
+                });
+            });
+
+            // زر إلغاء التحويل
+            transferBtn.addEventListener('click', function() {
+                if (hasRequest) {
+                    hasRequest = false;
+                    statusCell.textContent = 'لم يتم تسجيل أي طلب';
+                    statusCell.className = 'status-no-request';
+                    transferBtn.textContent = 'طلب التحويل';
+                    transferBtn.classList.remove('cancel');
+                    institutionName.classList.add('hidden');
+                }
+            });
+
+            // تهيئة الصفحة
+            initializeDropdowns();
+        });
+    </script>
+</body>
+</html>
